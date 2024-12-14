@@ -292,13 +292,7 @@ public class Resident{
                 break;
             }
 
-            File file = new File("ResidentInformation.txt");
-            if (!file.exists()) {
-                System.out.println("ResidentInformation.txt file not found.");
-                return;
-            }
-
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+            try(BufferedReader reader = new BufferedReader(new FileReader("ResidentInformation.txt"))){
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] details = line.replace("[", "").replace("]", "").split(", ");
@@ -314,17 +308,18 @@ public class Resident{
                     found = true;
                     residentMainPage();
                     break;
-                } else if(!fileEmail.equals(email)){
-                    System.out.println("Your account is not approved yet. Please wait for approval.");
-                    startPageResident();
-                } else {
-                    System.out.println("Invalid email or password. Please try again.");
-                    break;
                 }
 
             }
             reader.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred while reading the file.");
+            e.printStackTrace();
         }
+        if (!found) {
+            System.out.println("Invalid email or password. Please try again.");
+        }
+      } 
     }
 
    //where everything starts for resident
@@ -404,7 +399,7 @@ public class Resident{
         3) Update Phone Number
         4) Update Password
         5) Exit""");
-        System.out.println("Which option would you like to access? (numbers only): ");
+        System.out.print("Which option would you like to access? (numbers only): ");
         String choice = sc.nextLine();
         if (choice.equals("1")){
             update_name();
@@ -459,7 +454,7 @@ public class Resident{
                     for (int i = 0; i < parts.length; i++) {
                         if (parts[i].equals(oldname)) {
                             nameExists = true;
-                            System.out.println("Enter your new name: ");
+                            System.out.print("Enter your new name: ");
                             String newname = sc.nextLine().trim();
                             if (newname.isEmpty()) {
                                 delay();
@@ -525,7 +520,7 @@ public class Resident{
                     for (int i = 0; i < parts.length; i++) {
                         if (parts[i].equals(oldemail)) {
                             emailExists = true;
-                            System.out.println("Enter your new email: ");
+                            System.out.print("Enter your new email: ");
                             String newemail = sc.nextLine().trim();
                             if (oldemail.isEmpty()) {
                                 delay();
@@ -593,7 +588,7 @@ public class Resident{
                     for (int i = 0; i < parts.length; i++) {
                         if (parts[i].equals(oldphone)) {
                             phoneExists = true;
-                            System.out.println("Enter your new phone number: ");
+                            System.out.print("Enter your new phone number: ");
                             String newphone = sc.nextLine().trim();
                             if (newphone.isEmpty()) {
                                 delay();
@@ -661,7 +656,7 @@ public class Resident{
                     for (int i = 0; i < parts.length; i++) {
                         if (parts[i].equals(oldpass)) {
                             passExists = true;
-                            System.out.println("Enter your new password: ");
+                            System.out.print("Enter your new password: ");
                             String newpass = sc.nextLine().trim();
                             if (newpass.isEmpty()) {
                                 delay();

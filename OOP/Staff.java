@@ -294,7 +294,7 @@ public class Staff{
                 
             }
            
-           BufferedReader reader = new BufferedReader(new FileReader("StaffInformation.txt"));
+           try(BufferedReader reader = new BufferedReader(new FileReader("StaffInformation.txt"))){
            String line;
            while ((line = reader.readLine()) != null) {
                String[] details = line.replace("[", "").replace("]", "").split(", ");
@@ -311,15 +311,16 @@ public class Staff{
                    found = true;
                    staffMainPage();
                    break;
-               }else if(!fileEmail.equals(email)){
-                System.out.println("Your account is not approved yet. Please wait for approval.");
-                startPageStaff();
-               }else{
-                   System.out.println("Invalid email or password. Please try again.");
                }
-           }
-           reader.close();
+           }reader.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred while reading the file.");
+            e.printStackTrace();
         }
+        if (!found) {
+            System.out.println("Invalid email or password. Please try again.");
+        } 
+     }
    }
 
 

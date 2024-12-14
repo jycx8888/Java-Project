@@ -292,7 +292,7 @@ public class Manager{
                 
             }
            
-           BufferedReader reader = new BufferedReader(new FileReader("ManagerInformation.txt"));
+           try(BufferedReader reader = new BufferedReader(new FileReader("ManagerInformation.txt"))){
            String line;
            while ((line = reader.readLine()) != null) {
                String[] details = line.replace("[", "").replace("]", "").split(", ");
@@ -309,15 +309,20 @@ public class Manager{
                    found = true;
                    managerMainPage();
                    break;
-               } else if(!fileStatus.equals(email)){
-                   System.out.println("Your account is not approved yet. Please wait for approval.");
-                   startPageManager();
-               }else{
-                   System.out.println("Invalid email or password. Please try again.");
-               }
+              }
            }
            reader.close();
+           } catch (IOException e) {
+            System.out.println("An error occurred while reading the file.");
+            e.printStackTrace();
+           }
+
+           if (!found) {
+               System.out.println("Invalid email or password. Please try again.");
+           }
+
         }
+    
    }
 
 
@@ -1105,76 +1110,86 @@ public class Manager{
          * tax(service tax, room tax, cleaning tax)
          * additional fee (deposit, damage fee, extra bed fee, late checkout fee)
         */
-        Map<String, Double> rates = new TreeMap<>();
-
         // Read the rates from the file
+
+
         try (BufferedReader reader = new BufferedReader(new FileReader("rates.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(": RM");
-                if (parts.length == 2) {
-                    rates.put(parts[0].trim(), Double.parseDouble(parts[1].trim()));
+                String[] lines = line.split(", ");
+                System.out.println(lines[0]);
+                //System.out.println("--------Rates--------");
+                //System.out.println("1) Standard Room: RM" + lines[0]);
+                //System.out.println("2) Family Room: RM" + lines[1]);
+                //System.out.println("3) Deluxe Room: RM" + lines[2]);
+                //System.out.println("4) Cleaning Service: RM" + lines[3]);
+                //System.out.println("5) Food and Drink Service: RM" + lines[4]);
+                //System.out.println("6) Laundry Service: RM" + lines[5]);
+                //System.out.println("7) Service Tax: RM" + lines[6]);
+                //System.out.println("8) Room Tax: RM" + lines[7]);
+                //System.out.println("9) Cleaning Tax: RM" + lines[8]);
+                //System.out.println("10) Deposit Fee: RM" + lines[9]);
+                //System.out.println("11) Damage Fee: RM" + lines[10]);
+                //System.out.println("12) Extra Bed Fee: RM" + lines[11]);
+                //System.out.println("13) Late Checkout Fee: RM" + lines[12]);
                 }
-            }
         } catch (IOException e) {
             e.printStackTrace();
             return;
         }
 
+        
+
         // Display the rates in ascending order
-        System.out.println("--------Rates--------");
-        System.out.println("a) Room");
-        rates.entrySet().stream()
-                .filter(entry -> entry.getKey().toLowerCase().contains("room"))
-                .sorted(Map.Entry.comparingByKey())
-                .forEach(entry -> System.out.println("  i) " + entry.getKey() + ": RM" + entry.getValue()));
-
-        System.out.println("b) Service");
-        rates.entrySet().stream()
-                .filter(entry -> entry.getKey().toLowerCase().contains("service"))
-                .sorted(Map.Entry.comparingByKey())
-                .forEach(entry -> System.out.println("  i) " + entry.getKey() + ": RM" + entry.getValue()));
-
-        System.out.println("c) Tax");
-        rates.entrySet().stream()
-                .filter(entry -> entry.getKey().toLowerCase().contains("tax"))
-                .sorted(Map.Entry.comparingByKey())
-                .forEach(entry -> System.out.println("  i) " + entry.getKey() + ": RM" + entry.getValue()));
-
-        System.out.println("d) Additional Fee");
-        rates.entrySet().stream()
-                .filter(entry -> entry.getKey().toLowerCase().contains("fee"))
-                .sorted(Map.Entry.comparingByKey())
-                .forEach(entry -> System.out.println("  i) " + entry.getKey() + ": RM" + entry.getValue()));
-
-        // Ask the manager if they want to update the rates
-        System.out.print("Do you want to update the rates? (yes/no): ");
-        String response = sc.nextLine().trim().toLowerCase();
-        if (response.equals("yes")) {
-            System.out.print("Enter the name of the rate you want to update: ");
-            String rateName = sc.nextLine().trim();
-            if (rates.containsKey(rateName)) {
-                System.out.print("Enter the new rate for " + rateName + ": RM");
-                double newRate = sc.nextDouble();
-                sc.nextLine(); // Consume the newline
-                rates.put(rateName, newRate);
-
-                // Write the updated rates back to the file
-                try (BufferedWriter writer = new BufferedWriter(new FileWriter("rates.txt"))) {
-                    for (Map.Entry<String, Double> entry : rates.entrySet()) {
-                        writer.write(entry.getKey() + ": RM" + entry.getValue());
-                        writer.newLine();
-                    }
-                    System.out.println("Rates updated successfully.");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                System.out.println("Rate not found.");
-            }
-        } else {
-            System.out.println("No changes made to the rates.");
-        }
+    //    System.out.println("--------Rates--------");
+    //    System.out.println("a) Room");
+    //    System.out.println("");
+    //    System.out.println("b) Service");
+    //    rates.entrySet().stream()
+    //            .filter(entry -> entry.getKey().toLowerCase().contains("service"))
+    //            .sorted(Map.Entry.comparingByKey())
+    //            .forEach(entry -> System.out.println("  i) " + entry.getKey() + ": RM" + entry.getValue()));
+//
+    //    System.out.println("c) Tax");
+    //    rates.entrySet().stream()
+    //            .filter(entry -> entry.getKey().toLowerCase().contains("tax"))
+    //            .sorted(Map.Entry.comparingByKey())
+    //            .forEach(entry -> System.out.println("  i) " + entry.getKey() + ": RM" + entry.getValue()));
+//
+    //    System.out.println("d) Additional Fee");
+    //    rates.entrySet().stream()
+    //            .filter(entry -> entry.getKey().toLowerCase().contains("fee"))
+    //            .sorted(Map.Entry.comparingByKey())
+    //            .forEach(entry -> System.out.println("  i) " + entry.getKey() + ": RM" + entry.getValue()));
+//
+    //    // Ask the manager if they want to update the rates
+    //    System.out.print("Do you want to update the rates? (yes/no): ");
+    //    String response = sc.nextLine().trim().toLowerCase();
+    //    if (response.equals("yes")) {
+    //        System.out.print("Enter the name of the rate you want to update: ");
+    //        String rateName = sc.nextLine().trim();
+    //        if (rates.containsKey(rateName)) {
+    //            System.out.print("Enter the new rate for " + rateName + ": RM");
+    //            double newRate = sc.nextDouble();
+    //            sc.nextLine(); // Consume the newline
+    //            rates.put(rateName, newRate);
+//
+    //            // Write the updated rates back to the file
+    //            try (BufferedWriter writer = new BufferedWriter(new FileWriter("rates.txt"))) {
+    //                for (Map.Entry<String, Double> entry : rates.entrySet()) {
+    //                    writer.write(entry.getKey() + ": RM" + entry.getValue());
+    //                    writer.newLine();
+    //                }
+    //                System.out.println("Rates updated successfully.");
+    //            } catch (IOException e) {
+    //                e.printStackTrace();
+    //            }
+    //        } else {
+    //            System.out.println("Rate not found.");
+    //        }
+    //    } else {
+    //        System.out.println("No changes made to the rates.");
+    //    }
     }
 }
 /* 
