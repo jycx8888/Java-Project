@@ -32,6 +32,14 @@ public class Resident extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        BookingRoom = new javax.swing.JButton();
+        Profile = new javax.swing.JButton();
+        Receipt = new javax.swing.JButton();
+        Feedback = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        Exit = new javax.swing.JButton();
+        BookHistory = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -40,21 +48,107 @@ public class Resident extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Welcome, Resident");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, -1, 20));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, -1, 20));
+
+        BookingRoom.setText("Book a room");
+        BookingRoom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BookingRoomActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BookingRoom, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 120, -1));
+
+        Profile.setText("Profile");
+        Profile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ProfileActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Profile, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 120, -1));
+
+        Receipt.setText("Receipt");
+        Receipt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReceiptActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Receipt, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 120, -1));
+
+        Feedback.setText("Feedback");
+        Feedback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FeedbackActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Feedback, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, 120, -1));
+
+        jLabel2.setText(" ");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jLabel3.setText("~~APU Hostel--The best of the hostel in Malaysia~~");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, -1, 20));
+
+        Exit.setText("Exit");
+        Exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExitActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 380, 120, -1));
+
+        BookHistory.setText("Booking History");
+        BookHistory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BookHistoryActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BookHistory, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, 120, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProfileActionPerformed
+        // TODO add your handling code here:
+        UpdateProfile up = new UpdateProfile();
+        up.setVisible(true);
+        this. dispose();
+    }//GEN-LAST:event_ProfileActionPerformed
+
+    private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
+        // TODO add your handling code here:
+        UserSession.clearSession();
+        Login lg = new Login();
+        lg.setVisible(true);
+        this. dispose();
+    }//GEN-LAST:event_ExitActionPerformed
+
+    private void BookingRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookingRoomActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BookingRoomActionPerformed
+
+    private void ReceiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReceiptActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ReceiptActionPerformed
+
+    private void FeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FeedbackActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FeedbackActionPerformed
+
+    private void BookHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookHistoryActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BookHistoryActionPerformed
 
     /**
      * @param args the command line arguments
@@ -92,7 +186,15 @@ public class Resident extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BookHistory;
+    private javax.swing.JButton BookingRoom;
+    private javax.swing.JButton Exit;
+    private javax.swing.JButton Feedback;
+    private javax.swing.JButton Profile;
+    private javax.swing.JButton Receipt;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
