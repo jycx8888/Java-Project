@@ -269,7 +269,7 @@ public class register extends javax.swing.JFrame {
             }
 
             // Save to file
-            try (FileWriter writer = new FileWriter("c:/Users/Justin Yong/Documents/NetBeansProjects/OOP/src/main/java/OOP/Unapprove_User.txt", true)) {
+            try (FileWriter writer = new FileWriter("src/main/java/OOP/Unapprove_User.txt", true)) {
                 writer.write(position + ", "+ username + ", " + email + ", " + phoneNumber + ", " + password + "\n");
                 JOptionPane.showMessageDialog(register.this, "Registration successful! Your registration is waiting for approval.", "Success", JOptionPane.INFORMATION_MESSAGE);
                 clearFields();
@@ -282,7 +282,7 @@ public class register extends javax.swing.JFrame {
     }
     
     private boolean isEmailOrPhoneNumberRegistered(String email, String phoneNumber, String position) {
-            String filePath = "c:/Users/Justin Yong/Documents/NetBeansProjects/OOP/src/main/java/OOP/" + position + "_Info.txt";
+            String filePath = "src/main/java/OOP/" + position + "_Info.txt";
             try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
                 String line;
                 while ((line = reader.readLine()) != null) {

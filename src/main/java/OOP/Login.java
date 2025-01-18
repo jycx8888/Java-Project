@@ -258,7 +258,7 @@ public class Login extends javax.swing.JFrame {
         }
         
         private boolean verifyCredentials(String email, String password, String position) {
-            String filePath = "c:/Users/Justin Yong/Documents/NetBeansProjects/OOP/src/main/java/OOP/" + position + "_Info.txt";
+            String filePath = "src/main/java/OOP/" + position + "_Info.txt";
             try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
                 String line;
                 while ((line = reader.readLine()) != null) {

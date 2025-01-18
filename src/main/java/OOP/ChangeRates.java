@@ -19,7 +19,7 @@ public class ChangeRates extends javax.swing.JFrame {
     public ChangeRates() {
         try{
         model.setColumnIdentifiers(columnNames);
-        FileReader fr = new FileReader("c:/Users/Justin Yong/Documents/NetBeansProjects/OOP/src/main/java/OOP/rates.txt");
+        FileReader fr = new FileReader("src/main/java/OOP/rates.txt");
         BufferedReader br = new BufferedReader(fr);
         
         String line = null;
@@ -166,7 +166,7 @@ public class ChangeRates extends javax.swing.JFrame {
         }
         
         try {
-            if (Method.isRateNameRegistered(newRateName, "c:/Users/Justin Yong/Documents/NetBeansProjects/OOP/src/main/java/OOP/rates.txt")&& !newRateName.equals(rateName)) {
+            if (Method.isRateNameRegistered(newRateName, "src/main/java/OOP/rates.txt")&& !newRateName.equals(rateName)) {
                 JOptionPane.showMessageDialog(this, "Name is already exist.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -212,7 +212,7 @@ public class ChangeRates extends javax.swing.JFrame {
         }
         
         try {
-            if (Method.isRateNameRegistered(newRateName, "c:/Users/Justin Yong/Documents/NetBeansProjects/OOP/src/main/java/OOP/rates.txt")) {
+            if (Method.isRateNameRegistered(newRateName, "src/main/java/OOP/rates.txt")) {
                 JOptionPane.showMessageDialog(this, "Name is already exist.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -251,7 +251,7 @@ public class ChangeRates extends javax.swing.JFrame {
     }//GEN-LAST:event_DeleteActionPerformed
 
     private void saveData () {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("c:/Users/Justin Yong/Documents/NetBeansProjects/OOP/src/main/java/OOP/rates.txt"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/OOP/rates.txt"))) {
             for (int i = 0; i < model.getRowCount(); i++) {
                 writer.write(model.getValueAt(i, 0) + ", " + model.getValueAt(i, 1));
                 writer.newLine();

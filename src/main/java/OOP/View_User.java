@@ -14,7 +14,7 @@ public class View_User extends javax.swing.JFrame {
 
     private CustomTableModel model;
     private String columnNames[] = {"UserID", "Name", "Email", "Phone Number", "Password"};
-    private String currentFilePath = "c:/Users/Justin Yong/Documents/NetBeansProjects/OOP/src/main/java/OOP/Resident_Info.txt";
+    private String currentFilePath = "src/main/java/OOP/Resident_Info.txt";
     private List<String> passwords;
     
     public View_User() {
@@ -193,19 +193,19 @@ public class View_User extends javax.swing.JFrame {
 
     private void ManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManagerActionPerformed
         // TODO add your handling code here:
-        currentFilePath = "c:/Users/Justin Yong/Documents/NetBeansProjects/OOP/src/main/java/OOP/Manager_Info.txt";
+        currentFilePath = "src/main/java/OOP/Manager_Info.txt";
         loadData(currentFilePath);
     }//GEN-LAST:event_ManagerActionPerformed
 
     private void ResidentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResidentActionPerformed
         // TODO add your handling code here:
-        currentFilePath = "c:/Users/Justin Yong/Documents/NetBeansProjects/OOP/src/main/java/OOP/Resident_Info.txt";
+        currentFilePath = "src/main/java/OOP/Resident_Info.txt";
         loadData(currentFilePath);
     }//GEN-LAST:event_ResidentActionPerformed
 
     private void StaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StaffActionPerformed
         // TODO add your handling code here:
-        currentFilePath = "c:/Users/Justin Yong/Documents/NetBeansProjects/OOP/src/main/java/OOP/Staff_Info.txt";
+        currentFilePath = "src/main/java/OOP/Staff_Info.txt";
         loadData(currentFilePath);
     }//GEN-LAST:event_StaffActionPerformed
 
