@@ -4,6 +4,11 @@
  */
 package OOP;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Justin Yong
@@ -15,6 +20,7 @@ public class UpdateProfile_Resident extends javax.swing.JFrame {
      */
     public UpdateProfile_Resident() {
         initComponents();
+        loadProfile();
     }
 
     /**
@@ -70,8 +76,18 @@ public class UpdateProfile_Resident extends javax.swing.JFrame {
         });
 
         edit.setText("Edit");
+        edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editActionPerformed(evt);
+            }
+        });
 
         exit.setText("Exit");
+        exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -159,9 +175,40 @@ public class UpdateProfile_Resident extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_PhoneNumberTextFieldActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_editActionPerformed
+
+    private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
+        // TODO add your handling code here:
+        Resident re = new Resident();
+        re.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_exitActionPerformed
+
+    private void loadProfile() {
+        UserSession session = UserSession.getInstance();
+        if (session != null) {
+            try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/OOP/Resident_info.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split(", ");
+                    if (parts.length >= 5 && parts[0].equals(session.getUserID())) {
+                        NameTextField.setText(parts[1]);
+                        EmailTextField.setText(parts[2]);
+                        PhoneNumberTextField.setText(parts[3]);
+                        PasswordTextField.setText(parts[4]);
+                        break;
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
