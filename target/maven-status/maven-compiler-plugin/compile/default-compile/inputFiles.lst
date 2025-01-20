@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\Justin Yong\Documents\NetBeansProjects\OOP\src\main\java\OOP\Method.java
 C:\Users\Justin Yong\Documents\NetBeansProjects\OOP\src\main\java\OOP\UpdateProfile_Resident.java
 C:\Users\Justin Yong\Documents\NetBeansProjects\OOP\src\main\java\OOP\CustomTableModel.java
@@ -11,3 +12,18 @@ C:\Users\Justin Yong\Documents\NetBeansProjects\OOP\src\main\java\OOP\Register.j
 C:\Users\Justin Yong\Documents\NetBeansProjects\OOP\src\main\java\OOP\ChangeRates.java
 C:\Users\Justin Yong\Documents\NetBeansProjects\OOP\src\main\java\OOP\UserSession.java
 C:\Users\Justin Yong\Documents\NetBeansProjects\OOP\src\main\java\OOP\Login.java
+=======
+C:\Users\hp\Documents\NetBeansProjects\javaAssignment\src\main\java\OOP\Method.java
+C:\Users\hp\Documents\NetBeansProjects\javaAssignment\src\main\java\OOP\Staff.java
+C:\Users\hp\Documents\NetBeansProjects\javaAssignment\src\main\java\OOP\Update.java
+C:\Users\hp\Documents\NetBeansProjects\javaAssignment\src\main\java\OOP\register.java
+C:\Users\hp\Documents\NetBeansProjects\javaAssignment\src\main\java\OOP\UpdateProfile_Resident.java
+C:\Users\hp\Documents\NetBeansProjects\javaAssignment\src\main\java\OOP\View_User.java
+C:\Users\hp\Documents\NetBeansProjects\javaAssignment\src\main\java\OOP\Approve_User.java
+C:\Users\hp\Documents\NetBeansProjects\javaAssignment\src\main\java\OOP\Manager.java
+C:\Users\hp\Documents\NetBeansProjects\javaAssignment\src\main\java\OOP\Login.java
+C:\Users\hp\Documents\NetBeansProjects\javaAssignment\src\main\java\OOP\Resident.java
+C:\Users\hp\Documents\NetBeansProjects\javaAssignment\src\main\java\OOP\UserSession.java
+C:\Users\hp\Documents\NetBeansProjects\javaAssignment\src\main\java\OOP\ChangeRates.java
+C:\Users\hp\Documents\NetBeansProjects\javaAssignment\src\main\java\OOP\CustomTableModel.java
+>>>>>>> 7eddc361391d053bf9492f2abc0c3bc5d3cae67b
