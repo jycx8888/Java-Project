@@ -190,7 +190,8 @@ public class UpdateProfile_Resident extends javax.swing.JFrame {
     private void loadProfile() {
         UserSession session = UserSession.getInstance();
         if (session != null) {
-            try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/OOP/Resident_info.txt"))) {
+            System.out.println("Session UserID: " + session.getUserID()); // Debug statement
+            try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/OOP/Resident_Info.txt"))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     String[] parts = line.split(", ");
@@ -205,6 +206,8 @@ public class UpdateProfile_Resident extends javax.swing.JFrame {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }else {
+            System.out.println("No active session found."); // Debug statement
         }
     }
 
