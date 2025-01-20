@@ -16,12 +16,12 @@ import javax.swing.JOptionPane;
  *
  * @author Justin Yong
  */
-public class register extends javax.swing.JFrame {
+public class Register extends javax.swing.JFrame {
 
     /**
      * Creates new form register
      */
-    public register() {
+    public Register() {
         initComponents();
         jButton1.addActionListener(new SubmitButtonListener());
         
@@ -233,49 +233,49 @@ public class register extends javax.swing.JFrame {
 
             // Validate input
             if (username.isEmpty() || password.isEmpty() || phoneNumber.isEmpty() || email.isEmpty()) {
-                JOptionPane.showMessageDialog(register.this, "All fields must be filled out.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(Register.this, "All fields must be filled out.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             
             if (!username.matches("[a-zA-Z\\s]+")) {
-                JOptionPane.showMessageDialog(register.this, "Name cannot have numbers or syntax", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(Register.this, "Name cannot have numbers or syntax", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
             if (!phoneNumber.matches("\\d+")) {
-                JOptionPane.showMessageDialog(register.this, "Phone number must be numeric.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(Register.this, "Phone number must be numeric.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             
             if (!phoneNumber.startsWith("01") || !phoneNumber.matches("[0-9]+") || phoneNumber.length() != 10) {
-                JOptionPane.showMessageDialog(register.this, "Phone number must start with '01' and must be 10 digits.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(Register.this, "Phone number must start with '01' and must be 10 digits.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
             if (!email.contains("@")) {
-                JOptionPane.showMessageDialog(register.this, "Invalid email address.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(Register.this, "Invalid email address.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             
             if (!password.matches("^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,14}$")){
-                JOptionPane.showMessageDialog(register.this, "Invalid password. Password must be 8-14 characters long, contain at least one capital letter, one number, and one special character.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(Register.this, "Invalid password. Password must be 8-14 characters long, contain at least one capital letter, one number, and one special character.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             
             // Check if email or phone number is already registered for the selected position
             if (isEmailOrPhoneNumberRegistered(email, phoneNumber, position)) {
-                JOptionPane.showMessageDialog(register.this, "Email or phone number is already registered for this position.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(Register.this, "Email or phone number is already registered for this position.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
             // Save to file
             try (FileWriter writer = new FileWriter("src/main/java/OOP/Unapprove_User.txt", true)) {
                 writer.write(position + ", "+ username + ", " + email + ", " + phoneNumber + ", " + password + "\n");
-                JOptionPane.showMessageDialog(register.this, "Registration successful! Your registration is waiting for approval.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(Register.this, "Registration successful! Your registration is waiting for approval.", "Success", JOptionPane.INFORMATION_MESSAGE);
                 clearFields();
                 navigateToLoginPage();
             } catch (IOException ex) {
-                JOptionPane.showMessageDialog(register.this, "An error occurred while saving the data.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(Register.this, "An error occurred while saving the data.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
            
@@ -310,7 +310,7 @@ public class register extends javax.swing.JFrame {
         }
         
     private void navigateToLoginPage() {
-        register.this.dispose(); // Close the registration page
+        Register.this.dispose(); // Close the registration page
         Login lp = new Login();
         lp.setVisible(true);
     }
@@ -331,20 +331,21 @@ public class register extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new register().setVisible(true);
+                new Register().setVisible(true);
             }
         });
     }
