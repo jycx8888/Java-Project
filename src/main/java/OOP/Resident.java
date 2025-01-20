@@ -134,9 +134,9 @@ public class Resident extends javax.swing.JFrame {
         this. dispose();
     }//GEN-LAST:event_ExitActionPerformed
 
-    private void BookingRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookingRoomActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BookingRoomActionPerformed
+    private void BookingRoomActionPerformed(java.awt.event.ActionEvent evt) {
+        
+    }
 
     private void ReceiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReceiptActionPerformed
         // TODO add your handling code here:
