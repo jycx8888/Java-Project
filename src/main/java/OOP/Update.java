@@ -36,7 +36,7 @@ public class Update {
         if (name.matches("[a-zA-Z\\s]+")) {
             this.name = name;
         } else {
-            throw new IllegalArgumentException("Invalid name");
+            throw new IllegalArgumentException("Invalid name.");
         }
     }
 
@@ -48,7 +48,7 @@ public class Update {
         if (email.contains("@")) {
             this.email = email;
         } else {
-            throw new IllegalArgumentException("Invalid email");
+            throw new IllegalArgumentException("Invalid email.");
         }
     }
 
@@ -60,7 +60,7 @@ public class Update {
         if (phoneNumber.matches("\\d+") && phoneNumber.startsWith("01") && phoneNumber.length() == 10) {
             this.phoneNumber = phoneNumber;
         } else {
-            throw new IllegalArgumentException("Invalid phone number");
+            throw new IllegalArgumentException("Invalid phone number.");
         }
     }
 
@@ -72,79 +72,80 @@ public class Update {
         if (password.matches("^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,14}$")) {
             this.password = password;
         } else {
-            throw new IllegalArgumentException("Invalid password");
+            throw new IllegalArgumentException("Invalid password.");
         }
     }
 
-    public void editProfile(String name, String email, String phoneNumber, String password, String filePath) {
-        // Validation logic
-        if (name.isEmpty() || password.isEmpty() || phoneNumber.isEmpty() || email.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "All fields must be filled out.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        if (!name.matches("[a-zA-Z\\s]+")) {
-            JOptionPane.showMessageDialog(null, "Name cannot have numbers or syntax", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        if (!phoneNumber.matches("\\d+")) {
-            JOptionPane.showMessageDialog(null, "Phone number must be numeric.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        if (!phoneNumber.startsWith("01") || !phoneNumber.matches("[0-9]+") || phoneNumber.length() != 10) {
-            JOptionPane.showMessageDialog(null, "Phone number must start with '01' and must be 10 digits.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        if (!email.contains("@")) {
-            JOptionPane.showMessageDialog(null, "Invalid email address.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        if (!password.matches("^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,14}$")) {
-            JOptionPane.showMessageDialog(null, "Invalid password. Password must be 8-14 characters long, contain at least one capital letter, one number, and one special character.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Check if email or phone number is already registered for the selected position
-        if (isEmailOrPhoneNumberRegistered(email, phoneNumber)) {
-            JOptionPane.showMessageDialog(null, "Email or phone number is already registered for this position.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Proceed with profile update logic
+    public boolean validateProfile(String name, String email, String phoneNumber, String password, String filePath) {
+        // Retrieve the current user's data from the file
+        String[] currentUserInfo = null;
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
-            List<String> fileContent = new ArrayList<>();
-            String[] userInfo = null;
-
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(", ");
                 if (parts.length >= 5 && parts[0].equals(userID)) {
-                    userInfo = parts;
-                } else {
-                    fileContent.add(line);
+                    currentUserInfo = parts;
+                    break;
                 }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-            if (userInfo != null) {
-                userInfo[1] = name;
-                userInfo[2] = email;
-                userInfo[3] = phoneNumber;
-                userInfo[4] = password;
-                fileContent.add(String.join(", ", userInfo));
+        if (currentUserInfo == null) {
+            JOptionPane.showMessageDialog(null, "User not found.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        // Skip validation for unchanged email and phone number
+        boolean emailChanged = !email.equals(currentUserInfo[2]);
+        boolean phoneNumberChanged = !phoneNumber.equals(currentUserInfo[3]);
+        
+        if (!Validator.validateProfile(name, email, phoneNumber, password)) {
+            return false;
+        }
+
+        if (emailChanged || phoneNumberChanged) {
+            if (Validator.isEmailOrPhoneNumberRegistered(email, phoneNumber, filePath)) {
+                JOptionPane.showMessageDialog(null, "Email or phone number is already registered for this position.", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
             }
+        }
 
-            // Write updated content back to file
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-                for (String content : fileContent) {
-                    writer.write(content);
-                    writer.newLine();
-                }
+        return true;
+    }
+
+    public void editProfile(String name, String email, String phoneNumber, String password, String filePath) {
+        if (!validateProfile(name, email, phoneNumber, password, filePath)) {
+            return;
+        }
+
+        // Read the file into a list of strings
+        List<String> fileContent = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                fileContent.add(line);
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
 
+        // Modify the specific line
+        for (int i = 0; i < fileContent.size(); i++) {
+            String[] parts = fileContent.get(i).split(", ");
+            if (parts.length >= 5 && parts[0].equals(userID)) {
+                fileContent.set(i, userID + ", " + name + ", " + email + ", " + phoneNumber + ", " + password);
+                break;
+            }
+        }
+        
+        // Write the list back to the file
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            for (String content : fileContent) {
+                writer.write(content);
+                writer.newLine();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
