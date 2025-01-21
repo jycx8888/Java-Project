@@ -250,13 +250,9 @@ public class booking extends javax.swing.JFrame {
                           "Description: " + descriptionText + "\n" +
                           "Days: " + daysValue + "\n" +
                           "Additional Services:\n" +
-                          "Cleaning Service: " + (cleaningService ? "Yes" : "No") + "\n" +
-                          "Food and Drink Service: " + (foodAndDrinkService ? "Yes" : "No") + "\n" +
-                          "Laundry Service: " + (laundryService ? "Yes" : "No") + "\n";
     
-            try (FileWriter writer = new FileWriter("Rates.txt", true)) {
+            try (FileWriter writer = new FileWriter("Booking.txt", true)) {
                 writer.write(data);
-                writer.write("\n-------------------------\n");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -301,7 +297,7 @@ public class booking extends javax.swing.JFrame {
             String bookingData = String.format("Booking ID: %s\nUser ID: %s\nCheck-in Date: %s\nDays: %d\nPrice: RM%.2f\n",
                     BookingId, userId, checkInDate, daysInt, price);
     
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:/Users/hp/Documents/NetBeansProjects/javaAssignment/src/main/java/OOP/Rates.txt", true))) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:/Users/hp/Documents/NetBeansProjects/javaAssignment/src/main/java/OOP/Booking.txt", true))) {
                 writer.write(bookingData);
                 writer.write("\n-------------------------\n");
             } catch (IOException e) {
