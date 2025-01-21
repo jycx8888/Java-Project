@@ -4,17 +4,19 @@
  */
 package OOP;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Justin Yong
  */
 public class UpdateProfile_Staff extends javax.swing.JFrame {
 
-    /**
-     * Creates new form UpdateProfile_Staff
-     */
+    private Update update; 
+    
     public UpdateProfile_Staff() {
         initComponents();
+        loadProfile();
     }
 
     /**
@@ -26,21 +28,175 @@ public class UpdateProfile_Staff extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        NameTextField = new javax.swing.JTextField();
+        EmailTextField = new javax.swing.JTextField();
+        PhoneNumberTextField = new javax.swing.JTextField();
+        PasswordTextField = new javax.swing.JTextField();
+        Edit = new javax.swing.JButton();
+        Exit = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(204, 255, 153));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setText("Your Profile");
+
+        jLabel2.setText("Name:");
+
+        jLabel3.setText("Email:");
+
+        jLabel4.setText("Phone Number: ");
+
+        jLabel5.setText("Password: ");
+
+        PasswordTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PasswordTextFieldActionPerformed(evt);
+            }
+        });
+
+        Edit.setText("Edit");
+        Edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditActionPerformed(evt);
+            }
+        });
+
+        Exit.setText("Exit");
+        Exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExitActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(160, 160, 160)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(NameTextField)
+                            .addComponent(EmailTextField)
+                            .addComponent(PhoneNumberTextField)
+                            .addComponent(PasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(102, 102, 102)
+                        .addComponent(Edit)
+                        .addGap(50, 50, 50)
+                        .addComponent(Exit)))
+                .addContainerGap(66, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addComponent(jLabel1)
+                .addGap(40, 40, 40)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(EmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(PhoneNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(PasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Edit)
+                    .addComponent(Exit))
+                .addContainerGap(68, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
+        // TODO add your handling code here:
+        Staff st = new Staff();
+        st.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_ExitActionPerformed
+
+    private void PasswordTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PasswordTextFieldActionPerformed
+
+    private void loadProfile() {
+        UserSession session = UserSession.getInstance();
+        System.out.println("Session UserID: " + session.getUserID()); // Debug statement
+        if (session != null) {
+            update = new Update(session.getUserID(), session.getUsername(), session.getEmail(), session.getPhoneNumber(), session.getPassword());
+            NameTextField.setText(update.getName());
+            EmailTextField.setText(update.getEmail());
+            PhoneNumberTextField.setText(update.getPhoneNumber());
+            PasswordTextField.setText(update.getPassword());
+        } else {
+            JOptionPane.showMessageDialog(this, "User session not found.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditActionPerformed
+        // TODO add your handling code here:
+        if (update != null) {
+            String newName = NameTextField.getText();
+            String newEmail = EmailTextField.getText();
+            String newPhoneNumber = PhoneNumberTextField.getText();
+            String newPassword = PasswordTextField.getText();
+            
+            if (!update.validateProfile(newName, newEmail, newPhoneNumber, newPassword, "src/main/java/OOP/Staff_Info.txt")) {
+                return;
+            }
+
+            update.editProfile(newName, newEmail, newPhoneNumber, newPassword, "src/main/java/OOP/Staff_Info.txt");
+
+            // Update the UserSession with the new details
+            UserSession session = UserSession.getInstance();
+            if (session != null) {
+                session.updateSession(newName, newEmail, newPhoneNumber, newPassword);
+            }
+
+            JOptionPane.showMessageDialog(this, "Profile updated successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Failed to update profile.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_EditActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +234,17 @@ public class UpdateProfile_Staff extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Edit;
+    private javax.swing.JTextField EmailTextField;
+    private javax.swing.JButton Exit;
+    private javax.swing.JTextField NameTextField;
+    private javax.swing.JTextField PasswordTextField;
+    private javax.swing.JTextField PhoneNumberTextField;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
