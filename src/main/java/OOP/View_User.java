@@ -227,20 +227,12 @@ public class View_User extends javax.swing.JFrame {
         String newPhoneNumber = JOptionPane.showInputDialog(this, "Enter new phone number:", phoneNumber);
         String newPassword = JOptionPane.showInputDialog(this, "Enter new password:", password);
         
-        if (newName == null || newName.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Name cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+        if (!Validator.validateProfile(newName, newEmail, newPhoneNumber, newPassword)) {
             return;
         }
-        if (newEmail == null || newEmail.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Email cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (newPhoneNumber == null || newPhoneNumber.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Phone number cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (newPassword == null || newPassword.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Password cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+
+        if (Validator.isEmailOrPhoneNumberRegistered(email, phoneNumber, currentFilePath)) {
+            JOptionPane.showMessageDialog(null, "Email or phone number is already registered for this position.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 

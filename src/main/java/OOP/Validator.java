@@ -63,4 +63,18 @@ public class Validator {
         }
         return false;
     }
+    
+    public static boolean isRateNameRegistered(String rateName, String filePath) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(filePath));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] parts = line.split(", ");
+            if (parts[0].equals(rateName)) {
+                reader.close();
+                return true;
+            }
+        }
+        reader.close();
+        return false;
+    }
 }
