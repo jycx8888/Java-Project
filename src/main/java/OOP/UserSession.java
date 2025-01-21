@@ -53,4 +53,11 @@ public class UserSession {
     public String getPassword() {
         return password;
     }
+    
+    public void updateSession(String username, String email, String phoneNumber, String password) {
+        this.username = username;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+    }
 }

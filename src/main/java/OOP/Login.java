@@ -242,8 +242,8 @@ public class Login extends javax.swing.JFrame {
                 return;
             }
 
-            if (!email.contains("@") || !email.contains(".com")) {
-                JOptionPane.showMessageDialog(Login.this, "Email must contain '@' and '.com'", "Error", JOptionPane.ERROR_MESSAGE);
+            if (!email.contains("@") || (!email.contains("."))) {
+                JOptionPane.showMessageDialog(Login.this, "Invalid email.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 

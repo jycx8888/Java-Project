@@ -230,41 +230,14 @@ public class Register extends javax.swing.JFrame {
             String password = passwordField.getText().trim();
             String phoneNumber = phoneNumberField.getText().trim();
             String position = (String) jComboBox1.getSelectedItem();
+            String filePath = "src/main/java/OOP/" + position + "_Info.txt";
 
-            // Validate input
-            if (username.isEmpty() || password.isEmpty() || phoneNumber.isEmpty() || email.isEmpty()) {
-                JOptionPane.showMessageDialog(Register.this, "All fields must be filled out.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            
-            if (!username.matches("[a-zA-Z\\s]+")) {
-                JOptionPane.showMessageDialog(Register.this, "Name cannot have numbers or syntax", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
+            if (!Validator.validateProfile(username, email, phoneNumber, password)) {
+                 return;
             }
 
-            if (!phoneNumber.matches("\\d+")) {
-                JOptionPane.showMessageDialog(Register.this, "Phone number must be numeric.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            
-            if (!phoneNumber.startsWith("01") || !phoneNumber.matches("[0-9]+") || phoneNumber.length() != 10) {
-                JOptionPane.showMessageDialog(Register.this, "Phone number must start with '01' and must be 10 digits.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            if (!email.contains("@")) {
-                JOptionPane.showMessageDialog(Register.this, "Invalid email address.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            
-            if (!password.matches("^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,14}$")){
-                JOptionPane.showMessageDialog(Register.this, "Invalid password. Password must be 8-14 characters long, contain at least one capital letter, one number, and one special character.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            
-            // Check if email or phone number is already registered for the selected position
-            if (isEmailOrPhoneNumberRegistered(email, phoneNumber, position)) {
-                JOptionPane.showMessageDialog(Register.this, "Email or phone number is already registered for this position.", "Error", JOptionPane.ERROR_MESSAGE);
+            if (Validator.isEmailOrPhoneNumberRegistered(email, phoneNumber, filePath)) {
+                JOptionPane.showMessageDialog(null, "Email or phone number is already registered for this position.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -280,26 +253,6 @@ public class Register extends javax.swing.JFrame {
         }
            
     }
-    
-    private boolean isEmailOrPhoneNumberRegistered(String email, String phoneNumber, String position) {
-            String filePath = "src/main/java/OOP/" + position + "_Info.txt";
-            try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split(", ");
-                    if (parts.length >= 5) {
-                        String fileEmail = parts[2];
-                        String filePhoneNumber = parts[3];
-                        if (fileEmail.equals(email) || filePhoneNumber.equals(phoneNumber)) {
-                            return true;
-                        }
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return false;
-        }
     
     private void clearFields() {
             usernameField.setText("");

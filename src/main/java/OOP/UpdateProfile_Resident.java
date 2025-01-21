@@ -4,9 +4,6 @@
  */
 package OOP;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import javax.swing.JOptionPane;
 
 /**
@@ -176,27 +173,27 @@ public class UpdateProfile_Resident extends javax.swing.JFrame {
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
         // TODO add your handling code here:
-        UserSession session = UserSession.getInstance();
-        if (session != null) {
-            String userID = session.getUserID();
-            update = new Update(
-            userID,
-            NameTextField.getText(),
-            EmailTextField.getText(),
-            PhoneNumberTextField.getText(),
-            PasswordTextField.getText()
-        );
+        if (update != null) {
+            String newName = NameTextField.getText();
+            String newEmail = EmailTextField.getText();
+            String newPhoneNumber = PhoneNumberTextField.getText();
+            String newPassword = PasswordTextField.getText();
+            
+            if (!update.validateProfile(newName, newEmail, newPhoneNumber, newPassword, "src/main/java/OOP/Resident_Info.txt")) {
+                return;
+            }
 
-        update.editProfile(
-            NameTextField.getText(),
-            EmailTextField.getText(),
-            PhoneNumberTextField.getText(),
-            PasswordTextField.getText(),
-            "src/main/java/OOP/Resident_Info.txt"
-        );
-        JOptionPane.showMessageDialog(this, "Profile updated successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            update.editProfile(newName, newEmail, newPhoneNumber, newPassword, "src/main/java/OOP/Resident_Info.txt");
+
+            // Update the UserSession with the new details
+            UserSession session = UserSession.getInstance();
+            if (session != null) {
+                session.updateSession(newName, newEmail, newPhoneNumber, newPassword);
+            }
+
+            JOptionPane.showMessageDialog(this, "Profile updated successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
         } else {
-        JOptionPane.showMessageDialog(this, "Failed to update profile. No active session found.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Failed to update profile.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_editActionPerformed
 
@@ -209,25 +206,15 @@ public class UpdateProfile_Resident extends javax.swing.JFrame {
 
     private void loadProfile() {
         UserSession session = UserSession.getInstance();
+        System.out.println("Session UserID: " + session.getUserID()); // Debug statement
         if (session != null) {
-            System.out.println("Session UserID: " + session.getUserID()); // Debug statement
-            try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/OOP/Resident_Info.txt"))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split(", ");
-                    if (parts.length >= 5 && parts[0].equals(session.getUserID())) {
-                        NameTextField.setText(parts[1]);
-                        EmailTextField.setText(parts[2]);
-                        PhoneNumberTextField.setText(parts[3]);
-                        PasswordTextField.setText(parts[4]);
-                        break;
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }else {
-            System.out.println("No active session found."); // Debug statement
+            update = new Update(session.getUserID(), session.getUsername(), session.getEmail(), session.getPhoneNumber(), session.getPassword());
+            NameTextField.setText(update.getName());
+            EmailTextField.setText(update.getEmail());
+            PhoneNumberTextField.setText(update.getPhoneNumber());
+            PasswordTextField.setText(update.getPassword());
+        } else {
+            JOptionPane.showMessageDialog(this, "User session not found.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
