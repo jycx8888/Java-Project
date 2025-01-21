@@ -245,14 +245,12 @@ public class booking extends javax.swing.JFrame {
             boolean cleaningService = jCheckBox1.isSelected();
             boolean foodAndDrinkService = jCheckBox2.isSelected();
             boolean laundryService = jCheckBox3.isSelected();
+            UserSession session = UserSession.getInstance();
+            String userId = session.getUserID();
+
     
-            String data = "Check-in Date: " + checkInDate + "\n" +
-                          "Description: " + descriptionText + "\n" +
-                          "Days: " + daysValue + "\n" +
-                          "Additional Services:\n" +
-    
-            try (FileWriter writer = new FileWriter("Booking.txt", true)) {
-                writer.write(data);
+            try (FileWriter writer = new FileWriter("booking.txt", true)) {
+                writer.write("["+ bookingid +","+ userId + "," + days + "," + checkInDate + "pending");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -281,7 +279,6 @@ public class booking extends javax.swing.JFrame {
             }
     
             String checkInDate = check_in_text.getText();
-            UserSession session = UserSession.getInstance();
             String BookingId;
             try {
                 BookingId = generateBookingId();
@@ -291,13 +288,12 @@ public class booking extends javax.swing.JFrame {
             }
     
             // Proceed with booking logic
-            String userId = session.getUserID();
             double price = daysInt * 50; // Assuming RM 50 per day
     
             String bookingData = String.format("Booking ID: %s\nUser ID: %s\nCheck-in Date: %s\nDays: %d\nPrice: RM%.2f\n",
                     BookingId, userId, checkInDate, daysInt, price);
     
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:/Users/hp/Documents/NetBeansProjects/javaAssignment/src/main/java/OOP/Booking.txt", true))) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:/Users/hp/Documents/NetBeansProjects/javaAssignment/src/main/java/OOP/booking.txt", true))) {
                 writer.write(bookingData);
                 writer.write("\n-------------------------\n");
             } catch (IOException e) {
