@@ -6,8 +6,8 @@ package OOP;
 
 import javax.swing.JOptionPane;
 import java.io.*;
-
-
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  *
@@ -147,7 +147,7 @@ public class booking extends javax.swing.JFrame {
         book.setText("Book");
         book.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookActionPerformed(evt);
+                bookButtonActionPerformed(evt);
             }
         });
         
@@ -245,12 +245,14 @@ public class booking extends javax.swing.JFrame {
             boolean cleaningService = jCheckBox1.isSelected();
             boolean foodAndDrinkService = jCheckBox2.isSelected();
             boolean laundryService = jCheckBox3.isSelected();
-            UserSession session = UserSession.getInstance();
-            String userId = session.getUserID();
-
     
-            try (FileWriter writer = new FileWriter("booking.txt", true)) {
-                writer.write("["+","+ userId + "," + days + "," + checkInDate + "pending");
+            String data = "Check-in Date: " + checkInDate + "\n" +
+                          "Description: " + descriptionText + "\n" +
+                          "Days: " + daysValue + "\n" +
+                          "Additional Services:\n";
+    
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/OOP/booking.txt", true))) {
+                writer.write(data);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -261,52 +263,10 @@ public class booking extends javax.swing.JFrame {
         }
     }                       
 
-
     private void days_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_days_textActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_days_textActionPerformed
 
-    private void bookActionPerformed(java.awt.event.ActionEvent evt) {
-        handleBooking();
-    }
-
-    private void handleBooking() {
-        try {
-            int daysInt = Integer.parseInt(days_text.getText());
-            if (daysInt <= 0) {
-                JOptionPane.showMessageDialog(this, "Days cannot be 0 or less", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-    
-            String checkInDate = check_in_text.getText();
-            String BookingId;
-            try {
-                BookingId = generateBookingId();
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(this, "Error generating booking ID", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-    
-            // Proceed with booking logic
-            double price = daysInt * 50; // Assuming RM 50 per day
-    
-            String bookingData = String.format("Booking ID: %s\nUser ID: %s\nCheck-in Date: %s\nDays: %d\nPrice: RM%.2f\n",
-                    BookingId, userId, checkInDate, daysInt, price);
-    
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:/Users/hp/Documents/NetBeansProjects/javaAssignment/src/main/java/OOP/booking.txt", true))) {
-                writer.write(bookingData);
-                writer.write("\n-------------------------\n");
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(this, "Error saving booking data", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-    
-            JOptionPane.showMessageDialog(this, "Booking successful!");
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid number for days", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-    
     public static String generateBookingId() throws IOException {
         File file = new File("BookingIDGenerator.txt");
         if (!file.exists()) {
@@ -314,30 +274,16 @@ public class booking extends javax.swing.JFrame {
         }
     
         BufferedReader reader = new BufferedReader(new FileReader(file));
-        String line = reader.readLine();
-        if (line == null) {
-            reader.close();
-            throw new IOException("BookingIDGenerator.txt is empty");
-        }
-    
-        int id;
         try {
-            id = Integer.parseInt(line);
-        } catch (NumberFormatException e) {
+            String line = reader.readLine();
+            if (line == null) {
+                throw new IOException("BookingIDGenerator.txt is empty");
+            }
+            return line;
+        } finally {
             reader.close();
-            throw new IOException("Invalid ID format in BookingIDGenerator.txt");
         }
-        reader.close();
-    
-        String BookingId = "B" + String.format("%02d", id);
-    
-        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-        writer.write(Integer.toString(id + 1));
-        writer.close();
-    
-        return BookingId;
     }
-
     /**
      * @param args the command line arguments
      */
