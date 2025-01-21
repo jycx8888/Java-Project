@@ -107,7 +107,8 @@ public class Update {
             JOptionPane.showMessageDialog(null, "Invalid password. Password must be 8-14 characters long, contain at least one capital letter, one number, and one special character.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
+        // Check if email or phone number is already registered for the selected position
         if (isEmailOrPhoneNumberRegistered(email, phoneNumber)) {
             JOptionPane.showMessageDialog(null, "Email or phone number is already registered for this position.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -176,5 +177,4 @@ public class Update {
         }
         return false;
     }
-
 }

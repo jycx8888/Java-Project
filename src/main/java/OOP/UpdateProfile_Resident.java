@@ -7,7 +7,7 @@ package OOP;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import javax.swing.JTextField;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,14 +17,9 @@ public class UpdateProfile_Resident extends javax.swing.JFrame {
 
     private Update update;
 
-    public UpdateProfile_Resident(String userID, String name, String email, String phoneNumber, String password) {
-        initComponents();
-        update = new Update(userID, name, email, phoneNumber, password);
-        loadProfile();
-    }
-
     public UpdateProfile_Resident() {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        initComponents();
+        loadProfile();
     }
 
     /**
@@ -181,13 +176,18 @@ public class UpdateProfile_Resident extends javax.swing.JFrame {
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
         // TODO add your handling code here:
-        update.editProfile(
-            NameTextField.getText(),
-            EmailTextField.getText(),
-            PhoneNumberTextField.getText(),
-            PasswordTextField.getText(),
-            "src/main/java/OOP/Resident_Info.txt"
-        );
+        if (update != null) {
+            update.editProfile(
+                NameTextField.getText(),
+                EmailTextField.getText(),
+                PhoneNumberTextField.getText(),
+                PasswordTextField.getText(),
+                "src/main/java/OOP/Resident_Info.txt"
+            );
+            JOptionPane.showMessageDialog(this, "Profile updated successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Failed to update profile.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_editActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
