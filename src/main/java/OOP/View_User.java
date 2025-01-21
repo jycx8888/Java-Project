@@ -236,20 +236,6 @@ public class View_User extends javax.swing.JFrame {
             return;
         }
 
-        try {
-            if (Method.isEmailRegistered(newEmail, currentFilePath) && !newEmail.equals(email)) {
-                JOptionPane.showMessageDialog(this, "Email is already registered.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            if (Method.isPhoneNumberRegistered(newPhoneNumber, currentFilePath) && !newPhoneNumber.equals(phoneNumber)) {
-                JOptionPane.showMessageDialog(this, "Phone number is already registered.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "An error occurred while checking the email or phone number: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
         model.setValueAt(newName, selectedRow, 1);
         model.setValueAt(newEmail, selectedRow, 2);
         model.setValueAt(newPhoneNumber, selectedRow, 3);
