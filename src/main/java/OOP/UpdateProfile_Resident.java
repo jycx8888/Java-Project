@@ -15,12 +15,16 @@ import javax.swing.JTextField;
  */
 public class UpdateProfile_Resident extends javax.swing.JFrame {
 
-    /**
-     * Creates new form UpdateProfile
-     */
-    public UpdateProfile_Resident() {
+    private Update update;
+
+    public UpdateProfile_Resident(String userID, String name, String email, String phoneNumber, String password) {
         initComponents();
+        update = new Update(userID, name, email, phoneNumber, password);
         loadProfile();
+    }
+
+    public UpdateProfile_Resident() {
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     /**
@@ -177,7 +181,13 @@ public class UpdateProfile_Resident extends javax.swing.JFrame {
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
         // TODO add your handling code here:
-        
+        update.editProfile(
+            NameTextField.getText(),
+            EmailTextField.getText(),
+            PhoneNumberTextField.getText(),
+            PasswordTextField.getText(),
+            "src/main/java/OOP/Resident_Info.txt"
+        );
     }//GEN-LAST:event_editActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed

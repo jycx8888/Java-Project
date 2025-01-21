@@ -9,12 +9,12 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Update {
-    protected String userID;
-    protected String name;
-    protected String email;
-    protected String phoneNumber;
-    protected String password;
+public class Update {
+    private String userID;
+    private String name;
+    private String email;
+    private String phoneNumber;
+    private String password;
 
     public Update(String userID, String name, String email, String phoneNumber, String password) {
         this.userID = userID;
@@ -33,7 +33,7 @@ public abstract class Update {
     }
 
     public void setName(String name) {
-        if (validateName(name)) {
+        if (name.matches("[a-zA-Z\\s]+")) {
             this.name = name;
         } else {
             throw new IllegalArgumentException("Invalid name");
@@ -45,7 +45,7 @@ public abstract class Update {
     }
 
     public void setEmail(String email) {
-        if (validateEmail(email)) {
+        if (email.contains("@")) {
             this.email = email;
         } else {
             throw new IllegalArgumentException("Invalid email");
@@ -57,7 +57,7 @@ public abstract class Update {
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        if (validatePhoneNumber(phoneNumber)) {
+        if (phoneNumber.matches("\\d+") && phoneNumber.startsWith("01") && phoneNumber.length() == 10) {
             this.phoneNumber = phoneNumber;
         } else {
             throw new IllegalArgumentException("Invalid phone number");
@@ -69,21 +69,51 @@ public abstract class Update {
     }
 
     public void setPassword(String password) {
-        if (validatePassword(password)) {
+        if (password.matches("^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,14}$")) {
             this.password = password;
         } else {
             throw new IllegalArgumentException("Invalid password");
         }
     }
 
-    public void updateProfile(String name, String email, String phoneNumber, String password) {
-        setName(name);
-        setEmail(email);
-        setPhoneNumber(phoneNumber);
-        setPassword(password);
-    }
+    public void editProfile(String name, String email, String phoneNumber, String password, String filePath) {
+        // Validation logic
+        if (name.isEmpty() || password.isEmpty() || phoneNumber.isEmpty() || email.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "All fields must be filled out.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-    public void editProfile(String filePath) {
+        if (!name.matches("[a-zA-Z\\s]+")) {
+            JOptionPane.showMessageDialog(null, "Name cannot have numbers or syntax", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (!phoneNumber.matches("\\d+")) {
+            JOptionPane.showMessageDialog(null, "Phone number must be numeric.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (!phoneNumber.startsWith("01") || !phoneNumber.matches("[0-9]+") || phoneNumber.length() != 10) {
+            JOptionPane.showMessageDialog(null, "Phone number must start with '01' and must be 10 digits.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (!email.contains("@")) {
+            JOptionPane.showMessageDialog(null, "Invalid email address.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (!password.matches("^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,14}$")) {
+            JOptionPane.showMessageDialog(null, "Invalid password. Password must be 8-14 characters long, contain at least one capital letter, one number, and one special character.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if (isEmailOrPhoneNumberRegistered(email, phoneNumber)) {
+            JOptionPane.showMessageDialog(null, "Email or phone number is already registered for this position.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Proceed with profile update logic
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             List<String> fileContent = new ArrayList<>();
@@ -93,66 +123,58 @@ public abstract class Update {
                 String[] parts = line.split(", ");
                 if (parts.length >= 5 && parts[0].equals(userID)) {
                     userInfo = parts;
+                } else {
+                    fileContent.add(line);
                 }
-                fileContent.add(line);
             }
 
             if (userInfo != null) {
-                JTextField newNameField = new JTextField(userInfo[1]);
-                JTextField newEmailField = new JTextField(userInfo[2]);
-                JTextField newPhoneField = new JTextField(userInfo[3]);
-                JPasswordField newPasswordField = new JPasswordField(userInfo[4]);
-
-                Object[] message = {
-                    "Name:", newNameField,
-                    "Email:", newEmailField,
-                    "Phone:", newPhoneField,
-                    "Password:", newPasswordField
-                };
-
-                int option = JOptionPane.showConfirmDialog(null, message, "Edit Profile", JOptionPane.OK_CANCEL_OPTION);
-                if (option == JOptionPane.OK_OPTION) {
-                    updateProfile(newNameField.getText(), newEmailField.getText(), newPhoneField.getText(), new String(newPasswordField.getPassword()));
-                    saveUpdatedProfile(filePath, fileContent);
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "User not found.", "Error", JOptionPane.ERROR_MESSAGE);
+                userInfo[1] = name;
+                userInfo[2] = email;
+                userInfo[3] = phoneNumber;
+                userInfo[4] = password;
+                fileContent.add(String.join(", ", userInfo));
             }
+
+            // Write updated content back to file
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+                for (String content : fileContent) {
+                    writer.write(content);
+                    writer.newLine();
+                }
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void saveUpdatedProfile(String filePath, List<String> fileContent) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            for (String line : fileContent) {
+    private boolean isEmailOrPhoneNumberRegistered(String email, String phoneNumber) {
+        String filePath;
+        if (userID.startsWith("R")) {
+            filePath = "src/main/java/OOP/Resident_Info.txt";
+        } else if (userID.startsWith("S")) {
+            filePath = "src/main/java/OOP/Staff_Info.txt";
+        } else {
+            return false;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(", ");
-                if (parts.length >= 5 && parts[0].equals(userID)) {
-                    writer.write(userID + ", " + name + ", " + email + ", " + phoneNumber + ", " + password);
-                } else {
-                    writer.write(line);
+                if (parts.length >= 5) {
+                    String fileEmail = parts[2];
+                    String filePhoneNumber = parts[3];
+                    if (fileEmail.equals(email) || filePhoneNumber.equals(phoneNumber)) {
+                        return true;
+                    }
                 }
-                writer.newLine();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
-    // Validation methods
-    private boolean validateName(String name) {
-        return name != null && !name.trim().isEmpty();
-    }
-
-    private boolean validateEmail(String email) {
-        return email != null && email.contains("@") && email.contains(".");
-    }
-
-    private boolean validatePhoneNumber(String phoneNumber) {
-        return phoneNumber != null && phoneNumber.matches("\\d{10}");
-    }
-
-    private boolean validatePassword(String password) {
-        return password != null && password.length() >= 6;
-    }
 }
