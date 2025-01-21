@@ -264,11 +264,12 @@ public class Login extends javax.swing.JFrame {
                 while ((line = reader.readLine()) != null) {
                     String[] parts = line.split(", ");
                     if (parts.length >= 5) {
+                        String fileUserID = parts[0];
                         String fileUsername = parts[1];
                         String fileEmail = parts[2];
                         String filePassword = parts[4];
                         if (fileEmail.equals(email) && filePassword.equals(password)) {
-                            UserSession.createSession(position,fileUsername);
+                            UserSession.createSession(fileUserID,fileUsername);
                             return true;
                         }
                     }
