@@ -5,6 +5,13 @@
 package OOP;
 
 import javax.swing.JOptionPane;
+import java.util.*;
+import java.io.*;
+import javax.swing.JOptionPane;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 /**
  *
@@ -33,13 +40,57 @@ public class booking extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         days = new javax.swing.JLabel();
         days_text = new javax.swing.JTextField();
+        
         check_in = new javax.swing.JLabel();
         check_in_text = new javax.swing.JTextField();
+        check_in_text.setOpaque(false); // Make the text field transparent
+
+        // Store the default text
+        String defaultText = "(yyyy-mm-dd)";
+        check_in_text.setText(defaultText);
+
+        check_in_text.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                check_in_text.setText(""); // Clear the text when the text field is clicked
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (check_in_text.getText().isEmpty()) {
+                    check_in_text.setText(defaultText); // Restore the default text when focus is lost
+                }
+            }
+        });
+
+        // Add a DocumentListener to change the font color when user inputs a value
+        check_in_text.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            public void insertUpdate(javax.swing.event.DocumentEvent e) {
+                updateFontColor();
+            }
+            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                updateFontColor();
+            }
+            public void changedUpdate(javax.swing.event.DocumentEvent e) {
+                updateFontColor();
+            }
+            private void updateFontColor() {
+                if (!check_in_text.getText().equals(defaultText)) {
+                    check_in_text.setForeground(java.awt.Color.BLACK);
+                } else {
+                    check_in_text.setForeground(java.awt.Color.GRAY);
+                }
+            }
+        });
+
         description = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
         jCheckBox3 = new javax.swing.JCheckBox();
+        book = new javax.swing.JButton();
+        book.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookButtonActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,7 +116,7 @@ public class booking extends javax.swing.JFrame {
         check_in_text.setText("(yyyy-mm-dd)");
         check_in_text.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                check_in_textActionPerformed(evt);
+
             }
         });
 
@@ -97,6 +148,14 @@ public class booking extends javax.swing.JFrame {
 
         jCheckBox3.setText("Laundry service");
 
+        book.setText("Book");
+        book.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookActionPerformed(evt);
+            }
+        });
+        
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -118,15 +177,18 @@ public class booking extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(check_in)
                                     .addGap(18, 18, 18)
-                                    .addComponent(check_in_text, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jButton2)
-                                    .addGap(10, 10, 10)))
+                                    .addComponent(check_in_text, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel2)
                             .addComponent(jCheckBox1)
-                            .addComponent(jCheckBox2)
-                            .addComponent(jCheckBox3))))
+                            .addComponent(jCheckBox3)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(book)
+                                .addComponent(jCheckBox2)))))
                 .addContainerGap(118, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(103, 103, 103))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,7 +214,9 @@ public class booking extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jCheckBox3)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(book))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
 
@@ -172,9 +236,75 @@ public class booking extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void bookButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        try {
+            int daysValue = Integer.parseInt(days_text.getText());
+            if (daysValue <= 0) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Days cannot be 0 or less", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please enter a valid number for days", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Get the date from the text field
+        String dateStr = check_in_text.getText();
+        
+        // Validate the date
+        if (!isValidDate(dateStr)) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid date.");
+            return;
+        }
+        
+        // Check if the date is before the current date
+        if (isDateBeforeCurrentDate(dateStr)) {
+            JOptionPane.showMessageDialog(this, "The date cannot be before the current date.");
+            return;
+        }
+        
+        // Proceed with booking
+        // ...existing booking code...
+    }                                          
+
+    private boolean isValidDate(String dateStr) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setLenient(false);
+        try {
+            sdf.parse(dateStr);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+
+    private boolean isDateBeforeCurrentDate(String dateStr) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = sdf.parse(dateStr);
+            Date currentDate = new Date();
+            return date.before(currentDate);
+        } catch (ParseException e) {
+            return true;
+        }
+    }
+
     private void days_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_days_textActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_days_textActionPerformed
+
+    private void bookActionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            int daysValue = Integer.parseInt(days_text.getText());
+            if (daysValue <= 0) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Days cannot be 0 or less", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            } else {
+                // Proceed with booking logic
+            }
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please enter a valid number for days", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -212,6 +342,7 @@ public class booking extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton book;
     private javax.swing.JLabel check_in;
     private javax.swing.JTextField check_in_text;
     private javax.swing.JLabel days;

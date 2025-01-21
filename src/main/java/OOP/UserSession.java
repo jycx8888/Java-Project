@@ -12,6 +12,17 @@ public class UserSession {
     private static UserSession instance;
     private String userID;
     private String username;
+    private String email;
+    private String password;
+    private String phoneNumber;
+
+    public UserSession(String userID, String username, String email, String phoneNumber, String password) {
+        this.userID = userID;
+        this.username = username;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+    }
 
     private UserSession(String userID, String username) {
         this.userID = userID;
@@ -39,4 +50,18 @@ public class UserSession {
     public static void clearSession() {
         instance = null;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+
 }
