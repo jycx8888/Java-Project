@@ -4,6 +4,8 @@
  */
 package OOP;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author hp
@@ -33,22 +35,11 @@ public class booking extends javax.swing.JFrame {
         days_text = new javax.swing.JTextField();
         check_in = new javax.swing.JLabel();
         check_in_text = new javax.swing.JTextField();
-        check_in_text.setOpaque(false); // Make the text field transparent
-
-        // Store the default text
-        String defaultText = "(yyyy-mm-dd)";
-        check_in_text.setText(defaultText);
-
-        check_in_text.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                check_in_text.setText(""); // Clear the text when the text field is clicked
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                if (check_in_text.getText().isEmpty()) {
-                    check_in_text.setText(defaultText); // Restore the default text when focus is lost
-                }
-            }
-        });
+        description = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        jCheckBox3 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,13 +61,41 @@ public class booking extends javax.swing.JFrame {
 
         check_in.setText("Check in date:");
 
-        check_in_text.setForeground(new java.awt.Color(153, 153, 153));
+        check_in_text.setForeground(new java.awt.Color(204, 204, 204));
         check_in_text.setText("(yyyy-mm-dd)");
         check_in_text.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 check_in_textActionPerformed(evt);
             }
         });
+
+        description.setText("Description");
+        description.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JOptionPane.showMessageDialog(null, 
+                    "Room Booking menu\n" +
+                    "note:\n" +
+                    "1) Every room only has enough capacity to hold 1 person.\n" +
+                    "2) The price for a single room is RM 50 per day.\n" +
+                    "3) Every resident is required to deposit RM 15 via online\n" +
+                    "   transaction or APU hostel management in order to\n" +
+                    "   confirm your stay within 24 hours after booking.\n\n" +
+                    "additional services:\n" +
+                    "Cleaning Service RM10\n" +
+                    "Food and Drink Service RM20\n" +
+                    "Laundry Service RM10"
+                );
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("Additional services:");
+
+        jCheckBox1.setText("Cleaning service");
+
+        jCheckBox2.setText("Food and drink service");
+
+        jCheckBox3.setText("Laundry service");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -88,19 +107,25 @@ public class booking extends javax.swing.JFrame {
                         .addGap(102, 102, 102)
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(156, 156, 156)
-                        .addComponent(jButton2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(days)
                                 .addGap(18, 18, 18)
                                 .addComponent(days_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(check_in)
-                                .addGap(18, 18, 18)
-                                .addComponent(check_in_text, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(description)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(check_in)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(check_in_text, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jButton2)
+                                    .addGap(10, 10, 10)))
+                            .addComponent(jLabel2)
+                            .addComponent(jCheckBox1)
+                            .addComponent(jCheckBox2)
+                            .addComponent(jCheckBox3))))
                 .addContainerGap(118, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -108,17 +133,27 @@ public class booking extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1)
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
+                .addComponent(description)
+                .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(days_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(days))
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(check_in_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(check_in))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCheckBox1)
+                .addGap(18, 18, 18)
+                .addComponent(jCheckBox2)
+                .addGap(18, 18, 18)
+                .addComponent(jCheckBox3)
+                .addGap(18, 18, 18)
                 .addComponent(jButton2)
-                .addGap(36, 36, 36))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -129,7 +164,9 @@ public class booking extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -179,8 +216,13 @@ public class booking extends javax.swing.JFrame {
     private javax.swing.JTextField check_in_text;
     private javax.swing.JLabel days;
     private javax.swing.JTextField days_text;
+    private javax.swing.JButton description;
     private javax.swing.JButton jButton2;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
