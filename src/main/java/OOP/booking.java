@@ -5,6 +5,8 @@
 package OOP;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 import java.util.*;
 import java.io.*;
 import javax.swing.JOptionPane;
@@ -243,67 +245,111 @@ public class booking extends javax.swing.JFrame {
                 javax.swing.JOptionPane.showMessageDialog(this, "Days cannot be 0 or less", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
+    
+            String checkInDate = check_in_text.getText();
+            String descriptionText = description.getText();
+            boolean cleaningService = jCheckBox1.isSelected();
+            boolean foodAndDrinkService = jCheckBox2.isSelected();
+            boolean laundryService = jCheckBox3.isSelected();
+    
+            String data = "Check-in Date: " + checkInDate + "\n" +
+                          "Description: " + descriptionText + "\n" +
+                          "Days: " + daysValue + "\n" +
+                          "Additional Services:\n" +
+                          "Cleaning Service: " + (cleaningService ? "Yes" : "No") + "\n" +
+                          "Food and Drink Service: " + (foodAndDrinkService ? "Yes" : "No") + "\n" +
+                          "Laundry Service: " + (laundryService ? "Yes" : "No") + "\n";
+    
+            try (FileWriter writer = new FileWriter("Rates.txt", true)) {
+                writer.write(data);
+                writer.write("\n-------------------------\n");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
+            javax.swing.JOptionPane.showMessageDialog(this, "Booking information saved successfully.");
         } catch (NumberFormatException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Please enter a valid number for days", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-            return;
+            javax.swing.JOptionPane.showMessageDialog(this, "Please enter a valid number of days", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
+    }                       
 
-        // Get the date from the text field
-        String dateStr = check_in_text.getText();
-        
-        // Validate the date
-        if (!isValidDate(dateStr)) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid date.");
-            return;
-        }
-        
-        // Check if the date is before the current date
-        if (isDateBeforeCurrentDate(dateStr)) {
-            JOptionPane.showMessageDialog(this, "The date cannot be before the current date.");
-            return;
-        }
-        
-        // Proceed with booking
-        // ...existing booking code...
-    }                                          
-
-    private boolean isValidDate(String dateStr) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        sdf.setLenient(false);
-        try {
-            sdf.parse(dateStr);
-            return true;
-        } catch (ParseException e) {
-            return false;
-        }
-    }
-
-    private boolean isDateBeforeCurrentDate(String dateStr) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date date = sdf.parse(dateStr);
-            Date currentDate = new Date();
-            return date.before(currentDate);
-        } catch (ParseException e) {
-            return true;
-        }
-    }
 
     private void days_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_days_textActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_days_textActionPerformed
 
     private void bookActionPerformed(java.awt.event.ActionEvent evt) {
+        handleBooking();
+    }
+
+    private void handleBooking() {
         try {
-            int daysValue = Integer.parseInt(days_text.getText());
-            if (daysValue <= 0) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Days cannot be 0 or less", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-            } else {
-                // Proceed with booking logic
+            int daysInt = Integer.parseInt(days_text.getText());
+            if (daysInt <= 0) {
+                JOptionPane.showMessageDialog(this, "Days cannot be 0 or less", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
+    
+            String checkInDate = check_in_text.getText();
+            UserSession session = UserSession.getInstance();
+            String BookingId;
+            try {
+                BookingId = generateBookingId();
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Error generating booking ID", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+    
+            // Proceed with booking logic
+            String userId = session.getUserID();
+            double price = daysInt * 50; // Assuming RM 50 per day
+    
+            String bookingData = String.format("Booking ID: %s\nUser ID: %s\nCheck-in Date: %s\nDays: %d\nPrice: RM%.2f\n",
+                    BookingId, userId, checkInDate, daysInt, price);
+    
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("Rates.txt", true))) {
+                writer.write(bookingData);
+                writer.write("\n-------------------------\n");
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Error saving booking data", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+    
+            JOptionPane.showMessageDialog(this, "Booking successful!");
         } catch (NumberFormatException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Please enter a valid number for days", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please enter a valid number for days", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+    public static String generateBookingId() throws IOException {
+        File file = new File("BookingIDGenerator.txt");
+        if (!file.exists()) {
+            throw new IOException("BookingIDGenerator.txt file not found");
+        }
+    
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        String line = reader.readLine();
+        if (line == null) {
+            reader.close();
+            throw new IOException("BookingIDGenerator.txt is empty");
+        }
+    
+        int id;
+        try {
+            id = Integer.parseInt(line);
+        } catch (NumberFormatException e) {
+            reader.close();
+            throw new IOException("Invalid ID format in BookingIDGenerator.txt");
+        }
+        reader.close();
+    
+        String BookingId = "B" + String.format("%02d", id);
+    
+        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+        writer.write(Integer.toString(id + 1));
+        writer.close();
+    
+        return BookingId;
     }
 
     /**
