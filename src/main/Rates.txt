@@ -1,0 +1,8 @@
+Room per Day, 50            (fixed)
+Cleaning Service, 10        (optional)
+Food and Drink Service, 20  (optional)
+Laundry Service, 10         (optional)
+Deposit Fee, 15             (must)
+Damage Fee, 500             (depends)()
+Service Tax, 0.04           (must)
+
