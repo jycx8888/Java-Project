@@ -121,8 +121,8 @@ public class Resident extends javax.swing.JFrame {
 
     private void ProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProfileActionPerformed
         // TODO add your handling code here:
-        UpdateProfile_Resident up = new UpdateProfile_Resident();
-        up.setVisible(true);
+        UpdateProfile_Resident upr = new UpdateProfile_Resident();
+        upr.setVisible(true);
         this. dispose();
     }//GEN-LAST:event_ProfileActionPerformed
 
