@@ -250,7 +250,7 @@ public class booking extends javax.swing.JFrame {
 
     
             try (FileWriter writer = new FileWriter("booking.txt", true)) {
-                writer.write("["+ bookingid +","+ userId + "," + days + "," + checkInDate + "pending");
+                writer.write("["+","+ userId + "," + days + "," + checkInDate + "pending");
             } catch (IOException e) {
                 e.printStackTrace();
             }
