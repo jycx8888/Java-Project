@@ -176,17 +176,27 @@ public class UpdateProfile_Resident extends javax.swing.JFrame {
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
         // TODO add your handling code here:
-        if (update != null) {
-            update.editProfile(
-                NameTextField.getText(),
-                EmailTextField.getText(),
-                PhoneNumberTextField.getText(),
-                PasswordTextField.getText(),
-                "src/main/java/OOP/Resident_Info.txt"
-            );
-            JOptionPane.showMessageDialog(this, "Profile updated successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        UserSession session = UserSession.getInstance();
+        if (session != null) {
+            String userID = session.getUserID();
+            update = new Update(
+            userID,
+            NameTextField.getText(),
+            EmailTextField.getText(),
+            PhoneNumberTextField.getText(),
+            PasswordTextField.getText()
+        );
+
+        update.editProfile(
+            NameTextField.getText(),
+            EmailTextField.getText(),
+            PhoneNumberTextField.getText(),
+            PasswordTextField.getText(),
+            "src/main/java/OOP/Resident_Info.txt"
+        );
+        JOptionPane.showMessageDialog(this, "Profile updated successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(this, "Failed to update profile.", "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Failed to update profile. No active session found.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_editActionPerformed
 
