@@ -150,32 +150,4 @@ public class Update {
             e.printStackTrace();
         }
     }
-
-    private boolean isEmailOrPhoneNumberRegistered(String email, String phoneNumber) {
-        String filePath;
-        if (userID.startsWith("R")) {
-            filePath = "src/main/java/OOP/Resident_Info.txt";
-        } else if (userID.startsWith("S")) {
-            filePath = "src/main/java/OOP/Staff_Info.txt";
-        } else {
-            return false;
-        }
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(", ");
-                if (parts.length >= 5) {
-                    String fileEmail = parts[2];
-                    String filePhoneNumber = parts[3];
-                    if (fileEmail.equals(email) || filePhoneNumber.equals(phoneNumber)) {
-                        return true;
-                    }
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
 }
