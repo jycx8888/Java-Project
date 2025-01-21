@@ -267,9 +267,10 @@ public class Login extends javax.swing.JFrame {
                         String fileUserID = parts[0];
                         String fileUsername = parts[1];
                         String fileEmail = parts[2];
+                        String filePhoneNumber = parts[3];
                         String filePassword = parts[4];
                         if (fileEmail.equals(email) && filePassword.equals(password)) {
-                            UserSession.createSession(fileUserID,fileUsername);
+                            UserSession.createSession(fileUserID,fileUsername,fileEmail,filePhoneNumber,filePassword);
                             return true;
                         }
                     }

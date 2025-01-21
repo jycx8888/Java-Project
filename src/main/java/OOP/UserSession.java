@@ -4,19 +4,15 @@
  */
 package OOP;
 
-/**
- *
- * @author Justin Yong
- */
 public class UserSession {
     private static UserSession instance;
     private String userID;
     private String username;
     private String email;
-    private String password;
     private String phoneNumber;
+    private String password;
 
-    public UserSession(String userID, String username, String email, String phoneNumber, String password) {
+    private UserSession(String userID, String username, String email, String phoneNumber, String password) {
         this.userID = userID;
         this.username = username;
         this.email = email;
@@ -24,19 +20,18 @@ public class UserSession {
         this.password = password;
     }
 
-    private UserSession(String userID, String username) {
-        this.userID = userID;
-        this.username = username;
-    }
-
-    public static void createSession(String userID, String username) {
+    public static void createSession(String userID, String username, String email, String phoneNumber, String password) {
         if (instance == null) {
-            instance = new UserSession(userID, username);
+            instance = new UserSession(userID, username, email, phoneNumber, password);
         }
     }
 
     public static UserSession getInstance() {
         return instance;
+    }
+
+    public static void clearSession() {
+        instance = null;
     }
 
     public String getUserID() {
@@ -47,21 +42,15 @@ public class UserSession {
         return username;
     }
 
-    public static void clearSession() {
-        instance = null;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-
+    public String getPassword() {
+        return password;
+    }
 }
