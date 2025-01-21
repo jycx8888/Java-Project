@@ -166,7 +166,7 @@ public class ChangeRates extends javax.swing.JFrame {
         }
         
         try {
-            if (Method.isRateNameRegistered(newRateName, "src/main/java/OOP/rates.txt")&& !newRateName.equals(rateName)) {
+            if (Validator.isRateNameRegistered(newRateName, "src/main/java/OOP/rates.txt")&& !newRateName.equals(rateName)) {
                 JOptionPane.showMessageDialog(this, "Name is already exist.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -212,7 +212,7 @@ public class ChangeRates extends javax.swing.JFrame {
         }
         
         try {
-            if (Method.isRateNameRegistered(newRateName, "src/main/java/OOP/rates.txt")) {
+            if (Validator.isRateNameRegistered(newRateName, "src/main/java/OOP/rates.txt")) {
                 JOptionPane.showMessageDialog(this, "Name is already exist.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
