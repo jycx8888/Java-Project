@@ -52,3 +52,30 @@ Food and Drink Service: No
 Laundry Service: No
 
 -------------------------
+Check-in Date: 2025-06-06
+Description: Description
+Days: 44
+Additional Services:
+Cleaning Service: No
+Food and Drink Service: No
+Laundry Service: No
+
+-------------------------
+Check-in Date: 2025-07-07
+Description: Description
+Days: 15
+Additional Services:
+Cleaning Service: No
+Food and Drink Service: No
+Laundry Service: No
+
+-------------------------
+Check-in Date: 2025-07-08
+Description: Description
+Days: 17
+Additional Services:
+Cleaning Service: No
+Food and Drink Service: No
+Laundry Service: No
+
+-------------------------

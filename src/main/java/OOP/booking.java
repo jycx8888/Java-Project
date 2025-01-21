@@ -5,14 +5,8 @@
 package OOP;
 
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-
-import java.util.*;
 import java.io.*;
-import javax.swing.JOptionPane;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 
 
 /**
@@ -307,7 +301,7 @@ public class booking extends javax.swing.JFrame {
             String bookingData = String.format("Booking ID: %s\nUser ID: %s\nCheck-in Date: %s\nDays: %d\nPrice: RM%.2f\n",
                     BookingId, userId, checkInDate, daysInt, price);
     
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter("Rates.txt", true))) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:/Users/hp/Documents/NetBeansProjects/javaAssignment/src/main/java/OOP/Rates.txt", true))) {
                 writer.write(bookingData);
                 writer.write("\n-------------------------\n");
             } catch (IOException e) {
