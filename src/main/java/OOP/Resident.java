@@ -86,8 +86,8 @@ public class Resident extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        jLabel3.setText("~~APU Hostel--The best of the hostel in Malaysia~~");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, -1, 20));
+        jLabel3.setText("~~APU Hostel--The best hostel in Malaysia~~");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, 20));
 
         Exit.setText("Exit");
         Exit.addActionListener(new java.awt.event.ActionListener() {
