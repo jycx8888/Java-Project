@@ -82,6 +82,7 @@ public class booking extends javax.swing.JFrame {
         jCheckBox2 = new javax.swing.JCheckBox();
         jCheckBox3 = new javax.swing.JCheckBox();
         book = new javax.swing.JButton();
+        book.setText("Book");
         book.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bookButtonActionPerformed(evt);
@@ -143,13 +144,6 @@ public class booking extends javax.swing.JFrame {
         jCheckBox2.setText("Food and drink service");
 
         jCheckBox3.setText("Laundry service");
-
-        book.setText("Book");
-        book.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookButtonActionPerformed(evt);
-            }
-        });
         
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -240,27 +234,61 @@ public class booking extends javax.swing.JFrame {
                 return;
             }
     
+            UserSession session = UserSession.getInstance();
+            String userID = session.getUserID();
             String checkInDate = check_in_text.getText();
-            String descriptionText = description.getText();
             boolean cleaningService = jCheckBox1.isSelected();
             boolean foodAndDrinkService = jCheckBox2.isSelected();
             boolean laundryService = jCheckBox3.isSelected();
+            double price = 50 * daysValue * 1.04;
     
-            String data = "Check-in Date: " + checkInDate + "\n" +
-                          "Description: " + descriptionText + "\n" +
-                          "Days: " + daysValue + "\n" +
-                          "Additional Services:\n";
+            if (cleaningService) {
+                price += 10 ;
+            }
+            if (foodAndDrinkService) {
+                price += 20;
+            }
+            if (laundryService) {
+                price += 10;
+            }
+
+            String bookingId;
+            try {
+                bookingId = generateBookingId();
+            } catch (IOException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error generating booking ID", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            boolean alreadyBooked = false;
+            try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/OOP/booking.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    if (line.contains(userID)) {
+                        alreadyBooked = true;
+                        break;
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if (alreadyBooked) {
+                javax.swing.JOptionPane.showMessageDialog(this, "You have already booked a room.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            String data = "[" + bookingId + "," + userID + "," + checkInDate + "," + daysValue + "," + price +","+ "pending"+"]"  +"\r\n";
     
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/OOP/booking.txt", true))) {
                 writer.write(data);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            
-            javax.swing.JOptionPane.showMessageDialog(this, "Booking information saved successfully.");
         } catch (NumberFormatException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Please enter a valid number of days", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Invalid number format", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
+        JOptionPane.showMessageDialog(this, "                                 Booking successful!\r\nPlease make a desposit of RM15 within 24 hours to confirm your stay.");
     }                       
 
     private void days_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_days_textActionPerformed
@@ -268,22 +296,31 @@ public class booking extends javax.swing.JFrame {
     }//GEN-LAST:event_days_textActionPerformed
 
     public static String generateBookingId() throws IOException {
-        File file = new File("BookingIDGenerator.txt");
-        if (!file.exists()) {
-            throw new IOException("BookingIDGenerator.txt file not found");
-        }
+        String filePath = "src/main/java/OOP/booking.txt";
+        BufferedReader reader = new BufferedReader(new FileReader(filePath));
     
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        try {
-            String line = reader.readLine();
-            if (line == null) {
-                throw new IOException("BookingIDGenerator.txt is empty");
-            }
-            return line;
-        } finally {
-            reader.close();
+        int count = 0;
+        while (reader.readLine() != null) {
+            count++;
         }
+        reader.close();
+    
+        String prefix = "B";
+        String newBookingId = prefix + String.format("%02d", count + 1);
+    
+        return newBookingId;
     }
+
+
+    private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
+        // Clear the user session
+        UserSession.clearSession();
+        Resident resident = new Resident();
+        resident.setVisible(true);
+        this.dispose();
+    }
+
+
     /**
      * @param args the command line arguments
      */

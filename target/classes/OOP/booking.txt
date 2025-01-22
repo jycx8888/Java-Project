@@ -1,8 +1,2 @@
-Check-in Date: 2025-06-06
-Description: Description
-Days: 14
-Additional Services:
-Check-in Date: 2025-06-06
-Description: Description
-Days: 14
-Additional Services:
+
+[B02,R01,2025-06-07,1,92.0,pending]
