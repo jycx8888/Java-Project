@@ -44,6 +44,11 @@ public class booking extends javax.swing.JFrame {
         jCheckBox2 = new javax.swing.JCheckBox();
         jCheckBox3 = new javax.swing.JCheckBox();
         book = new javax.swing.JButton();
+        book.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookButtonActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,17 +73,34 @@ public class booking extends javax.swing.JFrame {
             }
         });
 
-        check_in.setText("Check in date:");
-
+        check_in.setText("Check in:");
         check_in_text.setForeground(new java.awt.Color(204, 204, 204));
         check_in_text.setText("(yyyy-mm-dd)");
-        check_in_text.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-
+        
+        check_in_text.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (check_in_text.getText().equals("(yyyy-mm-dd)")) {
+                    check_in_text.setText("");
+                    check_in_text.setForeground(new java.awt.Color(0, 0, 0)); // Set to default text color
+                }
+            }
+        
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (check_in_text.getText().isEmpty()) {
+                    check_in_text.setForeground(new java.awt.Color(204, 204, 204));
+                    check_in_text.setText("(yyyy-mm-dd)");
+                }
             }
         });
 
         description.setText("Description");
+        description.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descriptionButtonActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Additional services:");
@@ -261,6 +283,21 @@ public class booking extends javax.swing.JFrame {
         String newBookingId = prefix + String.format("%02d", count + 1);
     
         return newBookingId;
+    }
+
+    private void descriptionButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        javax.swing.JOptionPane.showMessageDialog(this,
+            "Note:\n" +
+            "1) Every room only has enough capacity to hold 1 person.\n" +
+            "2) The price for a single room is RM 50 per day.\n" +
+            "3) Every resident is required to deposit RM 15 via online\n" +
+            "   transaction or APU hostel management in order to\n" +
+            "   confirm your stay within 24 hours after booking.\n\n" +
+            "Additional services:\n" +
+            "1) Cleaning Service RM10\n" +
+            "2) Food and Drink Service RM20\n" +
+            "3) Laundry Service RM10"
+        );
     }
 
     /**
