@@ -8,6 +8,17 @@ import javax.swing.JOptionPane;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+<<<<<<< HEAD
+=======
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+>>>>>>> 973e25f58d0765c4cea7da72934f58b4df5b3aac
 
 /**
  *
@@ -182,6 +193,22 @@ public class booking extends javax.swing.JFrame {
             UserSession session = UserSession.getInstance();
             String userID = session.getUserID();
             String checkInDate = check_in_text.getText();
+
+            // Validate check-in date
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate checkInLocalDate;
+            try {
+                checkInLocalDate = LocalDate.parse(checkInDate, formatter);
+            } catch (DateTimeParseException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Invalid date format. Please use yyyy-MM-dd.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+    
+            if (checkInLocalDate.isBefore(LocalDate.now())) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Check-in date cannot be in the past.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
             boolean cleaningService = jCheckBox1.isSelected();
             boolean foodAndDrinkService = jCheckBox2.isSelected();
             boolean laundryService = jCheckBox3.isSelected();
@@ -223,7 +250,37 @@ public class booking extends javax.swing.JFrame {
                 return;
             }
 
+<<<<<<< HEAD
             String data = "[" + bookingId + "," + userID + "," + checkInDate + "," + daysValue + "," + price +","+ "pending"+"]"  +"\r\n";
+=======
+            // Read available rooms from room.txt
+            List<String> availableRooms = new ArrayList<>();
+            try (BufferedReader roomReader = new BufferedReader(new FileReader("src/main/java/OOP/Room.txt"))) {
+                String line;
+                while ((line = roomReader.readLine()) != null) {
+                    String[] parts = line.split(", ");
+                    if (parts.length == 2 && "available".equalsIgnoreCase(parts[1].trim())) {
+                        availableRooms.add(parts[0].trim());
+                    }
+                }
+            } catch (IOException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error reading room file", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+    
+            if (availableRooms.isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(this, "No rooms available.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Choose a random available room
+            Random random = new Random();
+            String chosenRoom = availableRooms.get(random.nextInt(availableRooms.size()));
+
+
+            LocalDate bookingDate = LocalDate.now();
+            String data = bookingId + ", " + bookingDate + ", " + userID + ", " + checkInDate + ", " + daysValue + ", " + cleaningService + ", " + foodAndDrinkService + ", " + laundryService + ", " + price + ", " + "pending" + ", " + chosenRoom + "\r\n";
+>>>>>>> 973e25f58d0765c4cea7da72934f58b4df5b3aac
     
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/OOP/booking.txt", true))) {
                 writer.write(data);
@@ -232,6 +289,7 @@ public class booking extends javax.swing.JFrame {
             }
         } catch (NumberFormatException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Invalid number format", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
         }
         JOptionPane.showMessageDialog(this, "                                 Booking successful!\r\nPlease make a desposit of RM15 within 24 hours to confirm your stay.");
     }                       

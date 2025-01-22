@@ -128,6 +128,9 @@ public class Staff extends javax.swing.JFrame {
 
     private void MakePaymentReceiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MakePaymentReceiptActionPerformed
         // TODO add your handling code here:
+        MakePayment mp = new MakePayment();
+        mp.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_MakePaymentReceiptActionPerformed
 
     /**
