@@ -293,9 +293,11 @@ public class booking extends javax.swing.JFrame {
 
             // Read available rooms from room.txt
             List<String> availableRooms = new ArrayList<>();
+            List<String> roomLines = new ArrayList<>();
             try (BufferedReader roomReader = new BufferedReader(new FileReader("src/main/java/OOP/Room.txt"))) {
                 String line;
                 while ((line = roomReader.readLine()) != null) {
+                    roomLines.add(line);
                     String[] parts = line.split(", ");
                     if (parts.length == 2 && "available".equalsIgnoreCase(parts[1].trim())) {
                         availableRooms.add(parts[0].trim());
@@ -317,18 +319,32 @@ public class booking extends javax.swing.JFrame {
 
 
             LocalDate bookingDate = LocalDate.now();
-            String data = bookingId + ", " + bookingDate + ", " + userID + ", " + checkInDate + ", " + daysValue + ", " + cleaningService + ", " + foodAndDrinkService + ", " + laundryService + ", " + price + ", " + "pending" + ", " + chosenRoom + "\r\n";
-    
+            String data = bookingId + ", " + bookingDate + ", " + userID + ", " + checkInDate + ", " + daysValue + ", " + cleaningService + ", " + foodAndDrinkService + ", " + laundryService + ", " + price + ", " + "pending" + ", " + chosenRoom;
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/OOP/booking.txt", true))) {
-                writer.write(data);
+                writer.write(data + "\n");
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            // Update room status to unavailable
+            try (BufferedWriter roomWriter = new BufferedWriter(new FileWriter("src/main/java/OOP/Room.txt"))) {
+                for (String roomLine : roomLines) {
+                    if (roomLine.startsWith(chosenRoom + ", ")) {
+                        roomWriter.write(chosenRoom + ", unavailable\n");
+                    } else {
+                        roomWriter.write(roomLine + "\n");
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            JOptionPane.showMessageDialog(this, "                                 Booking successful!\r\nYour Room Number is: " + chosenRoom + "\n" + "Please make a desposit of RM15 within 24 hours to confirm your stay.");
         } catch (NumberFormatException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Invalid number format", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
-        JOptionPane.showMessageDialog(this, "                                 Booking successful!\r\nPlease make a desposit of RM15 within 24 hours to confirm your stay.");
+        
     }                       
 
     private void days_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_days_textActionPerformed

@@ -20,6 +20,7 @@ public class MakePayment extends javax.swing.JFrame {
      */
     public MakePayment() {
         initComponents();
+        UserSession session = UserSession.getInstance();
     }
 
     /**
@@ -53,6 +54,7 @@ public class MakePayment extends javax.swing.JFrame {
         LaundryServiceCheckBox = new javax.swing.JCheckBox();
         jLabel9 = new javax.swing.JLabel();
         RoomTextField = new javax.swing.JTextField();
+        Exit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -84,6 +86,11 @@ public class MakePayment extends javax.swing.JFrame {
         jLabel8.setText("Additional Service:");
 
         Proceed.setText("Proceed");
+        Proceed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ProceedActionPerformed(evt);
+            }
+        });
 
         CleaningServiceCheckBox.setText("Cleaning Service");
         CleaningServiceCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -97,6 +104,13 @@ public class MakePayment extends javax.swing.JFrame {
         LaundryServiceCheckBox.setText("Laundry Service");
 
         jLabel9.setText("Room: ");
+
+        Exit.setText("Exit");
+        Exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -121,36 +135,36 @@ public class MakePayment extends javax.swing.JFrame {
                             .addComponent(jLabel9))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(RoomTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(DaysTextField)
-                                .addComponent(CheckInDateTextField)
-                                .addComponent(PhoneNumberTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-                                .addComponent(FullNameTextField)
-                                .addComponent(EmailTextField)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(BookingIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(SearchBookingID)))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(RoomTextField)
+                            .addComponent(DaysTextField)
+                            .addComponent(CheckInDateTextField)
+                            .addComponent(PhoneNumberTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                            .addComponent(FullNameTextField)
+                            .addComponent(EmailTextField)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(161, 161, 161)
-                                .addComponent(Proceed))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(CleaningServiceCheckBox))
-                                    .addGap(281, 281, 281))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(127, 127, 127)
-                                    .addComponent(FoodAndDrinkServiceCheckBox))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(290, 290, 290)
-                                    .addComponent(LaundryServiceCheckBox))))))
-                .addContainerGap(32, Short.MAX_VALUE))
+                                .addComponent(BookingIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(SearchBookingID))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(CleaningServiceCheckBox))
+                                .addGap(281, 281, 281))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(127, 127, 127)
+                                .addComponent(FoodAndDrinkServiceCheckBox))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(290, 290, 290)
+                                .addComponent(LaundryServiceCheckBox))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addComponent(Proceed)
+                        .addGap(53, 53, 53)
+                        .addComponent(Exit)))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,16 +203,18 @@ public class MakePayment extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(RoomTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CleaningServiceCheckBox)
                     .addComponent(FoodAndDrinkServiceCheckBox)
                     .addComponent(LaundryServiceCheckBox))
-                .addGap(18, 18, 18)
-                .addComponent(Proceed)
-                .addGap(18, 18, 18))
+                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Proceed)
+                    .addComponent(Exit))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 530));
@@ -258,6 +274,17 @@ public class MakePayment extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_CleaningServiceCheckBoxActionPerformed
 
+    private void ProceedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProceedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ProceedActionPerformed
+
+    private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
+        // TODO add your handling code here:
+        Staff st = new Staff();
+        st.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_ExitActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -299,6 +326,7 @@ public class MakePayment extends javax.swing.JFrame {
     private javax.swing.JCheckBox CleaningServiceCheckBox;
     private javax.swing.JTextField DaysTextField;
     private javax.swing.JTextField EmailTextField;
+    private javax.swing.JButton Exit;
     private javax.swing.JCheckBox FoodAndDrinkServiceCheckBox;
     private javax.swing.JTextField FullNameTextField;
     private javax.swing.JCheckBox LaundryServiceCheckBox;
