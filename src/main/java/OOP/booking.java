@@ -293,7 +293,7 @@ public class booking extends javax.swing.JFrame {
 
             // Read available rooms from room.txt
             List<String> availableRooms = new ArrayList<>();
-            try (BufferedReader roomReader = new BufferedReader(new FileReader("src/main/java/OOP/room.txt"))) {
+            try (BufferedReader roomReader = new BufferedReader(new FileReader("src/main/java/OOP/Room.txt"))) {
                 String line;
                 while ((line = roomReader.readLine()) != null) {
                     String[] parts = line.split(", ");
