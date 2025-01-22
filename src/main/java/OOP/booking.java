@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -268,7 +269,8 @@ public class booking extends javax.swing.JFrame {
                 return;
             }
 
-            String data = bookingId + "," + userID + "," + checkInDate + "," + daysValue + "," + price +","+ "pending" + "\r\n";
+            LocalDate bookingDate = LocalDate.now();
+            String data = bookingId + ", " + bookingDate + ", " + userID + ", " + checkInDate + ", " + daysValue + ", " + cleaningService + ", " + foodAndDrinkService + ", " + laundryService + ", " + price +", "+ "pending" + "\r\n";
     
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/OOP/booking.txt", true))) {
                 writer.write(data);
