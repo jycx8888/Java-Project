@@ -9,6 +9,8 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -228,6 +230,22 @@ public class booking extends javax.swing.JFrame {
             UserSession session = UserSession.getInstance();
             String userID = session.getUserID();
             String checkInDate = check_in_text.getText();
+
+            // Validate check-in date
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate checkInLocalDate;
+            try {
+                checkInLocalDate = LocalDate.parse(checkInDate, formatter);
+            } catch (DateTimeParseException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Invalid date format. Please use yyyy-MM-dd.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+    
+            if (checkInLocalDate.isBefore(LocalDate.now())) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Check-in date cannot be in the past.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
             boolean cleaningService = jCheckBox1.isSelected();
             boolean foodAndDrinkService = jCheckBox2.isSelected();
             boolean laundryService = jCheckBox3.isSelected();
@@ -279,6 +297,7 @@ public class booking extends javax.swing.JFrame {
             }
         } catch (NumberFormatException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Invalid number format", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
         }
         JOptionPane.showMessageDialog(this, "                                 Booking successful!\r\nPlease make a desposit of RM15 within 24 hours to confirm your stay.");
     }                       
