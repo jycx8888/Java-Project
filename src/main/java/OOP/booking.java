@@ -317,9 +317,9 @@ public class booking extends javax.swing.JFrame {
             "   transaction or APU hostel management in order to\n" +
             "   confirm your stay within 24 hours after booking.\n\n" +
             "Additional services:\n" +
-            "1) Cleaning Service RM10\n" +
-            "2) Food and Drink Service RM20\n" +
-            "3) Laundry Service RM10"
+            "1) Cleaning Service\n" +
+            "2) Food and Drink Service\n" +
+            "3) Laundry Service"
         );
     }
 
