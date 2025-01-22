@@ -8,6 +8,8 @@ import javax.swing.JOptionPane;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -195,30 +197,51 @@ public class booking extends javax.swing.JFrame {
 
     private void bookButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
         try {
+            // Read rates from rates.txt
+            Map<String, Double> rates = new HashMap<>();
+            try (BufferedReader ratesReader = new BufferedReader(new FileReader("src/main/java/OOP/rates.txt"))) {
+                String line;
+                while ((line = ratesReader.readLine()) != null) {
+                    String[] parts = line.split(", ");
+                    if (parts.length == 2) {
+                        rates.put(parts[0].trim(), Double.parseDouble(parts[1].trim()));
+                    }
+                }
+            } catch (IOException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error reading rates file", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        
+            double basePrice = rates.get("Room per Day");
+            double cleaningServiceRate = rates.get("Cleaning Service");
+            double foodAndDrinkServiceRate = rates.get("Food and Drink Service");
+            double laundryServiceRate = rates.get("Laundry Service");
+            double taxRate = rates.get("Service Tax");
+        
             int daysValue = Integer.parseInt(days_text.getText());
             if (daysValue <= 0) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Days cannot be 0 or less", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
-    
+        
             UserSession session = UserSession.getInstance();
             String userID = session.getUserID();
             String checkInDate = check_in_text.getText();
             boolean cleaningService = jCheckBox1.isSelected();
             boolean foodAndDrinkService = jCheckBox2.isSelected();
             boolean laundryService = jCheckBox3.isSelected();
-            double price = 50 * daysValue * 1.04;
-    
+            double price = basePrice * daysValue * (1 + taxRate);
+        
             if (cleaningService) {
-                price += 10 ;
+                price += cleaningServiceRate;
             }
             if (foodAndDrinkService) {
-                price += 20;
+                price += foodAndDrinkServiceRate;
             }
             if (laundryService) {
-                price += 10;
+                price += laundryServiceRate;
             }
-
+        
             String bookingId;
             try {
                 bookingId = generateBookingId();
@@ -226,7 +249,7 @@ public class booking extends javax.swing.JFrame {
                 javax.swing.JOptionPane.showMessageDialog(this, "Error generating booking ID", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
-
+        
             boolean alreadyBooked = false;
             try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/OOP/booking.txt"))) {
                 String line;
@@ -245,7 +268,7 @@ public class booking extends javax.swing.JFrame {
                 return;
             }
 
-            String data = "[" + bookingId + "," + userID + "," + checkInDate + "," + daysValue + "," + price +","+ "pending"+"]"  +"\r\n";
+            String data = bookingId + "," + userID + "," + checkInDate + "," + daysValue + "," + price +","+ "pending" + "\r\n";
     
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/OOP/booking.txt", true))) {
                 writer.write(data);
