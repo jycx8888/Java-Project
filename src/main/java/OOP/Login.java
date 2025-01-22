@@ -25,7 +25,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         enter.addActionListener(new LoginButtonListener());
-
+        setLocationRelativeTo(null);
     }
 
     /**
