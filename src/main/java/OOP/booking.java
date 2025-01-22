@@ -32,68 +32,29 @@ public class booking extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        Exit = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         days = new javax.swing.JLabel();
         days_text = new javax.swing.JTextField();
-        
         check_in = new javax.swing.JLabel();
         check_in_text = new javax.swing.JTextField();
-        check_in_text.setOpaque(false); // Make the text field transparent
-
-        // Store the default text
-        String defaultText = "(yyyy-mm-dd)";
-        check_in_text.setText(defaultText);
-
-        check_in_text.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                check_in_text.setText(""); // Clear the text when the text field is clicked
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                if (check_in_text.getText().isEmpty()) {
-                    check_in_text.setText(defaultText); // Restore the default text when focus is lost
-                }
-            }
-        });
-
-        // Add a DocumentListener to change the font color when user inputs a value
-        check_in_text.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
-            public void insertUpdate(javax.swing.event.DocumentEvent e) {
-                updateFontColor();
-            }
-            public void removeUpdate(javax.swing.event.DocumentEvent e) {
-                updateFontColor();
-            }
-            public void changedUpdate(javax.swing.event.DocumentEvent e) {
-                updateFontColor();
-            }
-            private void updateFontColor() {
-                if (!check_in_text.getText().equals(defaultText)) {
-                    check_in_text.setForeground(java.awt.Color.BLACK);
-                } else {
-                    check_in_text.setForeground(java.awt.Color.GRAY);
-                }
-            }
-        });
-
         description = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
         jCheckBox3 = new javax.swing.JCheckBox();
         book = new javax.swing.JButton();
-        book.setText("Book");
-        book.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookButtonActionPerformed(evt);
-            }
-        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 255));
 
-        jButton2.setText("Exit");
+        Exit.setText("Exit");
+        Exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExitActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Room Booking Menu");
@@ -113,28 +74,11 @@ public class booking extends javax.swing.JFrame {
         check_in_text.setText("(yyyy-mm-dd)");
         check_in_text.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-
+                check_in_textActionPerformed(evt);
             }
         });
 
         description.setText("Description");
-        description.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JOptionPane.showMessageDialog(null, 
-                    "Room Booking menu\n" +
-                    "note:\n" +
-                    "1) Every room only has enough capacity to hold 1 person.\n" +
-                    "2) The price for a single room is RM 50 per day.\n" +
-                    "3) Every resident is required to deposit RM 15 via online\n" +
-                    "   transaction or APU hostel management in order to\n" +
-                    "   confirm your stay within 24 hours after booking.\n\n" +
-                    "additional services:\n" +
-                    "Cleaning Service RM10\n" +
-                    "Food and Drink Service RM20\n" +
-                    "Laundry Service RM10"
-                );
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Additional services:");
@@ -144,7 +88,8 @@ public class booking extends javax.swing.JFrame {
         jCheckBox2.setText("Food and drink service");
 
         jCheckBox3.setText("Laundry service");
-        
+
+        book.setText("Book");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -177,7 +122,7 @@ public class booking extends javax.swing.JFrame {
                 .addContainerGap(118, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(Exit)
                 .addGap(103, 103, 103))
         );
         jPanel1Layout.setVerticalGroup(
@@ -205,7 +150,7 @@ public class booking extends javax.swing.JFrame {
                 .addComponent(jCheckBox3)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(Exit)
                     .addComponent(book))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
@@ -295,6 +240,13 @@ public class booking extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_days_textActionPerformed
 
+    private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
+        // TODO add your handling code here:
+        Resident re = new Resident();
+        re.setVisible(true);
+        this. dispose();
+    }//GEN-LAST:event_ExitActionPerformed
+
     public static String generateBookingId() throws IOException {
         String filePath = "src/main/java/OOP/booking.txt";
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
@@ -310,16 +262,6 @@ public class booking extends javax.swing.JFrame {
     
         return newBookingId;
     }
-
-
-    private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
-        // Clear the user session
-        UserSession.clearSession();
-        Resident resident = new Resident();
-        resident.setVisible(true);
-        this.dispose();
-    }
-
 
     /**
      * @param args the command line arguments
@@ -357,13 +299,13 @@ public class booking extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Exit;
     private javax.swing.JButton book;
     private javax.swing.JLabel check_in;
     private javax.swing.JTextField check_in_text;
     private javax.swing.JLabel days;
     private javax.swing.JTextField days_text;
     private javax.swing.JButton description;
-    private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
