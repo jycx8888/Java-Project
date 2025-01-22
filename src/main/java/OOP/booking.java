@@ -25,6 +25,7 @@ public class booking extends javax.swing.JFrame {
      */
     public booking() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

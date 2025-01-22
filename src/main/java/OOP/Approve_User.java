@@ -43,7 +43,7 @@ public class Approve_User extends javax.swing.JFrame {
         BufferedReader br = new BufferedReader(fr);
         
         String line = null;
-        
+
         while ((line = br.readLine()) != null){
             String values[] = line.split(", ");
             model.addRow(values);
@@ -56,7 +56,8 @@ public class Approve_User extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error reading file: " + e.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
-        initComponents();
+        initComponents();        
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
