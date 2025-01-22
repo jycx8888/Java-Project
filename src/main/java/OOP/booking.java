@@ -74,7 +74,7 @@ public class booking extends javax.swing.JFrame {
         check_in_text.setText("(yyyy-mm-dd)");
         check_in_text.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                check_in_textActionPerformed(evt);
+
             }
         });
 
