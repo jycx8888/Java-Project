@@ -11,8 +11,11 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 /**
  *
@@ -288,8 +291,33 @@ public class booking extends javax.swing.JFrame {
                 return;
             }
 
+            // Read available rooms from room.txt
+            List<String> availableRooms = new ArrayList<>();
+            try (BufferedReader roomReader = new BufferedReader(new FileReader("src/main/java/OOP/room.txt"))) {
+                String line;
+                while ((line = roomReader.readLine()) != null) {
+                    String[] parts = line.split(", ");
+                    if (parts.length == 2 && "available".equalsIgnoreCase(parts[1].trim())) {
+                        availableRooms.add(parts[0].trim());
+                    }
+                }
+            } catch (IOException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error reading room file", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+    
+            if (availableRooms.isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(this, "No rooms available.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Choose a random available room
+            Random random = new Random();
+            String chosenRoom = availableRooms.get(random.nextInt(availableRooms.size()));
+
+
             LocalDate bookingDate = LocalDate.now();
-            String data = bookingId + ", " + bookingDate + ", " + userID + ", " + checkInDate + ", " + daysValue + ", " + cleaningService + ", " + foodAndDrinkService + ", " + laundryService + ", " + price +", "+ "pending" + "\r\n";
+            String data = bookingId + ", " + bookingDate + ", " + userID + ", " + checkInDate + ", " + daysValue + ", " + cleaningService + ", " + foodAndDrinkService + ", " + laundryService + ", " + price + ", " + "pending" + ", " + chosenRoom + "\r\n";
     
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/OOP/booking.txt", true))) {
                 writer.write(data);

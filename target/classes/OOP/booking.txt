@@ -1,1 +1,1 @@
-B01, 2025-01-22, R01, 2025-01-23, 7, true, false, false, 374.0, pending
+B01, 2025-01-22, R01, 2025-01-23, 7, true, false, false, 374.0, approved, 101

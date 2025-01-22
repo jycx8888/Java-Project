@@ -4,6 +4,11 @@
  */
 package OOP;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Justin Yong
@@ -30,7 +35,7 @@ public class MakePayment extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         BookingIDTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        Find = new javax.swing.JToggleButton();
+        SearchBookingID = new javax.swing.JToggleButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         FullNameTextField = new javax.swing.JTextField();
@@ -46,6 +51,8 @@ public class MakePayment extends javax.swing.JFrame {
         CleaningServiceCheckBox = new javax.swing.JCheckBox();
         FoodAndDrinkServiceCheckBox = new javax.swing.JCheckBox();
         LaundryServiceCheckBox = new javax.swing.JCheckBox();
+        jLabel9 = new javax.swing.JLabel();
+        RoomTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -57,10 +64,10 @@ public class MakePayment extends javax.swing.JFrame {
 
         jLabel2.setText("BookingID:");
 
-        Find.setText("Find");
-        Find.addActionListener(new java.awt.event.ActionListener() {
+        SearchBookingID.setText("Search");
+        SearchBookingID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FindActionPerformed(evt);
+                SearchBookingIDActionPerformed(evt);
             }
         });
 
@@ -89,21 +96,14 @@ public class MakePayment extends javax.swing.JFrame {
 
         LaundryServiceCheckBox.setText("Laundry Service");
 
+        jLabel9.setText("Room: ");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CleaningServiceCheckBox))
-                .addGap(317, 317, 317))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(146, 146, 146)
-                        .addComponent(FoodAndDrinkServiceCheckBox))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(156, 156, 156)
                         .addComponent(jLabel1))
@@ -117,25 +117,40 @@ public class MakePayment extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel9))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(DaysTextField)
-                            .addComponent(CheckInDateTextField)
-                            .addComponent(PhoneNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(FullNameTextField)
-                            .addComponent(EmailTextField)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(BookingIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Find, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(RoomTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(DaysTextField)
+                                .addComponent(CheckInDateTextField)
+                                .addComponent(PhoneNumberTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                                .addComponent(FullNameTextField)
+                                .addComponent(EmailTextField)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(BookingIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(SearchBookingID)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(179, 179, 179)
-                        .addComponent(Proceed))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(309, 309, 309)
-                        .addComponent(LaundryServiceCheckBox)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(161, 161, 161)
+                                .addComponent(Proceed))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(CleaningServiceCheckBox))
+                                    .addGap(281, 281, 281))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(127, 127, 127)
+                                    .addComponent(FoodAndDrinkServiceCheckBox))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(290, 290, 290)
+                                    .addComponent(LaundryServiceCheckBox))))))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,7 +168,7 @@ public class MakePayment extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(BookingIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Find))
+                            .addComponent(SearchBookingID))
                         .addGap(25, 25, 25)
                         .addComponent(EmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
@@ -170,27 +185,75 @@ public class MakePayment extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DaysTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addGap(18, 18, 18)
+                .addGap(35, 35, 35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(RoomTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CleaningServiceCheckBox)
                     .addComponent(FoodAndDrinkServiceCheckBox)
                     .addComponent(LaundryServiceCheckBox))
-                .addGap(13, 13, 13)
+                .addGap(18, 18, 18)
                 .addComponent(Proceed)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addGap(18, 18, 18))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 450));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 530));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void FindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_FindActionPerformed
-
+    private void SearchBookingIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBookingIDActionPerformed
+        // TODO add your handling code here
+        String bookingId = BookingIDTextField.getText().trim();
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/OOP/booking.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(", ");
+                if (parts.length == 11 && parts[0].equals(bookingId)) {
+                    if ("pending".equals(parts[9])) {
+                        JOptionPane.showMessageDialog(this, "Booking is invalid as the deposit is not paid.", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }else if("approved".equals(parts[9])){
+                    BookingIDTextField.setText(parts[0]);
+                    CheckInDateTextField.setText(parts[3]);
+                    DaysTextField.setText(parts[4]);
+                    CleaningServiceCheckBox.setSelected(Boolean.parseBoolean(parts[5]));
+                    FoodAndDrinkServiceCheckBox.setSelected(Boolean.parseBoolean(parts[6]));
+                    LaundryServiceCheckBox.setSelected(Boolean.parseBoolean(parts[7]));
+                    RoomTextField.setText(parts[10]);
+                    findResidentInfoById(parts[2]);
+                    // Populate other fields as needed
+                    return;
+                    }
+                }
+            }
+            JOptionPane.showMessageDialog(this, "No booking found with the provided Booking ID.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_SearchBookingIDActionPerformed
+    
+    private void findResidentInfoById(String residentId) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/OOP/Resident_Info.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(", ");
+                if (parts.length == 5 && parts[0].equals(residentId)) {
+                    FullNameTextField.setText(parts[1]);
+                    EmailTextField.setText(parts[2]);
+                    PhoneNumberTextField.setText(parts[3]);
+                    return;
+                }
+            }
+            JOptionPane.showMessageDialog(this, "No resident found with the provided Resident ID.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     private void CleaningServiceCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CleaningServiceCheckBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CleaningServiceCheckBoxActionPerformed
@@ -236,12 +299,13 @@ public class MakePayment extends javax.swing.JFrame {
     private javax.swing.JCheckBox CleaningServiceCheckBox;
     private javax.swing.JTextField DaysTextField;
     private javax.swing.JTextField EmailTextField;
-    private javax.swing.JToggleButton Find;
     private javax.swing.JCheckBox FoodAndDrinkServiceCheckBox;
     private javax.swing.JTextField FullNameTextField;
     private javax.swing.JCheckBox LaundryServiceCheckBox;
     private javax.swing.JTextField PhoneNumberTextField;
     private javax.swing.JButton Proceed;
+    private javax.swing.JTextField RoomTextField;
+    private javax.swing.JToggleButton SearchBookingID;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -250,6 +314,7 @@ public class MakePayment extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
