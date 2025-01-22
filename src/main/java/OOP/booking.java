@@ -8,9 +8,6 @@ import javax.swing.JOptionPane;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  *
@@ -23,7 +20,6 @@ public class booking extends javax.swing.JFrame {
      */
     public booking() {
         initComponents();
-        setLocationRelativeTo(null);
     }
 
     /**
@@ -48,11 +44,6 @@ public class booking extends javax.swing.JFrame {
         jCheckBox2 = new javax.swing.JCheckBox();
         jCheckBox3 = new javax.swing.JCheckBox();
         book = new javax.swing.JButton();
-        book.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookButtonActionPerformed(evt);
-            }
-        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,34 +68,17 @@ public class booking extends javax.swing.JFrame {
             }
         });
 
-        check_in.setText("Check in:");
+        check_in.setText("Check in date:");
+
         check_in_text.setForeground(new java.awt.Color(204, 204, 204));
         check_in_text.setText("(yyyy-mm-dd)");
-        
-        check_in_text.addFocusListener(new java.awt.event.FocusAdapter() {
-            @Override
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                if (check_in_text.getText().equals("(yyyy-mm-dd)")) {
-                    check_in_text.setText("");
-                    check_in_text.setForeground(new java.awt.Color(0, 0, 0)); // Set to default text color
-                }
-            }
-        
-            @Override
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                if (check_in_text.getText().isEmpty()) {
-                    check_in_text.setForeground(new java.awt.Color(204, 204, 204));
-                    check_in_text.setText("(yyyy-mm-dd)");
-                }
+        check_in_text.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                check_in_textActionPerformed(evt);
             }
         });
 
         description.setText("Description");
-        description.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                descriptionButtonActionPerformed(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Additional services:");
@@ -199,51 +173,30 @@ public class booking extends javax.swing.JFrame {
 
     private void bookButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
         try {
-            // Read rates from rates.txt
-            Map<String, Double> rates = new HashMap<>();
-            try (BufferedReader ratesReader = new BufferedReader(new FileReader("src/main/java/OOP/rates.txt"))) {
-                String line;
-                while ((line = ratesReader.readLine()) != null) {
-                    String[] parts = line.split(", ");
-                    if (parts.length == 2) {
-                        rates.put(parts[0].trim(), Double.parseDouble(parts[1].trim()));
-                    }
-                }
-            } catch (IOException e) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Error reading rates file", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        
-            double basePrice = rates.get("Room per Day");
-            double cleaningServiceRate = rates.get("Cleaning Service");
-            double foodAndDrinkServiceRate = rates.get("Food and Drink Service");
-            double laundryServiceRate = rates.get("Laundry Service");
-            double taxRate = rates.get("Service Tax");
-        
             int daysValue = Integer.parseInt(days_text.getText());
             if (daysValue <= 0) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Days cannot be 0 or less", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
-        
+    
             UserSession session = UserSession.getInstance();
             String userID = session.getUserID();
             String checkInDate = check_in_text.getText();
             boolean cleaningService = jCheckBox1.isSelected();
             boolean foodAndDrinkService = jCheckBox2.isSelected();
             boolean laundryService = jCheckBox3.isSelected();
-            double price = basePrice * daysValue * (1 + taxRate);
-        
+            double price = 50 * daysValue * 1.04;
+    
             if (cleaningService) {
-                price += cleaningServiceRate;
+                price += 10 ;
             }
             if (foodAndDrinkService) {
-                price += foodAndDrinkServiceRate;
+                price += 20;
             }
             if (laundryService) {
-                price += laundryServiceRate;
+                price += 10;
             }
-        
+
             String bookingId;
             try {
                 bookingId = generateBookingId();
@@ -251,7 +204,7 @@ public class booking extends javax.swing.JFrame {
                 javax.swing.JOptionPane.showMessageDialog(this, "Error generating booking ID", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
-        
+
             boolean alreadyBooked = false;
             try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/OOP/booking.txt"))) {
                 String line;
@@ -270,8 +223,7 @@ public class booking extends javax.swing.JFrame {
                 return;
             }
 
-            LocalDate bookingDate = LocalDate.now();
-            String data = bookingId + ", " + bookingDate + ", " + userID + ", " + checkInDate + ", " + daysValue + ", " + cleaningService + ", " + foodAndDrinkService + ", " + laundryService + ", " + price +", "+ "pending" + "\r\n";
+            String data = "[" + bookingId + "," + userID + "," + checkInDate + "," + daysValue + "," + price +","+ "pending"+"]"  +"\r\n";
     
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/OOP/booking.txt", true))) {
                 writer.write(data);
@@ -309,21 +261,6 @@ public class booking extends javax.swing.JFrame {
         String newBookingId = prefix + String.format("%02d", count + 1);
     
         return newBookingId;
-    }
-
-    private void descriptionButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        javax.swing.JOptionPane.showMessageDialog(this,
-            "Note:\n" +
-            "1) Every room only has enough capacity to hold 1 person.\n" +
-            "2) The price for a single room is RM 50 per day.\n" +
-            "3) Every resident is required to deposit RM 15 via online\n" +
-            "   transaction or APU hostel management in order to\n" +
-            "   confirm your stay within 24 hours after booking.\n\n" +
-            "Additional services:\n" +
-            "1) Cleaning Service\n" +
-            "2) Food and Drink Service\n" +
-            "3) Laundry Service"
-        );
     }
 
     /**
