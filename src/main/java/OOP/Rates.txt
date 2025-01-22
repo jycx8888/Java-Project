@@ -3,6 +3,6 @@ Cleaning Service, 10
 Food and Drink Service, 20  
 Laundry Service, 10         
 Deposit Fee, 15             
-Damage Fee, 500             
-Service Tax, 0.04           
-
+Service Tax, 0.04 
+Damage Fee (mild), 50
+Damage Fee (severe), 500
