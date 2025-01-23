@@ -346,7 +346,7 @@ public class booking extends javax.swing.JFrame {
                 e.printStackTrace();
             }
 
-            JOptionPane.showMessageDialog(this, "                                 Booking successful!\r\nYour Room Number is: " + chosenRoom + "\n" + "Please make a desposit of RM15 within 24 hours to confirm your stay.");
+            JOptionPane.showMessageDialog(this, "                                 Booking successful!\r\nYour Room Number is: " + chosenRoom + "\n" + "Please complete your payment within 24 hours to the APU hostel management confirm your reservation." + "\n" + "Failure to do so will result in the cancellation of your booking ID.");
         } catch (NumberFormatException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Invalid number format", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
@@ -393,9 +393,10 @@ public class booking extends javax.swing.JFrame {
             "Note:\n" +
             "1) Every room only has enough capacity to hold 1 person.\n" +
             "2) The price for a single room is RM 50 per day.\n" +
-            "3) Every resident is required to deposit RM 15 via online\n" +
-            "   transaction or APU hostel management in order to\n" +
-            "   confirm your stay within 24 hours after booking.\n\n" +
+            "3) Every resident is required to make payments to\n" +
+            "   APU hostel management in 24 hours after booking\n" +
+            "   in order to confirm your stay within 24 hours\n" +
+            "   after booking.\n\n" +
             "Additional services:\n" +
             "1) Cleaning Service\n" +
             "2) Food and Drink Service\n" +
