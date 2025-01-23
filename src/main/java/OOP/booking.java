@@ -319,8 +319,14 @@ public class booking extends javax.swing.JFrame {
             String chosenRoom = availableRooms.get(random.nextInt(availableRooms.size()));
 
 
-            String bookingDate = getCurrentTime();
-            String data = bookingId + ", " + bookingDate + ", " + userID + ", " + checkInDate + ", " + daysValue + ", " + cleaningService + ", " + foodAndDrinkService + ", " + laundryService + ", " + price + ", " + "pending" + ", " + chosenRoom;
+            
+            LocalDateTime bookingDate = LocalDateTime.now(); // Replace with actual booking date
+            String datebook = bookingDate.toLocalDate().toString();
+            String time = bookingDate.toLocalTime().toString();
+            String data = bookingId + ", " + datebook + ", " + time + "," + userID + ", " + checkInDate + ", " + daysValue + ", " + cleaningService + ", " + foodAndDrinkService + ", " + laundryService + ", " + price + ", " + "pending" + ", " + chosenRoom;
+
+            // String bookingDate = getCurrentTime();
+            // String data = bookingId + ", " + bookingDate + ", " + userID + ", " + checkInDate + ", " + daysValue + ", " + cleaningService + ", " + foodAndDrinkService + ", " + laundryService + ", " + price + ", " + "pending" + ", " + chosenRoom;
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/OOP/booking.txt", true))) {
                 writer.write(data + "\n");
             } catch (IOException e) {
