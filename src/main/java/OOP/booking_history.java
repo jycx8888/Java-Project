@@ -15,6 +15,7 @@ public class booking_history extends javax.swing.JFrame {
      */
     public booking_history() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
