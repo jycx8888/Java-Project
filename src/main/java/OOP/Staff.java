@@ -15,6 +15,7 @@ public class Staff extends javax.swing.JFrame {
      */
     public Staff() {
         initComponents();
+        setLocationRelativeTo(null);
         UserSession session = UserSession.getInstance();
         if (session != null) {
             jLabel1.setText("Welcome, " + session.getUsername());

@@ -20,6 +20,7 @@ public class MakePayment extends javax.swing.JFrame {
      */
     public MakePayment() {
         initComponents();
+        setLocationRelativeTo(null);
         UserSession session = UserSession.getInstance();
     }
 

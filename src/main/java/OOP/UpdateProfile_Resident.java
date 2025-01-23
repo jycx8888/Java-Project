@@ -16,6 +16,7 @@ public class UpdateProfile_Resident extends javax.swing.JFrame {
 
     public UpdateProfile_Resident() {
         initComponents();
+        setLocationRelativeTo(null);
         loadProfile();
     }
 

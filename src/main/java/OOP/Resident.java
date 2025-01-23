@@ -15,6 +15,7 @@ public class Resident extends javax.swing.JFrame {
      */
     public Resident() {
         initComponents();
+        setLocationRelativeTo(null);
         UserSession session = UserSession.getInstance();
         if (session != null) {
             jLabel1.setText("Welcome, " + session.getUsername());

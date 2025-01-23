@@ -15,6 +15,7 @@ public class Receipt extends javax.swing.JFrame {
      */
     public Receipt() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

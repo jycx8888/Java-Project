@@ -35,6 +35,7 @@ public class ChangeRates extends javax.swing.JFrame {
             
         }
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
