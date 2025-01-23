@@ -6,7 +6,10 @@ package OOP;
 
 import javax.swing.JOptionPane;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -316,7 +319,7 @@ public class booking extends javax.swing.JFrame {
             String chosenRoom = availableRooms.get(random.nextInt(availableRooms.size()));
 
 
-            LocalDate bookingDate = LocalDate.now();
+            String bookingDate = getCurrentTime();
             String data = bookingId + ", " + bookingDate + ", " + userID + ", " + checkInDate + ", " + daysValue + ", " + cleaningService + ", " + foodAndDrinkService + ", " + laundryService + ", " + price + ", " + "pending" + ", " + chosenRoom;
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/OOP/booking.txt", true))) {
                 writer.write(data + "\n");
@@ -344,6 +347,13 @@ public class booking extends javax.swing.JFrame {
         }
         
     }                       
+
+    private String getCurrentTime() {
+    LocalDateTime now = LocalDateTime.now();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    return now.format(formatter);
+    }
+
 
     private void days_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_days_textActionPerformed
         // TODO add your handling code here:
