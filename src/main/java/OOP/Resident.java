@@ -150,8 +150,8 @@ public class Resident extends javax.swing.JFrame {
     }//GEN-LAST:event_FeedbackActionPerformed
 
     private void BookHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookHistoryActionPerformed
-        booking_history bookingHistoryPage = new booking_history();
-        bookingHistoryPage.setVisible(true);
+        booking_history_main bookingHistorymainPage = new booking_history_main();
+        bookingHistorymainPage.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_BookHistoryActionPerformed
 
