@@ -1,7 +1,9 @@
 package OOP;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 
@@ -72,11 +74,11 @@ public class booking_history extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 430, 120, -1));
         jButton2 = new javax.swing.JButton();
-        // jButton2.addActionListener(new java.awt.event.ActionListener() {
-        //     public void actionPerformed(java.awt.event.ActionEvent evt) {
-        //         deleteBookingRecord(evt);
-        //     }
-        // });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBookingRecord(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -247,7 +249,7 @@ public class booking_history extends javax.swing.JFrame {
 
         jButton1.setText("Exit");
 
-        jButton2.setText("Delete booking");
+        jButton2.setText("cancel booking");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -331,6 +333,38 @@ public class booking_history extends javax.swing.JFrame {
         residentPage.setVisible(true);
         this.dispose();
     }
+
+    private void deleteBookingRecord(java.awt.event.ActionEvent evt) {
+        String bookingID = Booking_ID.getText();
+        UserSession session = UserSession.getInstance();
+        String userID = session.getUserID();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/OOP/booking.txt"))) {
+            StringBuilder updatedContent = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] details = line.split(",");
+                if (details.length == 12 && details[0].trim().equals(bookingID) && details[3].trim().equals(userID)) {
+                    details[10] = "cancelled"; // Update status to cancelled
+                    line = String.join(",", details);
+                }
+                updatedContent.append(line).append(System.lineSeparator());
+            }
+
+            // Write the updated content back to the file
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/OOP/booking.txt"))) {
+                writer.write(updatedContent.toString());
+            }
+
+            // Update the status label in the UI
+            status.setText("cancelled");
+            JOptionPane.showMessageDialog(this, "Booking cancelled successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error updating booking data", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
 
     /**
      * @param args the command line arguments
