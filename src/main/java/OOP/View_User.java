@@ -21,6 +21,7 @@ public class View_User extends javax.swing.JFrame {
         passwords = new ArrayList<>();
         model = new CustomTableModel(columnNames, 0, passwords);
         initComponents();
+        setLocationRelativeTo(null);
         loadData(currentFilePath);
         
     }

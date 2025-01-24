@@ -23,6 +23,7 @@ public class Register extends javax.swing.JFrame {
      */
     public Register() {
         initComponents();
+        setLocationRelativeTo(null);
         jButton1.addActionListener(new SubmitButtonListener());
         
     }

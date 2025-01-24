@@ -16,6 +16,7 @@ public class UpdateProfile_Staff extends javax.swing.JFrame {
     
     public UpdateProfile_Staff() {
         initComponents();
+        setLocationRelativeTo(null);
         loadProfile();
     }
 

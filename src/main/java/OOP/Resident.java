@@ -15,6 +15,7 @@ public class Resident extends javax.swing.JFrame {
      */
     public Resident() {
         initComponents();
+        setLocationRelativeTo(null);
         UserSession session = UserSession.getInstance();
         if (session != null) {
             jLabel1.setText("Welcome, " + session.getUsername());
@@ -149,7 +150,9 @@ public class Resident extends javax.swing.JFrame {
     }//GEN-LAST:event_FeedbackActionPerformed
 
     private void BookHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookHistoryActionPerformed
-        // TODO add your handling code here:
+        booking_history bookingHistoryPage = new booking_history();
+        bookingHistoryPage.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_BookHistoryActionPerformed
 
     /**

@@ -6,7 +6,10 @@ package OOP;
 
 import javax.swing.JOptionPane;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -316,8 +319,15 @@ public class booking extends javax.swing.JFrame {
             String chosenRoom = availableRooms.get(random.nextInt(availableRooms.size()));
 
 
-            LocalDate bookingDate = LocalDate.now();
-            String data = bookingId + ", " + bookingDate + ", " + userID + ", " + checkInDate + ", " + daysValue + ", " + cleaningService + ", " + foodAndDrinkService + ", " + laundryService + ", " + price + ", " + "pending" + ", " + chosenRoom;
+            LocalDateTime bookingDate = LocalDateTime.now(); // Replace with actual booking date
+            String datebook = bookingDate.toLocalDate().toString();
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+            String time = bookingDate.toLocalTime().format(timeFormatter);
+            String data = bookingId + ", " + datebook + ", " + time + "," + userID + ", " + checkInDate + ", " + daysValue + ", " + cleaningService + ", " + foodAndDrinkService + ", " + laundryService + ", " + price + ", " + "pending" + ", " + chosenRoom;
+
+            // String bookingDate = getCurrentTime();
+            // String data = bookingId + ", " + bookingDate + ", " + userID + ", " + checkInDate + ", " + daysValue + ", " + cleaningService + ", " + foodAndDrinkService + ", " + laundryService + ", " + price + ", " + "pending" + ", " + chosenRoom;
+
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/OOP/booking.txt", true))) {
                 writer.write(data + "\n");
             } catch (IOException e) {
@@ -337,13 +347,20 @@ public class booking extends javax.swing.JFrame {
                 e.printStackTrace();
             }
 
-            JOptionPane.showMessageDialog(this, "                                 Booking successful!\r\nYour Room Number is: " + chosenRoom + "\n" + "Please make a desposit of RM15 within 24 hours to confirm your stay.");
+            JOptionPane.showMessageDialog(this, "                                 Booking successful!\r\nYour Room Number is: " + chosenRoom + "\n" + "Please complete your payment within 24 hours to the APU hostel management confirm your reservation." + "\n" + "Failure to do so will result in the cancellation of your booking ID.");
         } catch (NumberFormatException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Invalid number format", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
         
     }                       
+
+    private String getCurrentTime() {
+    LocalDateTime now = LocalDateTime.now();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    return now.format(formatter);
+    }
+
 
     private void days_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_days_textActionPerformed
         // TODO add your handling code here:
@@ -377,9 +394,10 @@ public class booking extends javax.swing.JFrame {
             "Note:\n" +
             "1) Every room only has enough capacity to hold 1 person.\n" +
             "2) The price for a single room is RM 50 per day.\n" +
-            "3) Every resident is required to deposit RM 15 via online\n" +
-            "   transaction or APU hostel management in order to\n" +
-            "   confirm your stay within 24 hours after booking.\n\n" +
+            "3) Every resident is required to make payments to\n" +
+            "   APU hostel management in 24 hours after booking\n" +
+            "   in order to confirm your stay within 24 hours\n" +
+            "   after booking.\n\n" +
             "Additional services:\n" +
             "1) Cleaning Service\n" +
             "2) Food and Drink Service\n" +
