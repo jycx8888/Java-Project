@@ -14,10 +14,16 @@ public class booking_history extends javax.swing.JFrame {
     /**
      * Creates new form booking_history
      */
+
     public booking_history() {
         initComponents();
         setLocationRelativeTo(null);
-        loadBookingData();
+    }
+
+    public booking_history(String bookingID) {
+        initComponents();
+        setLocationRelativeTo(null);
+        loadBookingData(bookingID);
     }
 
     /**
@@ -87,7 +93,7 @@ public class booking_history extends javax.swing.JFrame {
 
         jLabel4.setText("Check in Date:");
 
-        jLabel5.setText("Food and drinks");
+        jLabel5.setText("Food and drinks:");
 
         jLabel6.setText("User ID:");
 
@@ -95,15 +101,15 @@ public class booking_history extends javax.swing.JFrame {
 
         jLabel8.setText("Room number:");
 
-        jLabel9.setText("Days");
+        jLabel9.setText("Days:");
 
-        jLabel10.setText("Laundry service");
+        jLabel10.setText("Laundry service:");
 
         jLabel11.setText("Status:");
 
-        jLabel12.setText("Cleaning service");
+        jLabel12.setText("Cleaning service:");
 
-        jLabel13.setText("Price");
+        jLabel13.setText("Price:");
 
         Booking_ID.setText("jLabel15");
 
@@ -291,7 +297,7 @@ public class booking_history extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void loadBookingData() {
+    private void loadBookingData(String bookingID) {
         UserSession session = UserSession.getInstance();
         String userID = session.getUserID();
 
@@ -299,7 +305,7 @@ public class booking_history extends javax.swing.JFrame {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] details = line.split(",");
-                if (details.length == 12 && details[3].trim().equals(userID)) {
+                if (details.length == 12 && details[0].trim().equals(bookingID) && details[3].trim().equals(userID)) {
                     Booking_ID.setText(details[0].trim());
                     date.setText(details[1].trim());
                     time.setText(details[2].trim());

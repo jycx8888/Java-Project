@@ -7,7 +7,7 @@ package OOP;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,6 +23,11 @@ public class booking_history_main extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         loadBookingData();
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
     }
 
     /**
@@ -40,6 +45,11 @@ public class booking_history_main extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -132,6 +142,23 @@ public class booking_history_main extends javax.swing.JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow != -1) {
+            String bookingID = (String) jTable1.getValueAt(selectedRow, 0);
+            new booking_history(bookingID).setVisible(true);
+            this.setVisible(false); 
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a booking to view details.");
+        }
+    }
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
+        Resident residentPage = new Resident();
+        residentPage.setVisible(true);
+        this.dispose();
     }
 
     /**
