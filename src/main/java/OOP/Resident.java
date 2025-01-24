@@ -146,7 +146,9 @@ public class Resident extends javax.swing.JFrame {
     }//GEN-LAST:event_ReceiptActionPerformed
 
     private void FeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FeedbackActionPerformed
-        // TODO add your handling code here:
+        feedback feedbackPage = new feedback();
+        feedbackPage.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_FeedbackActionPerformed
 
     private void BookHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookHistoryActionPerformed
