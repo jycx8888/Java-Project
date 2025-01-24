@@ -351,45 +351,66 @@ public class Booking_New extends javax.swing.JFrame {
                 javax.swing.JOptionPane.showMessageDialog(this, "Error generating booking ID", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
-
-            // Check room availability for the entire stay duration
+            
+            // Read available rooms from room.txt
             List<String> availableRooms = new ArrayList<>();
-            List<String> roomLines = new ArrayList<>();
-            try (BufferedReader roomReader = new BufferedReader(new FileReader("src/main/java/OOP/Room_Availability.txt"))) {
+            try (BufferedReader roomReader = new BufferedReader(new FileReader("src/main/java/OOP/room.txt"))) {
                 String line;
                 while ((line = roomReader.readLine()) != null) {
-                    roomLines.add(line);
                     String[] parts = line.split(", ");
-                    LocalDate date = LocalDate.parse(parts[0], formatter);
-                    if (date.isEqual(checkInLocalDate) || (date.isAfter(checkInLocalDate) && date.isBefore(checkInLocalDate.plusDays(daysValue)))) {
-                        if ("available".equalsIgnoreCase(parts[2].trim())) {
-                            availableRooms.add(parts[1].trim());
-                        }
+                    if (parts.length == 2 && "available".equalsIgnoreCase(parts[1].trim())) {
+                        availableRooms.add(parts[0].trim());
                     }
                 }
             } catch (IOException e) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Error reading room availability file", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                javax.swing.JOptionPane.showMessageDialog(this, "Error reading room file", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
             if (availableRooms.isEmpty()) {
-                javax.swing.JOptionPane.showMessageDialog(this, "No rooms available for the selected date range.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                javax.swing.JOptionPane.showMessageDialog(this, "No rooms available.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            // Choose a random available room
+            // Check room availability for the entire stay duration
+            List<String> chosenRooms = new ArrayList<>();
             Random random = new Random();
-            String chosenRoom = availableRooms.get(random.nextInt(availableRooms.size()));
-
+            for (int i = 0; i < personValue; i++) {
+                boolean roomFound = false;
+                for (int j = 0; j < availableRooms.size(); j++) {
+                    String chosenRoom = availableRooms.get(random.nextInt(availableRooms.size()));
+                    boolean roomAvailable = true;
+                    try (BufferedReader roomAvailabilityReader = new BufferedReader(new FileReader("src/main/java/OOP/room_availability.txt"))) {
+                        String line;
+                        while ((line = roomAvailabilityReader.readLine()) != null) {
+                            String[] parts = line.split(", ");
+                            LocalDate date = LocalDate.parse(parts[0], formatter);
+                            if (parts[1].equals(chosenRoom) && (date.isEqual(checkInLocalDate) || (date.isAfter(checkInLocalDate) && date.isBefore(checkInLocalDate.plusDays(daysValue))))) {
+                                roomAvailable = false;
+                                break;
+                            }
+                        }
+                    } catch (IOException e) {
+                        javax.swing.JOptionPane.showMessageDialog(this, "Error reading room availability file", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    if (roomAvailable) {
+                        chosenRooms.add(chosenRoom);
+                        roomFound = true;
+                        break;
+                    }
+                }
+                if (!roomFound) {
+                    javax.swing.JOptionPane.showMessageDialog(this, "No rooms available for the selected date range.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
 
             LocalDateTime bookingDate = LocalDateTime.now(); // Replace with actual booking date
             String datebook = bookingDate.toLocalDate().toString();
             DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
             String time = bookingDate.toLocalTime().format(timeFormatter);
-            String data = bookingId + ", " + datebook + ", " + time + "," + userID + ", " + checkInDate + ", " + daysValue + ", " + personValue + ", " + cleaningService + ", " + foodAndDrinkService + ", " + laundryService + ", " + price + ", " + "pending";
-
-            // String bookingDate = getCurrentTime();
-            // String data = bookingId + ", " + bookingDate + ", " + userID + ", " + checkInDate + ", " + daysValue + ", " + cleaningService + ", " + foodAndDrinkService + ", " + laundryService + ", " + price + ", " + "pending" + ", " + chosenRoom;
+            String data = bookingId + ", " + datebook + ", " + time + "," + userID + ", " + checkInDate + ", " + daysValue + ", " + personValue + ", " + cleaningService + ", " + foodAndDrinkService + ", " + laundryService + ", " + total + ", " + "confirmed";
 
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/OOP/booking.txt", true))) {
                 writer.write(data + "\n");
@@ -399,15 +420,17 @@ public class Booking_New extends javax.swing.JFrame {
 
             // Write to room_availability.txt for the entire stay duration
             try (BufferedWriter roomWriter = new BufferedWriter(new FileWriter("src/main/java/OOP/room_availability.txt", true))) {
-                for (int i = 0; i < daysValue; i++) {
-                    LocalDate date = checkInLocalDate.plusDays(i);
-                    roomWriter.write(date + ", " + chosenRoom + ", " + bookingId + "\n");
+                for (String chosenRoom : chosenRooms) {
+                    for (int i = 0; i < daysValue; i++) {
+                        LocalDate date = checkInLocalDate.plusDays(i);
+                        roomWriter.write(date + ", " + chosenRoom + ", " + bookingId + "\n");
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            JOptionPane.showMessageDialog(this, "                                 Booking successful!\r\nYour Room Number is: " + chosenRoom + "\n" + "Please complete your payment within 24 hours to the APU hostel management confirm your reservation." + "\n" + "Failure to do so will result in the cancellation of your booking ID.");
+            JOptionPane.showMessageDialog(this, "                                 Booking successful!\r\nYour Room Number is: " + chosenRooms + "\n" + "Please complete your payment within 24 hours to the APU hostel management confirm your reservation." + "\n" + "Failure to do so will result in the cancellation of your booking ID.");
         } catch (NumberFormatException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Invalid number format", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
