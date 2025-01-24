@@ -230,8 +230,8 @@ public class MakePayment extends javax.swing.JFrame {
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(", ");
                 if (parts.length == 11 && parts[0].equals(bookingId)) {
-                    if ("pending".equals(parts[9])) {
-                        JOptionPane.showMessageDialog(this, "Booking is invalid as the deposit is not paid.", "Error", JOptionPane.ERROR_MESSAGE);
+                    if ("cancel".equals(parts[9])) {
+                        JOptionPane.showMessageDialog(this, "Booking is invalid as the payment is not paid on time.", "Error", JOptionPane.ERROR_MESSAGE);
                         return;
                     }else if("approved".equals(parts[9])){
                     BookingIDTextField.setText(parts[0]);
