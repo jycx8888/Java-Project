@@ -58,14 +58,26 @@ public class booking_history extends javax.swing.JFrame {
         status = new javax.swing.JLabel();
         price = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton1.setText("Exit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 430, 120, -1));
         jButton2 = new javax.swing.JButton();
+        // jButton2.addActionListener(new java.awt.event.ActionListener() {
+        //     public void actionPerformed(java.awt.event.ActionEvent evt) {
+        //         deleteBookingRecord(evt);
+        //     }
+        // });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Booking History");
+        jLabel1.setText("Booking Records");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -306,6 +318,12 @@ public class booking_history extends javax.swing.JFrame {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error reading booking data", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+        Resident residentPage = new Resident();
+        residentPage.setVisible(true);
+        this.dispose();
     }
 
     /**
