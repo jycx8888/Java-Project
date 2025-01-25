@@ -142,11 +142,11 @@ public class Resident extends javax.swing.JFrame {
 
     private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
         // TODO add your handling code here:
-        int response = JOptionPane.showConfirmDialog(this, "Are you sure you want to cancel the booking?", "Confirm Cancellation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int response = JOptionPane.showConfirmDialog(this, "Are you sure you want to exit?", "Confirm Exit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response != JOptionPane.YES_OPTION) {
             return; // If the user selects "No", do not proceed with the cancellation
         }
-        
+
         UserSession.clearSession();
         Login lg = new Login();
         lg.setVisible(true);
