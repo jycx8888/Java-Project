@@ -330,6 +330,9 @@ public class MakePayment extends javax.swing.JFrame {
 
     private void ProceedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProceedActionPerformed
         // TODO add your handling code here:
+        Receipt re = new Receipt();
+        re.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_ProceedActionPerformed
 
     private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
