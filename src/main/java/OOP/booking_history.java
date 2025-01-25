@@ -305,6 +305,12 @@ public class booking_history extends javax.swing.JFrame {
         UserSession session = UserSession.getInstance();
         String userID = session.getUserID();
 
+        // Show confirmation dialog
+        int response = JOptionPane.showConfirmDialog(this, "Are you sure you want to cancel the booking?", "Confirm Cancellation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response != JOptionPane.YES_OPTION) {
+            return; // If the user selects "No", do not proceed with the cancellation
+        }
+
         try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/OOP/booking.txt"))) {
             StringBuilder updatedContent = new StringBuilder();
             String line;

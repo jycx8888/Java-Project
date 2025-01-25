@@ -373,38 +373,47 @@ public class Booking_New extends javax.swing.JFrame {
             }
     
             // Check room availability for the entire stay duration
+            Map<LocalDate, Integer> roomAvailability = new HashMap<>();
+            for (int i = 0; i < daysValue; i++) {
+                LocalDate date = checkInLocalDate.plusDays(i);
+                roomAvailability.put(date, 0);
+            }
+    
+            try (BufferedReader roomAvailabilityReader = new BufferedReader(new FileReader("src/main/java/OOP/Room_Availability.txt"))) {
+                String line;
+                while ((line = roomAvailabilityReader.readLine()) != null) {
+                    String[] parts = line.split(", ");
+                    LocalDate date = LocalDate.parse(parts[0], formatter);
+                    if (roomAvailability.containsKey(date)) {
+                        roomAvailability.put(date, roomAvailability.get(date) + 1);
+                    }
+                }
+            } catch (IOException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error reading room availability file", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+    
+            // Check if there are enough rooms available for each day
+            StringBuilder errorMessage = new StringBuilder();
+            boolean roomsAvailable = true;
+            for (Map.Entry<LocalDate, Integer> entry : roomAvailability.entrySet()) {
+                int available = availableRooms.size() - entry.getValue();
+                if (available < personValue) {
+                    roomsAvailable = false;
+                    errorMessage.append(entry.getKey().toString()).append(" only has ").append(available).append(" rooms available.\n");
+                }
+            }
+    
+            if (!roomsAvailable) {
+                JOptionPane.showMessageDialog(this, errorMessage.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+    
+            // Randomly choose the available rooms based on the number of persons
             List<String> chosenRooms = new ArrayList<>();
-            Random random = new Random();
             for (int i = 0; i < personValue; i++) {
-                boolean roomFound = false;
-                for (int j = 0; j < availableRooms.size(); j++) {
-                    String chosenRoom = availableRooms.get(j);
-                    boolean roomAvailable = true;
-                    try (BufferedReader roomAvailabilityReader = new BufferedReader(new FileReader("src/main/java/OOP/Room_Availability.txt"))) {
-                        String line;
-                        while ((line = roomAvailabilityReader.readLine()) != null) {
-                            String[] parts = line.split(", ");
-                            LocalDate date = LocalDate.parse(parts[0], formatter);
-                            if (parts[1].equals(chosenRoom) && (date.isEqual(checkInLocalDate) || (date.isAfter(checkInLocalDate) && date.isBefore(checkInLocalDate.plusDays(daysValue))))) {
-                                roomAvailable = false;
-                                break;
-                            }
-                        }
-                    } catch (IOException e) {
-                        javax.swing.JOptionPane.showMessageDialog(this, "Error reading room availability file", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-                        return;
-                    }
-                    if (roomAvailable) {
-                        chosenRooms.add(chosenRoom);
-                        availableRooms.remove(chosenRoom); // Remove the chosen room from the list of available rooms
-                        roomFound = true;
-                        break;
-                    }
-                }
-                if (!roomFound) {
-                    javax.swing.JOptionPane.showMessageDialog(this, "Only " + chosenRooms.size() + " rooms are available for the selected date range.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
+                String chosenRoom = availableRooms.remove(0);
+                chosenRooms.add(chosenRoom);
             }
 
             LocalDateTime bookingDate = LocalDateTime.now(); // Replace with actual booking date
