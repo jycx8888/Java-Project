@@ -41,6 +41,7 @@ public class Resident extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         Exit = new javax.swing.JButton();
         BookHistory = new javax.swing.JButton();
+        About = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,7 +97,7 @@ public class Resident extends javax.swing.JFrame {
                 ExitActionPerformed(evt);
             }
         });
-        jPanel1.add(Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 380, 120, -1));
+        jPanel1.add(Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 430, 120, -1));
 
         BookHistory.setText("Booking History");
         BookHistory.addActionListener(new java.awt.event.ActionListener() {
@@ -106,6 +107,14 @@ public class Resident extends javax.swing.JFrame {
         });
         jPanel1.add(BookHistory, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, 120, -1));
 
+        About.setText("About Us");
+        About.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AboutActionPerformed(evt);
+            }
+        });
+        jPanel1.add(About, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 380, 120, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -114,7 +123,9 @@ public class Resident extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -157,6 +168,12 @@ public class Resident extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_BookHistoryActionPerformed
 
+    private void AboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AboutActionPerformed
+        about aboutPage = new about();  
+        aboutPage.setVisible(true);
+        this.setVisible(false);
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -193,6 +210,7 @@ public class Resident extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton About;
     private javax.swing.JButton BookHistory;
     private javax.swing.JButton BookingRoom;
     private javax.swing.JButton Exit;
