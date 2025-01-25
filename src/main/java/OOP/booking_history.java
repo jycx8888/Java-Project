@@ -5,6 +5,11 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -324,12 +329,33 @@ public class booking_history extends javax.swing.JFrame {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error updating booking data", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
+        // Remove room information from Room_Availability.txt based on booking ID
+        StringBuilder updatedRoomContent = new StringBuilder();
+        try (BufferedReader roomReader = new BufferedReader(new FileReader("src/main/java/OOP/Room_Availability.txt"))) {
+            String line;
+            while ((line = roomReader.readLine()) != null) {
+                String[] parts = line.split(", ");
+                if (!(parts.length == 3 && parts[2].trim().equals(bookingID))) {
+                    updatedRoomContent.append(line).append(System.lineSeparator());
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading room availability data", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    
+        // Write the updated room availability content back to the file
+        try (BufferedWriter roomWriter = new BufferedWriter(new FileWriter("src/main/java/OOP/Room_Availability.txt"))) {
+            roomWriter.write(updatedRoomContent.toString());
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error updating room availability data", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_DeleteActionPerformed
 
     private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
         // TODO add your handling code here:
-        Resident residentPage = new Resident();
-        residentPage.setVisible(true);
+        booking_history_main bkm = new booking_history_main();
+        bkm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ExitActionPerformed
 
@@ -354,13 +380,29 @@ public class booking_history extends javax.swing.JFrame {
                     laundry.setText(details[9].trim().equals("true") ? "Yes" : "No");
                     price.setText(details[10].trim());
                     status.setText(details[11].trim());
-                    roomnum.setText(details[11].trim());
                     break;
                 }
             }
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error reading booking data", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
+        // Read room information from Room_Availability.txt based on booking ID
+        Set<String> rooms = new HashSet<>();
+        try (BufferedReader roomReader = new BufferedReader(new FileReader("src/main/java/OOP/Room_Availability.txt"))) {
+            String line;
+            while ((line = roomReader.readLine()) != null) {
+                String[] parts = line.split(", ");
+                if (parts.length == 3 && parts[2].trim().equals(bookingID)) {
+                    rooms.add(parts[1].trim());
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading room availability data", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    
+        // Display room information without square brackets
+        roomnum.setText(String.join(", ", rooms));
     }
 
     
