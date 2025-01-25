@@ -135,7 +135,7 @@ public class booking_history_main extends javax.swing.JFrame {
                 if (data.length == 12 && data[3].trim().equals(userID)) {
                     String bookingID = data[0].trim();
                     String checkInDate = data[4].trim();
-                    String status = data[10].trim();
+                    String status = data[11].trim();
                     model.addRow(new Object[]{bookingID, userID, checkInDate, status});
                 }
             }

@@ -333,13 +333,13 @@ public class Booking_New extends javax.swing.JFrame {
             double price = basePrice * daysValue * personValue;
         
             if (cleaningService) {
-                price += cleaningServiceRate * daysValue;
+                price += cleaningServiceRate * daysValue * personValue;
             }
             if (foodAndDrinkService) {
-                price += foodAndDrinkServiceRate  * daysValue;
+                price += foodAndDrinkServiceRate  * daysValue * personValue;
             }
             if (laundryService) {
-                price += laundryServiceRate * daysValue;
+                price += laundryServiceRate * daysValue * personValue;
             }
             
             double total = price *  (1 + taxRate);
@@ -373,44 +373,44 @@ public class Booking_New extends javax.swing.JFrame {
             }
 
             // Check room availability for the entire stay duration
-            List<String> chosenRooms = new ArrayList<>();
-            Random random = new Random();
-            for (int i = 0; i < personValue; i++) {
-                boolean roomFound = false;
-                for (int j = 0; j < availableRooms.size(); j++) {
-                    String chosenRoom = availableRooms.get(random.nextInt(availableRooms.size()));
-                    boolean roomAvailable = true;
-                    try (BufferedReader roomAvailabilityReader = new BufferedReader(new FileReader("src/main/java/OOP/room_availability.txt"))) {
-                        String line;
-                        while ((line = roomAvailabilityReader.readLine()) != null) {
-                            String[] parts = line.split(", ");
-                            LocalDate date = LocalDate.parse(parts[0], formatter);
-                            if (parts[1].equals(chosenRoom) && (date.isEqual(checkInLocalDate) || (date.isAfter(checkInLocalDate) && date.isBefore(checkInLocalDate.plusDays(daysValue))))) {
-                                roomAvailable = false;
-                                break;
-                            }
+        List<String> chosenRooms = new ArrayList<>();
+        Random random = new Random();
+        for (int i = 0; i < personValue; i++) {
+            boolean roomFound = false;
+            for (int j = 0; j < availableRooms.size(); j++) {
+                String chosenRoom = availableRooms.get(random.nextInt(availableRooms.size()));
+                boolean roomAvailable = true;
+                try (BufferedReader roomAvailabilityReader = new BufferedReader(new FileReader("src/main/java/OOP/room_availability.txt"))) {
+                    String line;
+                    while ((line = roomAvailabilityReader.readLine()) != null) {
+                        String[] parts = line.split(", ");
+                        LocalDate date = LocalDate.parse(parts[0], formatter);
+                        if (parts[1].equals(chosenRoom) && (date.isEqual(checkInLocalDate) || (date.isAfter(checkInLocalDate) && date.isBefore(checkInLocalDate.plusDays(daysValue))))) {
+                            roomAvailable = false;
+                            break;
                         }
-                    } catch (IOException e) {
-                        javax.swing.JOptionPane.showMessageDialog(this, "Error reading room availability file", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-                        return;
                     }
-                    if (roomAvailable) {
-                        chosenRooms.add(chosenRoom);
-                        roomFound = true;
-                        break;
-                    }
-                }
-                if (!roomFound) {
-                    javax.swing.JOptionPane.showMessageDialog(this, "No rooms available for the selected date range.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                } catch (IOException e) {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Error reading room availability file", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                     return;
                 }
+                if (roomAvailable) {
+                    chosenRooms.add(chosenRoom);
+                    roomFound = true;
+                    break;
+                }
             }
+            if (!roomFound) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Only " + chosenRooms.size() + " rooms are available for the selected date range.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
 
             LocalDateTime bookingDate = LocalDateTime.now(); // Replace with actual booking date
             String datebook = bookingDate.toLocalDate().toString();
             DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
             String time = bookingDate.toLocalTime().format(timeFormatter);
-            String data = bookingId + ", " + datebook + ", " + time + "," + userID + ", " + checkInDate + ", " + daysValue + ", " + personValue + ", " + cleaningService + ", " + foodAndDrinkService + ", " + laundryService + ", " + total + ", " + "confirmed";
+            String data = bookingId + ", " + datebook + ", " + time + ", " + userID + ", " + checkInDate + ", " + daysValue + ", " + personValue + ", " + cleaningService + ", " + foodAndDrinkService + ", " + laundryService + ", " + total + ", " + "confirmed";
 
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/OOP/booking.txt", true))) {
                 writer.write(data + "\n");
