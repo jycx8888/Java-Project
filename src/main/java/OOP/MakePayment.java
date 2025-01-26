@@ -256,16 +256,20 @@ public class MakePayment extends javax.swing.JFrame {
 
         // Read booking information from booking.txt based on booking ID
         boolean bookingFound = false;
+        String paymentStatus = "";
         try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/OOP/booking.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(", ");
-                if (parts.length == 12 && parts[0].trim().equals(bookingId)) {
+                if (parts.length == 13 && parts[0].trim().equals(bookingId)) {
                     bookingFound = true;
                     if ("cancelled".equals(parts[11].trim())) {
                         JOptionPane.showMessageDialog(this, "Booking was cancelled.", "Error", JOptionPane.ERROR_MESSAGE);
                         return;
-                    }else if("confirmed".equals(parts[11].trim())){
+                    }else if("paid".equals(parts[12].trim())){
+                        JOptionPane.showMessageDialog(this, "Booking was already paid.", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }else if("confirmed".equals(parts[11].trim()) && "unpaid".equals(parts[12].trim())){
                     CheckInDateTextField.setText(parts[4].trim());
                     DaysTextField.setText(parts[5].trim());
                     CleaningServiceCheckBox.setSelected(Boolean.parseBoolean(parts[7].trim()));
@@ -331,113 +335,116 @@ public class MakePayment extends javax.swing.JFrame {
     private void ProceedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProceedActionPerformed
         // TODO add your handling code here:
         String bookingID = BookingIDTextField.getText().trim();
+        String checkInDate = CheckInDateTextField.getText().trim();
+        String daysText = DaysTextField.getText().trim();
+        String personText = PersonTextField.getText().trim();
+        String residentID = ResidentIDTextField.getText().trim();
+        String residentName = FullNameTextField.getText().trim();
+        String residentEmail = EmailTextField.getText().trim();
+        String residentPhoneNumber = PhoneNumberTextField.getText().trim();
+        String roomText = RoomTextField.getText().trim();
+    
+        // Validate that all required fields are not empty
+        if (bookingID.isEmpty() || checkInDate.isEmpty() || daysText.isEmpty() || personText.isEmpty() ||
+            residentID.isEmpty() || residentName.isEmpty() || residentEmail.isEmpty() || residentPhoneNumber.isEmpty() ||
+            roomText.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "All fields must be filled out", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    
+        int days = Integer.parseInt(daysText);
+        int person = Integer.parseInt(personText);
+        boolean cleaningService = CleaningServiceCheckBox.isSelected();
+        boolean foodAndDrinkService = FoodAndDrinkServiceCheckBox.isSelected();
+        boolean laundryService = LaundryServiceCheckBox.isSelected();
 
-    if (bookingID.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Booking ID cannot be empty", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    // Get booking information from text fields and checkboxes
-    String checkInDate = CheckInDateTextField.getText().trim();
-    int days = Integer.parseInt(DaysTextField.getText().trim());
-    int person = Integer.parseInt(PersonTextField.getText().trim());
-    boolean cleaningService = CleaningServiceCheckBox.isSelected();
-    boolean foodAndDrinkService = FoodAndDrinkServiceCheckBox.isSelected();
-    boolean laundryService = LaundryServiceCheckBox.isSelected();
-
-    // Get resident information from text fields
-    String residentID = ResidentIDTextField.getText().trim();
-    String residentName = FullNameTextField.getText().trim();
-    String residentEmail = EmailTextField.getText().trim();
-    String residentPhoneNumber = PhoneNumberTextField.getText().trim();
-
-    // Read rates from rates.txt
-    double roomRate = 0.0;
-    double cleaningRate = 0.0;
-    double foodAndDrinkRate = 0.0;
-    double laundryRate = 0.0;
-    double serviceTaxRate = 0.0;
-    try (BufferedReader ratesReader = new BufferedReader(new FileReader("src/main/java/OOP/rates.txt"))) {
-        String line;
-        while ((line = ratesReader.readLine()) != null) {
-            String[] parts = line.split(", ");
-            if (parts.length == 2) {
-                switch (parts[0].trim()) {
-                    case "Room per Day":
-                        roomRate = Double.parseDouble(parts[1].trim());
-                        break;
-                    case "Cleaning Service":
-                        cleaningRate = Double.parseDouble(parts[1].trim());
-                        break;
-                    case "Food and Drink Service":
-                        foodAndDrinkRate = Double.parseDouble(parts[1].trim());
-                        break;
-                    case "Laundry Service":
-                        laundryRate = Double.parseDouble(parts[1].trim());
-                        break;
-                    case "Service Tax":
-                        serviceTaxRate = Double.parseDouble(parts[1].trim());
-                        break;
+        // Read rates from rates.txt
+        double roomRate = 0.0;
+        double cleaningRate = 0.0;
+        double foodAndDrinkRate = 0.0;
+        double laundryRate = 0.0;
+        double serviceTaxRate = 0.0;
+        try (BufferedReader ratesReader = new BufferedReader(new FileReader("src/main/java/OOP/rates.txt"))) {
+            String line;
+            while ((line = ratesReader.readLine()) != null) {
+                String[] parts = line.split(", ");
+                if (parts.length == 2) {
+                    switch (parts[0].trim()) {
+                        case "Room per Day":
+                            roomRate = Double.parseDouble(parts[1].trim());
+                            break;
+                        case "Cleaning Service":
+                            cleaningRate = Double.parseDouble(parts[1].trim());
+                            break;
+                        case "Food and Drink Service":
+                            foodAndDrinkRate = Double.parseDouble(parts[1].trim());
+                            break;
+                        case "Laundry Service":
+                            laundryRate = Double.parseDouble(parts[1].trim());
+                            break;
+                        case "Service Tax":
+                            serviceTaxRate = Double.parseDouble(parts[1].trim());
+                            break;
+                    }
                 }
             }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading rates file", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    } catch (IOException e) {
-        JOptionPane.showMessageDialog(this, "Error reading rates file", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-
-    // Calculate the quantities and amounts
-    int roomQuantity = days * person;
-    int cleaningQuantity = cleaningService ? days * person : 0;
-    int foodAndDrinkQuantity = foodAndDrinkService ? days * person : 0;
-    int laundryQuantity = laundryService ? days * person : 0;
-
-    double roomAmount = roomRate * roomQuantity;
-    double cleaningAmount = cleaningRate * cleaningQuantity;
-    double foodAndDrinkAmount = foodAndDrinkRate * foodAndDrinkQuantity;
-    double laundryAmount = laundryRate * laundryQuantity;
-
-    double subtotal = roomAmount + cleaningAmount + foodAndDrinkAmount + laundryAmount;
-    double serviceTax = subtotal * serviceTaxRate;
-    double total = subtotal + serviceTax;
-
-    // Get room information from text field
-    Set<String> rooms = new HashSet<>();
-    for (String room : RoomTextField.getText().split(", ")) {
-        rooms.add(room.trim());
-    }
-
-    // Generate a sequential Receipt ID based on the number of receipts
-    int receiptCount = 0;
-    try (BufferedReader receiptReader = new BufferedReader(new FileReader("src/main/java/OOP/receipt.txt"))) {
-        while (receiptReader.readLine() != null) {
-            receiptCount++;
+    
+        // Calculate the quantities and amounts
+        int roomQuantity = days * person;
+        int cleaningQuantity = cleaningService ? days * person : 0;
+        int foodAndDrinkQuantity = foodAndDrinkService ? days * person : 0;
+        int laundryQuantity = laundryService ? days * person : 0;
+    
+        double roomAmount = roomRate * roomQuantity;
+        double cleaningAmount = cleaningRate * cleaningQuantity;
+        double foodAndDrinkAmount = foodAndDrinkRate * foodAndDrinkQuantity;
+        double laundryAmount = laundryRate * laundryQuantity;
+    
+        double subtotal = roomAmount + cleaningAmount + foodAndDrinkAmount + laundryAmount;
+        double serviceTax = subtotal * serviceTaxRate;
+        double total = subtotal + serviceTax;
+    
+        // Get room information from text field
+        Set<String> rooms = new HashSet<>();
+        for (String room : RoomTextField.getText().split(", ")) {
+            rooms.add(room.trim());
         }
-    } catch (IOException e) {
-        JOptionPane.showMessageDialog(this, "Error reading receipt data", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-    String receiptID = String.format("RE%04d", receiptCount + 1);
-
-    // Show the receipt
-    Receipt receipt = new Receipt();
-    receipt.setReceiptID(receiptID);
-    receipt.setStaffID(UserSession.getInstance().getUserID());
-    receipt.setProceedDate(Receipt.getLocalDateTime());
-    receipt.setResidentID(residentID);
-    receipt.setName(residentName);
-    receipt.setEmail(residentEmail);
-    receipt.setPhoneNumber(residentPhoneNumber);
-    receipt.setBookingID(bookingID);
-    receipt.setCheckInDate(checkInDate);
-    receipt.setDays(days);
-    receipt.setPerson(person);
-    receipt.setUnitCost(roomRate, cleaningRate, foodAndDrinkRate, laundryRate);
-    receipt.setQuantity(roomQuantity, cleaningQuantity, foodAndDrinkQuantity, laundryQuantity);
-    receipt.setAmount(roomAmount, cleaningAmount, foodAndDrinkAmount, laundryAmount);
-    receipt.setSubtotal(subtotal);
-    receipt.setServiceTax(serviceTax);
-    receipt.setTotal(total);
-    receipt.setRooms(rooms);
-    receipt.setVisible(true);
+    
+        // Generate a sequential Receipt ID based on the number of receipts
+        int receiptCount = 0;
+        try (BufferedReader receiptReader = new BufferedReader(new FileReader("src/main/java/OOP/Receipt.txt"))) {
+            while (receiptReader.readLine() != null) {
+                receiptCount++;
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading receipt data", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        String receiptID = String.format("RE%04d", receiptCount + 1);
+    
+        // Show the receipt
+        Receipt receipt = new Receipt();
+        receipt.setReceiptID(receiptID);
+        receipt.setStaffID(UserSession.getInstance().getUserID());
+        receipt.setProceedDate(Receipt.getLocalDateTime());
+        receipt.setResidentID(residentID);
+        receipt.setName(residentName);
+        receipt.setEmail(residentEmail);
+        receipt.setPhoneNumber(residentPhoneNumber);
+        receipt.setBookingID(bookingID);
+        receipt.setCheckInDate(checkInDate);
+        receipt.setDays(days);
+        receipt.setPerson(person);
+        receipt.setUnitCost(roomRate, cleaningRate, foodAndDrinkRate, laundryRate);
+        receipt.setQuantity(roomQuantity, cleaningQuantity, foodAndDrinkQuantity, laundryQuantity);
+        receipt.setAmount(roomAmount, cleaningAmount, foodAndDrinkAmount, laundryAmount);
+        receipt.setSubtotal(subtotal);
+        receipt.setServiceTax(serviceTax);
+        receipt.setTotal(total);
+        receipt.setRooms(rooms);
+        receipt.setVisible(true);
     }//GEN-LAST:event_ProceedActionPerformed
 
     private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed

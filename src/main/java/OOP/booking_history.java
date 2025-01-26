@@ -316,7 +316,14 @@ public class booking_history extends javax.swing.JFrame {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] details = line.split(",");
-                if (details.length == 12 && details[0].trim().equals(bookingID) && details[3].trim().equals(userID)) {
+                if (details.length == 13 && details[0].trim().equals(bookingID) && details[3].trim().equals(userID)) {
+                    if(details[11].trim().equals("cancelled")) {
+                        JOptionPane.showMessageDialog(this, "Booking already cancelled", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }else if(details[12].trim().equals("paid")) {
+                        JOptionPane.showMessageDialog(this, "Booking already paid", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
                     details[11] = "cancelled"; // Update status to cancelled
                     line = String.join(",", details);
                 }
@@ -373,7 +380,7 @@ public class booking_history extends javax.swing.JFrame {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] details = line.split(",");
-                if (details.length == 12 && details[0].trim().equals(bookingID) && details[3].trim().equals(userID)) {
+                if (details.length == 13 && details[0].trim().equals(bookingID) && details[3].trim().equals(userID)) {
                     Booking_ID.setText(details[0].trim());
                     date.setText(details[1].trim());
                     time.setText(details[2].trim());
