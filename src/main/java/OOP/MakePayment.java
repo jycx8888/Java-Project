@@ -330,9 +330,161 @@ public class MakePayment extends javax.swing.JFrame {
 
     private void ProceedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProceedActionPerformed
         // TODO add your handling code here:
-        Receipt re = new Receipt();
-        re.setVisible(true);
-        this.dispose();
+        String bookingID = BookingIDTextField.getText().trim();
+
+        if (bookingID.isEmpty()) {
+            bookingID = "none" ;
+            return;
+        }
+    
+        // Read booking information from booking.txt based on booking ID
+        boolean bookingFound = false;
+        String checkInDate = "";
+        int days = 0;
+        int person = 0;
+        boolean cleaningService = false;
+        boolean foodAndDrinkService = false;
+        boolean laundryService = false;
+        String residentID = "";
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/OOP/booking.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(", ");
+                if (parts.length == 12 && parts[0].trim().equals(bookingID)) {
+                    bookingFound = true;
+                    checkInDate = parts[4].trim();
+                    days = Integer.parseInt(parts[5].trim());
+                    person = Integer.parseInt(parts[6].trim());
+                    cleaningService = Boolean.parseBoolean(parts[7].trim());
+                    foodAndDrinkService = Boolean.parseBoolean(parts[8].trim());
+                    laundryService = Boolean.parseBoolean(parts[9].trim());
+                    residentID = parts[3].trim();
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading booking data", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    
+        if (!bookingFound) {
+            JOptionPane.showMessageDialog(this, "Booking not found", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    
+        // Read rates from rates.txt
+        double roomRate = 0.0;
+        double cleaningRate = 0.0;
+        double foodAndDrinkRate = 0.0;
+        double laundryRate = 0.0;
+        double serviceTaxRate = 0.0;
+        try (BufferedReader ratesReader = new BufferedReader(new FileReader("src/main/java/OOP/rates.txt"))) {
+            String line;
+            while ((line = ratesReader.readLine()) != null) {
+                String[] parts = line.split(", ");
+                if (parts.length == 2) {
+                    switch (parts[0].trim()) {
+                        case "Room per Day":
+                            roomRate = Double.parseDouble(parts[1].trim());
+                            break;
+                        case "Cleaning Service":
+                            cleaningRate = Double.parseDouble(parts[1].trim());
+                            break;
+                        case "Food and Drink Service":
+                            foodAndDrinkRate = Double.parseDouble(parts[1].trim());
+                            break;
+                        case "Laundry Service":
+                            laundryRate = Double.parseDouble(parts[1].trim());
+                            break;
+                        case "Service Tax":
+                            serviceTaxRate = Double.parseDouble(parts[1].trim());
+                            break;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading rates file", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    
+        // Calculate the quantities and amounts
+        int roomQuantity = days * person;
+        int cleaningQuantity = cleaningService ? days * person : 0;
+        int foodAndDrinkQuantity = foodAndDrinkService ? days * person : 0;
+        int laundryQuantity = laundryService ? days * person : 0;
+    
+        double roomAmount = roomRate * roomQuantity;
+        double cleaningAmount = cleaningRate * cleaningQuantity;
+        double foodAndDrinkAmount = foodAndDrinkRate * foodAndDrinkQuantity;
+        double laundryAmount = laundryRate * laundryQuantity;
+    
+        double subtotal = roomAmount + cleaningAmount + foodAndDrinkAmount + laundryAmount;
+        double serviceTax = subtotal * serviceTaxRate;
+        double total = subtotal + serviceTax;
+    
+        // Get resident information
+        String residentName = "";
+        String residentEmail = "";
+        String residentPhoneNumber = "";
+        try (BufferedReader residentReader = new BufferedReader(new FileReader("src/main/java/OOP/Resident_Info.txt"))) {
+            String line;
+            while ((line = residentReader.readLine()) != null) {
+                String[] parts = line.split(", ");
+                if (parts.length == 5 && parts[0].trim().equals(residentID)) {
+                    residentName = parts[1].trim();
+                    residentEmail = parts[2].trim();
+                    residentPhoneNumber = parts[3].trim();
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading resident information", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    
+        // Read room information from Room_Availability.txt based on booking ID
+        Set<String> rooms = new HashSet<>();
+        try (BufferedReader roomReader = new BufferedReader(new FileReader("src/main/java/OOP/Room_Availability.txt"))) {
+            String line;
+            while ((line = roomReader.readLine()) != null) {
+                String[] parts = line.split(", ");
+                if (parts.length == 3 && parts[2].trim().equals(bookingID)) {
+                    rooms.add(parts[1].trim());
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading room availability data", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    
+        // Generate a sequential Resident ID based on the number of receipts
+        int receiptCount = 0;
+        try (BufferedReader receiptReader = new BufferedReader(new FileReader("src/main/java/OOP/receipt.txt"))) {
+            while (receiptReader.readLine() != null) {
+                receiptCount++;
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading receipt data", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        String ReceiptID = String.format("RE%04d", receiptCount + 1);
+
+        Receipt receipt = new Receipt();
+        receipt.setBookingID(bookingID);
+        receipt.setReceiptID(ReceiptID);
+        receipt.setStaffID(UserSession.getInstance().getUserID());
+        receipt.setProceedDate(Receipt.getLocalDateTime());
+        receipt.setResidentID(residentID);
+        receipt.setName(residentName);
+        receipt.setEmail(residentEmail);
+        receipt.setPhoneNumber(residentPhoneNumber);
+        receipt.setBookingID(bookingID);
+        receipt.setCheckInDate(checkInDate);
+        receipt.setDays(days);
+        receipt.setRooms(rooms);
+        receipt.setPerson(person);
+        receipt.setUnitCost(roomRate, cleaningRate, foodAndDrinkRate, laundryRate);
+        receipt.setQuantity(roomQuantity, cleaningQuantity, foodAndDrinkQuantity, laundryQuantity);
+        receipt.setAmount(roomAmount, cleaningAmount, foodAndDrinkAmount, laundryAmount);
+        receipt.setSubtotal(subtotal);
+        receipt.setServiceTax(serviceTax);
+        receipt.setTotal(total);
+        receipt.setVisible(true);
     }//GEN-LAST:event_ProceedActionPerformed
 
     private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
