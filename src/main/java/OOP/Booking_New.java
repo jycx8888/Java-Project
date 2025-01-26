@@ -440,7 +440,7 @@ public class Booking_New extends javax.swing.JFrame {
                 e.printStackTrace();
             }
 
-            JOptionPane.showMessageDialog(this, "                                 Booking successful!\r\nYour Room Number is: " + chosenRooms + "\n" + "Please complete your payment within 24 hours to the APU hostel management confirm your reservation." + "\n" + "Failure to do so will result in the cancellation of your booking ID.");
+            JOptionPane.showMessageDialog(this, "Booking successful!\r\nYour Room Number is: " + chosenRooms);
         } catch (NumberFormatException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Invalid number format", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
