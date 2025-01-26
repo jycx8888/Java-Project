@@ -38,6 +38,8 @@ public class Staff extends javax.swing.JFrame {
         Profile = new javax.swing.JButton();
         MakePaymentReceipt = new javax.swing.JButton();
         Exit = new javax.swing.JButton();
+        CheckRoom = new javax.swing.JButton();
+        BookingList = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,6 +69,10 @@ public class Staff extends javax.swing.JFrame {
             }
         });
 
+        CheckRoom.setText("Check Room");
+
+        BookingList.setText("Booking List");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -74,28 +80,34 @@ public class Staff extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(152, 152, 152)
+                        .addGap(156, 156, 156)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(Profile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(MakePaymentReceipt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Exit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(Exit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BookingList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(CheckRoom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(144, 144, 144)
+                        .addGap(143, 143, 143)
                         .addComponent(jLabel1)))
-                .addContainerGap(175, Short.MAX_VALUE))
+                .addContainerGap(176, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(91, 91, 91)
+                .addGap(80, 80, 80)
                 .addComponent(jLabel1)
-                .addGap(78, 78, 78)
+                .addGap(38, 38, 38)
                 .addComponent(Profile)
+                .addGap(17, 17, 17)
+                .addComponent(BookingList)
+                .addGap(18, 18, 18)
+                .addComponent(CheckRoom)
                 .addGap(18, 18, 18)
                 .addComponent(MakePaymentReceipt)
                 .addGap(18, 18, 18)
                 .addComponent(Exit)
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -175,6 +187,8 @@ public class Staff extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BookingList;
+    private javax.swing.JButton CheckRoom;
     private javax.swing.JButton Exit;
     private javax.swing.JButton MakePaymentReceipt;
     private javax.swing.JButton Profile;

@@ -19,7 +19,6 @@ OOP\ChangeRates$5.class
 OOP\ChangeRates.class
 OOP\Approve_User$5.class
 OOP\Register$5.class
-OOP\booking$4.class
 OOP\Resident$5.class
 OOP\UpdateProfile_Resident$1.class
 OOP\UpdateProfile_Staff$1.class
@@ -29,12 +28,10 @@ OOP\View_User$6.class
 OOP\MakePayment$4.class
 OOP\Resident$4.class
 OOP\Register$6.class
-OOP\booking.class
 OOP\UpdateProfile_Resident.class
 OOP\Login$6.class
 OOP\Manager$4.class
 OOP\Approve_User$6.class
-OOP\booking$5.class
 OOP\Resident.class
 OOP\View_User$7.class
 OOP\UpdateProfile_Staff$3.class
@@ -48,10 +45,8 @@ OOP\Staff$1.class
 OOP\Manager$3.class
 OOP\View_User$1.class
 OOP\MakePayment$2.class
-OOP\booking$6.class
 OOP\Register$7.class
 OOP\Staff$4.class
-OOP\booking$3.class
 OOP\Approve_User$4.class
 OOP\Register$1.class
 OOP\UserSession.class
@@ -72,7 +67,6 @@ OOP\Login$4.class
 OOP\Staff$2.class
 OOP\ChangeRates$2.class
 OOP\Resident$1.class
-OOP\booking$1.class
 OOP\Register$2.class
 OOP\Update.class
 OOP\Approve_User$2.class
@@ -83,7 +77,6 @@ OOP\View_User$4.class
 OOP\MakePayment$1.class
 OOP\Register$3.class
 OOP\Receipt$1.class
-OOP\booking$2.class
 OOP\Manager.class
 OOP\UpdateProfile_Staff$4.class
 OOP\Resident$7.class
