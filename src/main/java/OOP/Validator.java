@@ -33,7 +33,7 @@ public class Validator {
         }
 
         if ((!email.contains("@")) || (!email.contains("."))) {
-            JOptionPane.showMessageDialog(null, "Invalid email address.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Email must contain '@' and '.'", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
