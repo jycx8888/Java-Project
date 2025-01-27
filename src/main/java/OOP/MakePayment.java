@@ -425,10 +425,10 @@ public class MakePayment extends javax.swing.JFrame {
         String receiptID = String.format("RE%04d", receiptCount + 1);
     
         // Show the receipt
-        Receipt receipt = new Receipt();
+        Receipt_Staff receipt = new Receipt_Staff();
         receipt.setReceiptID(receiptID);
         receipt.setStaffID(UserSession.getInstance().getUserID());
-        receipt.setProceedDate(Receipt.getLocalDateTime());
+        receipt.setProceedDate(Receipt_Staff.getLocalDateTime());
         receipt.setResidentID(residentID);
         receipt.setName(residentName);
         receipt.setEmail(residentEmail);
