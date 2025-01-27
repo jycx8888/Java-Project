@@ -420,7 +420,7 @@ public class Booking_New extends javax.swing.JFrame {
             String datebook = bookingDate.toLocalDate().toString();
             DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
             String time = bookingDate.toLocalTime().format(timeFormatter);
-            String data = bookingId + ", " + datebook + ", " + time + ", " + userID + ", " + checkInDate + ", " + daysValue + ", " + personValue + ", " + cleaningService + ", " + foodAndDrinkService + ", " + laundryService + ", " + total + ", " + "confirmed";
+            String data = bookingId + ", " + datebook + ", " + time + ", " + userID + ", " + checkInDate + ", " + daysValue + ", " + personValue + ", " + cleaningService + ", " + foodAndDrinkService + ", " + laundryService + ", " + total + ", " + "confirmed" + ", " + "unpaid";
 
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/OOP/booking.txt", true))) {
                 writer.write(data + "\n");

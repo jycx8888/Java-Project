@@ -4,10 +4,14 @@
  */
 package OOP;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Set;
 import java.util.UUID;
+
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -618,6 +622,40 @@ public class Receipt extends javax.swing.JFrame {
 
     private void PrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintActionPerformed
         // TODO add your handling code here:
+        try (FileWriter receiptWriter = new FileWriter("src/main/java/OOP/receipt.txt", true)) {
+            receiptWriter.write(
+                ReceiptID.getText() + ", " +
+                StaffID.getText() + ", " +
+                ProceedDate.getText() + ", " +
+                ResidentID.getText() + ", " +
+                ResidentName.getText() + ", " +
+                ResidentEmail.getText() + ", " +
+                ResidentPhoneNumber.getText() + ", " +
+                BookingID.getText() + ", " +
+                CheckInDate.getText() + ", " +
+                Days.getText() + ", " +
+                Person.getText() + ", " +
+                RoomUnitCost.getText() + ", " +
+                CleaningServiceUnitCost.getText() + ", " +
+                FoodAndDrinkUnitCost.getText() + ", " +
+                LaundryServiceUnitCost.getText() + ", " +
+                RoomQuantity.getText() + ", " +
+                CleaningServiceQuantity.getText() + ", " +
+                FoodAndDrinkQuantity.getText() + ", " +
+                LaundryServiceQuantity.getText() + ", " +
+                RoomAmount.getText() + ", " +
+                CleaningServiceAmount.getText() + ", " +
+                FoodAndDrinkAmount.getText() + ", " +
+                LaundryServiceAmount.getText() + ", " +
+                Subtotal.getText() + ", " +
+                ServiceTax.getText() + ", " +
+                Total.getText() + ", " +
+                Room.getText() + "\n"
+            );
+            JOptionPane.showMessageDialog(this, "Print successfully.\r\nReceipt had recorded.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error writing receipt data", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_PrintActionPerformed
 
     /**

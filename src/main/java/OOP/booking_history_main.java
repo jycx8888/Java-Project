@@ -132,7 +132,7 @@ public class booking_history_main extends javax.swing.JFrame {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
-                if (data.length == 12 && data[3].trim().equals(userID)) {
+                if (data.length == 13 && data[3].trim().equals(userID)) {
                     String bookingID = data[0].trim();
                     String checkInDate = data[4].trim();
                     String status = data[11].trim();
