@@ -67,10 +67,11 @@ public class booking_history extends javax.swing.JFrame {
         date = new javax.swing.JLabel();
         checkindate = new javax.swing.JLabel();
         roomnum = new javax.swing.JLabel();
-        status = new javax.swing.JLabel();
+        BookingStatus = new javax.swing.JLabel();
         price = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         person = new javax.swing.JLabel();
+        PaymentStatus = new javax.swing.JLabel();
         Exit = new javax.swing.JButton();
         Delete = new javax.swing.JButton();
 
@@ -89,7 +90,7 @@ public class booking_history extends javax.swing.JFrame {
 
         jLabel4.setText("Check in Date:");
 
-        jLabel5.setText("Food and drinks");
+        jLabel5.setText("Food and drinks:");
 
         jLabel6.setText("User ID:");
 
@@ -97,11 +98,11 @@ public class booking_history extends javax.swing.JFrame {
 
         jLabel9.setText("Days");
 
-        jLabel10.setText("Laundry service");
+        jLabel10.setText("Laundry service:");
 
-        jLabel11.setText("Status:");
+        jLabel11.setText("Booking & Payment Status:");
 
-        jLabel12.setText("Cleaning service");
+        jLabel12.setText("Cleaning service:");
 
         jLabel13.setText("Price:");
 
@@ -125,13 +126,15 @@ public class booking_history extends javax.swing.JFrame {
 
         roomnum.setText("jLabel16");
 
-        status.setText("jLabel17");
+        BookingStatus.setText("jLabel17");
 
         price.setText("jLabel18");
 
         jLabel15.setText("Person: ");
 
         person.setText("jLabel16");
+
+        PaymentStatus.setText("jLabel7");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -143,13 +146,13 @@ public class booking_history extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel12)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(40, 40, 40)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(foodndrink, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                                    .addComponent(foodndrink, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(cleaning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(laundry, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -178,20 +181,18 @@ public class booking_history extends javax.swing.JFrame {
                     .addComponent(jLabel13)
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(date, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(price, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-                            .addComponent(status, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(roomnum, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(checkindate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(person, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(date, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(price, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                    .addComponent(BookingStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(roomnum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(checkindate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(person, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(time, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+                    .addComponent(PaymentStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,7 +228,8 @@ public class booking_history extends javax.swing.JFrame {
                     .addComponent(jLabel11)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cleaning)
-                    .addComponent(status))
+                    .addComponent(BookingStatus)
+                    .addComponent(PaymentStatus))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
@@ -269,7 +271,7 @@ public class booking_history extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,8 +317,8 @@ public class booking_history extends javax.swing.JFrame {
             StringBuilder updatedContent = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] details = line.split(",");
-                if (details.length == 13 && details[0].trim().equals(bookingID) && details[3].trim().equals(userID)) {
+                String[] details = line.split(", ");
+                if (details.length >= 14 && details[0].trim().equals(bookingID) && details[3].trim().equals(userID)) {
                     if(details[11].trim().equals("cancelled")) {
                         JOptionPane.showMessageDialog(this, "Booking already cancelled", "Error", JOptionPane.ERROR_MESSAGE);
                         return;
@@ -325,7 +327,7 @@ public class booking_history extends javax.swing.JFrame {
                         return;
                     }
                     details[11] = "cancelled"; // Update status to cancelled
-                    line = String.join(",", details);
+                    line = String.join(", ", details);
                 }
                 updatedContent.append(line).append(System.lineSeparator());
             }
@@ -336,7 +338,7 @@ public class booking_history extends javax.swing.JFrame {
             }
 
             // Update the status label in the UI
-            status.setText("cancelled");
+            BookingStatus.setText("cancelled");
             JOptionPane.showMessageDialog(this, "Booking cancelled successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (IOException e) {
@@ -379,8 +381,8 @@ public class booking_history extends javax.swing.JFrame {
         try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/OOP/booking.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] details = line.split(",");
-                if (details.length == 13 && details[0].trim().equals(bookingID) && details[3].trim().equals(userID)) {
+                String[] details = line.split(", (?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+                if (details.length >= 14 && details[0].trim().equals(bookingID) && details[3].trim().equals(userID)) {
                     Booking_ID.setText(details[0].trim());
                     date.setText(details[1].trim());
                     time.setText(details[2].trim());
@@ -392,30 +394,18 @@ public class booking_history extends javax.swing.JFrame {
                     foodndrink.setText(details[8].trim().equals("true") ? "Yes" : "No");
                     laundry.setText(details[9].trim().equals("true") ? "Yes" : "No");
                     price.setText(details[10].trim());
-                    status.setText(details[11].trim());
+                    BookingStatus.setText(details[11].trim());
+                    PaymentStatus.setText(details[12].trim());
+
+                    // Format room numbers for display
+                    String rooms = line.substring(line.indexOf(details[13])).trim();
+                    roomnum.setText(rooms.replace("[", "").replace("]", ""));
                     break;
-                }
+                    }
             }
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error reading booking data", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
-        // Read room information from Room_Availability.txt based on booking ID
-        Set<String> rooms = new HashSet<>();
-        try (BufferedReader roomReader = new BufferedReader(new FileReader("src/main/java/OOP/Room_Availability.txt"))) {
-            String line;
-            while ((line = roomReader.readLine()) != null) {
-                String[] parts = line.split(", ");
-                if (parts.length == 3 && parts[2].trim().equals(bookingID)) {
-                    rooms.add(parts[1].trim());
-                }
-            }
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Error reading room availability data", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    
-        // Display room information without square brackets
-        roomnum.setText(String.join(", ", rooms));
     }
 
     
@@ -455,9 +445,11 @@ public class booking_history extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel BookingStatus;
     private javax.swing.JLabel Booking_ID;
     private javax.swing.JButton Delete;
     private javax.swing.JButton Exit;
+    private javax.swing.JLabel PaymentStatus;
     private javax.swing.JLabel checkindate;
     private javax.swing.JLabel cleaning;
     private javax.swing.JLabel date;
@@ -483,7 +475,6 @@ public class booking_history extends javax.swing.JFrame {
     private javax.swing.JLabel person;
     private javax.swing.JLabel price;
     private javax.swing.JLabel roomnum;
-    private javax.swing.JLabel status;
     private javax.swing.JLabel time;
     private javax.swing.JLabel userid;
     // End of variables declaration//GEN-END:variables

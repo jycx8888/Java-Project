@@ -4,11 +4,15 @@
  */
 package OOP;
 
+import java.awt.Color;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -31,7 +35,31 @@ public class Booking_New extends javax.swing.JFrame {
      */
     public Booking_New() {
         initComponents();
+        addFocusListenerToCheckInDateTextField();
         setLocationRelativeTo(null);
+    }
+
+    private void addFocusListenerToCheckInDateTextField() {
+        CheckInDateTextField.setText("YYYY-MM-DD");
+        CheckInDateTextField.setForeground(Color.GRAY);
+
+        CheckInDateTextField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (CheckInDateTextField.getText().equals("YYYY-MM-DD")) {
+                    CheckInDateTextField.setText("");
+                    CheckInDateTextField.setForeground(Color.BLACK);
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (CheckInDateTextField.getText().isEmpty()) {
+                    CheckInDateTextField.setText("YYYY-MM-DD");
+                    CheckInDateTextField.setForeground(Color.GRAY);
+                }
+            }
+        });
     }
 
     /**
@@ -88,7 +116,6 @@ public class Booking_New extends javax.swing.JFrame {
             }
         });
 
-        CheckInDateTextField.setText("(yyyy-mm-dd)");
         CheckInDateTextField.setToolTipText("");
         CheckInDateTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -249,10 +276,10 @@ public class Booking_New extends javax.swing.JFrame {
             "Note:\n" +
             "1) Every room only has enough capacity to hold 1 person.\n" +
             "2) The price for a single room is RM 50 per day.\n" +
-            "3) Every resident is required to make payments to\n" +
-            "   APU hostel management in 24 hours after booking\n" +
-            "   in order to confirm your stay within 24 hours\n" +
-            "   after booking.\n\n" +
+            "3) Check in and chek out time is 2PM.\n" +
+            "4) Every resident is required to check in in\n" +
+            "   APU hostel within 1 hour \n" +
+            "   if not will cancel your booking.\n" +
             "Additional services:\n" +
             "1) Cleaning Service\n" +
             "2) Food and Drink Service\n" +
@@ -343,6 +370,8 @@ public class Booking_New extends javax.swing.JFrame {
             }
             
             double total = price *  (1 + taxRate);
+
+            
         
             String bookingId;
             try {
@@ -420,7 +449,7 @@ public class Booking_New extends javax.swing.JFrame {
             String datebook = bookingDate.toLocalDate().toString();
             DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
             String time = bookingDate.toLocalTime().format(timeFormatter);
-            String data = bookingId + ", " + datebook + ", " + time + ", " + userID + ", " + checkInDate + ", " + daysValue + ", " + personValue + ", " + cleaningService + ", " + foodAndDrinkService + ", " + laundryService + ", " + total + ", " + "confirmed" + ", " + "unpaid";
+            String data = bookingId + ", " + datebook + ", " + time + ", " + userID + ", " + checkInDate + ", " + daysValue + ", " + personValue + ", " + chosenRooms + ", " + cleaningService + ", " + foodAndDrinkService + ", " + laundryService + ", " + total + ", " + "confirmed" + ", " + "unpaid";
 
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/OOP/booking.txt", true))) {
                 writer.write(data + "\n");

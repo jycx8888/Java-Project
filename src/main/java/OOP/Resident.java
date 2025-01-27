@@ -70,7 +70,7 @@ public class Resident extends javax.swing.JFrame {
         });
         jPanel1.add(Profile, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 120, -1));
 
-        Receipt.setText("Receipt");
+        Receipt.setText("View Receipt");
         Receipt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ReceiptActionPerformed(evt);
@@ -175,7 +175,7 @@ public class Resident extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_BookHistoryActionPerformed
 
-    private void AboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AboutActionPerformed
+    private void AboutActionPerformed(java.awt.event.ActionEvent evt) {                                      
         about aboutPage = new about();  
         aboutPage.setVisible(true);
         this.setVisible(false);

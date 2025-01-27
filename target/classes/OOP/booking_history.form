@@ -61,7 +61,7 @@
                           <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="47" max="32767" attributes="0"/>
+                  <EmptySpace pref="45" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -107,14 +107,14 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="jLabel12" alignment="0" max="32767" attributes="0"/>
                                           <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel10" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="foodndrink" pref="56" max="32767" attributes="0"/>
+                                          <Component id="foodndrink" max="32767" attributes="0"/>
                                           <Component id="cleaning" max="32767" attributes="0"/>
                                           <Component id="laundry" alignment="0" max="32767" attributes="0"/>
                                       </Group>
@@ -154,24 +154,20 @@
                           <Component id="jLabel15" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="date" pref="56" max="32767" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="time" min="-2" pref="79" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="price" alignment="0" pref="70" max="32767" attributes="0"/>
-                                  <Component id="status" max="32767" attributes="0"/>
-                                  <Component id="roomnum" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="checkindate" max="32767" attributes="0"/>
-                                  <Component id="person" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="date" max="32767" attributes="0"/>
+                          <Component id="price" alignment="0" pref="70" max="32767" attributes="0"/>
+                          <Component id="BookingStatus" alignment="1" max="32767" attributes="0"/>
+                          <Component id="roomnum" alignment="0" max="32767" attributes="0"/>
+                          <Component id="checkindate" alignment="1" max="32767" attributes="0"/>
+                          <Component id="person" alignment="1" max="32767" attributes="0"/>
                       </Group>
+                      <EmptySpace pref="21" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="time" pref="67" max="32767" attributes="0"/>
+                          <Component id="PaymentStatus" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -213,7 +209,8 @@
                           <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel12" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
                           <Component id="cleaning" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="status" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="BookingStatus" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="PaymentStatus" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -245,7 +242,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Food and drinks"/>
+                <Property name="text" type="java.lang.String" value="Food and drinks:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
@@ -265,17 +262,17 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Laundry service"/>
+                <Property name="text" type="java.lang.String" value="Laundry service:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel11">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Status:"/>
+                <Property name="text" type="java.lang.String" value="Booking &amp; Payment Status:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel12">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Cleaning service"/>
+                <Property name="text" type="java.lang.String" value="Cleaning service:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel13">
@@ -335,7 +332,7 @@
                 <Property name="text" type="java.lang.String" value="jLabel16"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="status">
+            <Component class="javax.swing.JLabel" name="BookingStatus">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel17"/>
               </Properties>
@@ -353,6 +350,11 @@
             <Component class="javax.swing.JLabel" name="person">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel16"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="PaymentStatus">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jLabel7"/>
               </Properties>
             </Component>
           </SubComponents>
