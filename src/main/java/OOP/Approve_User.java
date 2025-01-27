@@ -86,7 +86,7 @@ public class Approve_User extends javax.swing.JFrame {
         jScrollPane1.setViewportView(unapproveUserTable);
         unapproveUserTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
-        Select.setText("Select");
+        Select.setText("Approve");
         Select.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SelectActionPerformed(evt);
