@@ -4,10 +4,14 @@
  */
 package OOP;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -656,6 +660,39 @@ public class Receipt_Staff extends javax.swing.JFrame {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error writing receipt data", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        
+        // Read the entire booking file into memory
+        List<String> bookingLines = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/OOP/booking.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                bookingLines.add(line);
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading booking data", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+            // Update the payment status to "paid"
+        for (int i = 0; i < bookingLines.size(); i++) {
+            String[] parts = bookingLines.get(i).split(", ");
+            if (parts.length >= 14 && parts[0].trim().equals(BookingID.getText())) {
+                parts[12] = "paid";
+                bookingLines.set(i, String.join(", ", parts));
+                break;
+            }
+        }
+    
+        // Write the updated booking data back to the file
+        try (FileWriter writer = new FileWriter("src/main/java/OOP/booking.txt")) {
+            for (String line : bookingLines) {
+                writer.write(line + "\n");
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error writing booking data", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        this.dispose();
+
     }//GEN-LAST:event_PrintActionPerformed
 
     /**

@@ -37,7 +37,6 @@ OOP\View_User$7.class
 OOP\UpdateProfile_Staff$3.class
 OOP\Login.class
 OOP\MakePayment$5.class
-OOP\Receipt.class
 OOP\MakePayment.class
 OOP\View_User.class
 OOP\Register$4.class
@@ -76,7 +75,6 @@ OOP\UpdateProfile_Resident$5.class
 OOP\View_User$4.class
 OOP\MakePayment$1.class
 OOP\Register$3.class
-OOP\Receipt$1.class
 OOP\Manager.class
 OOP\UpdateProfile_Staff$4.class
 OOP\Resident$7.class

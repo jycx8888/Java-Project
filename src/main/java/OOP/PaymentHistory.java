@@ -6,46 +6,45 @@ package OOP;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author hp
+ * @author Justin Yong
  */
-public class booking_history_main extends javax.swing.JFrame {
+public class PaymentHistory extends javax.swing.JFrame {
 
-    private DefaultTableModel model = new DefaultTableModel();
-    private String columnNames[] = {"BookingID", "Check In Date", "Booking Status", "Payment Status"};
+    private DefaultTableModel model;
+    private String columnNames[] = {"Receipt ID", "Payment Datetime", "Total"};
     
-    public booking_history_main() {
+    public PaymentHistory() {
         UserSession session = UserSession.getInstance();
         String userID = session.getUserID().trim();
         try{
         model.setColumnIdentifiers(columnNames);
-        FileReader fr = new FileReader("src/main/java/OOP/booking.txt");
+        FileReader fr = new FileReader("src/main/java/OOP/Receipt.txt");
         BufferedReader br = new BufferedReader(fr);
         
         String line = null;
         
         while ((line = br.readLine()) != null){
             String data[] = line.split(", ");
-            if (data.length >= 14 && data[3].trim().equals(userID)) {
-                    String bookingID = data[0].trim();
-                    String checkInDate = data[4].trim();
-                    String bookingStatus = data[11].trim();
-                    String paymentStatus = data[12].trim();
-                    model.addRow(new Object[]{bookingID, checkInDate, bookingStatus, paymentStatus});
+            if (data.length >= 26 && data[3].trim().equals(userID)) {
+                    String receiptID = data[0].trim();
+                    String paymentDatetime = data[2].trim();
+                    String total = data[25].trim();
+                    model.addRow(new Object[]{receiptID, paymentDatetime, total});
                 }
         }
         br.close();
         fr.close();
         
         } catch(Exception e){
-            
+            JOptionPane.showMessageDialog(this, "Error reading file: " + e.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
-        initComponents();
+        initComponents();        
         setLocationRelativeTo(null);
     }
 
@@ -62,7 +61,7 @@ public class booking_history_main extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        SeeDetails = new javax.swing.JButton();
+        Details = new javax.swing.JButton();
         Exit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -70,15 +69,15 @@ public class booking_history_main extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 204, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Booking History");
+        jLabel1.setText("Payment History");
 
         jTable1.setModel(model);
         jScrollPane1.setViewportView(jTable1);
 
-        SeeDetails.setText("See details");
-        SeeDetails.addActionListener(new java.awt.event.ActionListener() {
+        Details.setText("See Details");
+        Details.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SeeDetailsActionPerformed(evt);
+                DetailsActionPerformed(evt);
             }
         });
 
@@ -96,30 +95,30 @@ public class booking_history_main extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(219, 219, 219)
+                        .addGap(172, 172, 172)
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
+                        .addGap(21, 21, 21)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(163, 163, 163)
-                        .addComponent(SeeDetails)
-                        .addGap(65, 65, 65)
+                        .addGap(131, 131, 131)
+                        .addComponent(Details)
+                        .addGap(62, 62, 62)
                         .addComponent(Exit)))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(33, 33, 33)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SeeDetails)
+                    .addComponent(Details)
                     .addComponent(Exit))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -130,7 +129,7 @@ public class booking_history_main extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -143,17 +142,17 @@ public class booking_history_main extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_ExitActionPerformed
 
-    private void SeeDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeeDetailsActionPerformed
+    private void DetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetailsActionPerformed
         // TODO add your handling code here:
         int selectedRow = jTable1.getSelectedRow();
         if (selectedRow != -1) {
-            String bookingID = (String) jTable1.getValueAt(selectedRow, 0);
-            new booking_history(bookingID).setVisible(true);
+            String receiptID = (String) jTable1.getValueAt(selectedRow, 0);
+            new booking_history(receiptID).setVisible(true);
             this.setVisible(false); 
         } else {
             JOptionPane.showMessageDialog(this, "Please select a booking to view details.");
         }
-    }//GEN-LAST:event_SeeDetailsActionPerformed
+    }//GEN-LAST:event_DetailsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,27 +171,28 @@ public class booking_history_main extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(booking_history_main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PaymentHistory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(booking_history_main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PaymentHistory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(booking_history_main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PaymentHistory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(booking_history_main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PaymentHistory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new booking_history_main().setVisible(true);
+                new PaymentHistory().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Details;
     private javax.swing.JButton Exit;
-    private javax.swing.JButton SeeDetails;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

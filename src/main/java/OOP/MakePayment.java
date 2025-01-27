@@ -261,7 +261,7 @@ public class MakePayment extends javax.swing.JFrame {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(", ");
-                if (parts.length == 13 && parts[0].trim().equals(bookingId)) {
+                if (parts.length >= 14 && parts[0].trim().equals(bookingId)) {
                     bookingFound = true;
                     if ("cancelled".equals(parts[11].trim())) {
                         JOptionPane.showMessageDialog(this, "Booking was cancelled.", "Error", JOptionPane.ERROR_MESSAGE);
