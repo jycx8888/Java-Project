@@ -70,7 +70,7 @@ public class Resident extends javax.swing.JFrame {
         });
         jPanel1.add(Profile, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 120, -1));
 
-        Receipt.setText("View Receipt");
+        Receipt.setText("Payment History");
         Receipt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ReceiptActionPerformed(evt);
@@ -84,7 +84,7 @@ public class Resident extends javax.swing.JFrame {
                 FeedbackActionPerformed(evt);
             }
         });
-        jPanel1.add(Feedback, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, 120, -1));
+        jPanel1.add(Feedback, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, 120, -1));
 
         jLabel2.setText(" ");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, -1, -1));
@@ -107,7 +107,7 @@ public class Resident extends javax.swing.JFrame {
                 BookHistoryActionPerformed(evt);
             }
         });
-        jPanel1.add(BookHistory, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, 120, -1));
+        jPanel1.add(BookHistory, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, 120, -1));
 
         About.setText("About Us");
         About.addActionListener(new java.awt.event.ActionListener() {
