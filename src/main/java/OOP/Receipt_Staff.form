@@ -177,7 +177,7 @@
                                               <Group type="102" attributes="0">
                                                   <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-                                                  <Component id="jLabel20" min="-2" pref="57" max="-2" attributes="0"/>
+                                                  <Component id="DamageFee" min="-2" pref="57" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <Group type="102" alignment="1" attributes="0">
@@ -380,7 +380,7 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="DamageFee" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
@@ -743,7 +743,7 @@
             <Property name="text" type="java.lang.String" value="Damage Fee"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel20">
+        <Component class="javax.swing.JLabel" name="DamageFee">
           <Properties>
             <Property name="text" type="java.lang.String" value="jLabel20"/>
           </Properties>

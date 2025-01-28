@@ -70,6 +70,11 @@ public class Staff extends javax.swing.JFrame {
         });
 
         CheckRoom.setText("Check Room");
+        CheckRoom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CheckRoomActionPerformed(evt);
+            }
+        });
 
         BookingList.setText("Booking List");
 
@@ -150,6 +155,13 @@ public class Staff extends javax.swing.JFrame {
         mp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_MakePaymentReceiptActionPerformed
+
+    private void CheckRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckRoomActionPerformed
+        // TODO add your handling code here:
+        CheckRoom cr = new CheckRoom();
+        cr.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_CheckRoomActionPerformed
 
     /**
      * @param args the command line arguments

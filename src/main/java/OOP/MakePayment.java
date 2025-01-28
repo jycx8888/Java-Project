@@ -63,6 +63,7 @@ public class MakePayment extends javax.swing.JFrame {
         ResidentIDTextField = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         PersonTextField = new javax.swing.JTextField();
+        DamageCheckBox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -124,6 +125,8 @@ public class MakePayment extends javax.swing.JFrame {
 
         jLabel11.setText("Person: ");
 
+        DamageCheckBox.setText("Damage");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -158,29 +161,29 @@ public class MakePayment extends javax.swing.JFrame {
                         .addGap(26, 26, 26)
                         .addComponent(SearchBookingID))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
+                        .addGap(58, 58, 58)
+                        .addComponent(jLabel9))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(CleaningServiceCheckBox))
-                                    .addGap(281, 281, 281))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(127, 127, 127)
-                                    .addComponent(FoodAndDrinkServiceCheckBox))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(290, 290, 290)
-                                    .addComponent(LaundryServiceCheckBox)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(90, 90, 90)
-                                .addComponent(Proceed)
-                                .addGap(53, 53, 53)
-                                .addComponent(Exit))
+                                .addGap(127, 127, 127)
+                                .addComponent(FoodAndDrinkServiceCheckBox))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addComponent(jLabel9)))))
-                .addContainerGap(31, Short.MAX_VALUE))
+                                .addGap(290, 290, 290)
+                                .addComponent(LaundryServiceCheckBox))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(CleaningServiceCheckBox)
+                                    .addComponent(DamageCheckBox))
+                                .addGap(281, 281, 281))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(125, 125, 125)
+                        .addComponent(Proceed)
+                        .addGap(53, 53, 53)
+                        .addComponent(Exit)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,18 +229,20 @@ public class MakePayment extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(RoomTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CleaningServiceCheckBox)
                     .addComponent(FoodAndDrinkServiceCheckBox)
                     .addComponent(LaundryServiceCheckBox))
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
+                .addComponent(DamageCheckBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Proceed)
                     .addComponent(Exit))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addGap(29, 29, 29))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 590));
@@ -261,21 +266,22 @@ public class MakePayment extends javax.swing.JFrame {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(", ");
-                if (parts.length >= 14 && parts[0].trim().equals(bookingId)) {
+                if (parts.length >= 15 && parts[0].trim().equals(bookingId)) {
                     bookingFound = true;
-                    if ("cancelled".equals(parts[11].trim())) {
+                    if ("cancelled".equals(parts[12].trim())) {
                         JOptionPane.showMessageDialog(this, "Booking was cancelled.", "Error", JOptionPane.ERROR_MESSAGE);
                         return;
-                    }else if("paid".equals(parts[12].trim())){
+                    }else if("paid".equals(parts[13].trim())){
                         JOptionPane.showMessageDialog(this, "Booking was already paid.", "Error", JOptionPane.ERROR_MESSAGE);
                         return;
-                    }else if("confirmed".equals(parts[11].trim()) && "unpaid".equals(parts[12].trim())){
+                    }else if("confirmed".equals(parts[12].trim()) && "unpaid".equals(parts[13].trim())){
                     CheckInDateTextField.setText(parts[4].trim());
                     DaysTextField.setText(parts[5].trim());
                     CleaningServiceCheckBox.setSelected(Boolean.parseBoolean(parts[7].trim()));
                     FoodAndDrinkServiceCheckBox.setSelected(Boolean.parseBoolean(parts[8].trim()));
                     LaundryServiceCheckBox.setSelected(Boolean.parseBoolean(parts[9].trim()));
                     PersonTextField.setText(parts[6]);
+                    DamageCheckBox.setSelected(Boolean.parseBoolean(parts[11].trim()));
                     findResidentInfoById(parts[3].trim());
                     // Populate other fields as needed
                     break;
@@ -357,6 +363,7 @@ public class MakePayment extends javax.swing.JFrame {
         boolean cleaningService = CleaningServiceCheckBox.isSelected();
         boolean foodAndDrinkService = FoodAndDrinkServiceCheckBox.isSelected();
         boolean laundryService = LaundryServiceCheckBox.isSelected();
+        boolean damage = DamageCheckBox.isSelected();
 
         // Read rates from rates.txt
         double roomRate = 0.0;
@@ -364,6 +371,7 @@ public class MakePayment extends javax.swing.JFrame {
         double foodAndDrinkRate = 0.0;
         double laundryRate = 0.0;
         double serviceTaxRate = 0.0;
+        double damageRate = 0.0;
         try (BufferedReader ratesReader = new BufferedReader(new FileReader("src/main/java/OOP/rates.txt"))) {
             String line;
             while ((line = ratesReader.readLine()) != null) {
@@ -385,6 +393,9 @@ public class MakePayment extends javax.swing.JFrame {
                         case "Service Tax":
                             serviceTaxRate = Double.parseDouble(parts[1].trim());
                             break;
+                        case "Damage Fee":
+                            damageRate = Double.parseDouble(parts[1].trim());
+                            break;   
                     }
                 }
             }
@@ -405,7 +416,8 @@ public class MakePayment extends javax.swing.JFrame {
     
         double subtotal = roomAmount + cleaningAmount + foodAndDrinkAmount + laundryAmount;
         double serviceTax = subtotal * serviceTaxRate;
-        double total = subtotal + serviceTax;
+        double damageFee = damage ? damageRate : 0;
+        double total = subtotal + serviceTax + damageFee;
     
         // Get room information from text field
         Set<String> rooms = new HashSet<>();
@@ -444,6 +456,7 @@ public class MakePayment extends javax.swing.JFrame {
         receipt.setServiceTax(serviceTax);
         receipt.setTotal(total);
         receipt.setRooms(rooms);
+        receipt.setDamage(damageFee);
         receipt.setVisible(true);
     }//GEN-LAST:event_ProceedActionPerformed
 
@@ -493,6 +506,7 @@ public class MakePayment extends javax.swing.JFrame {
     private javax.swing.JTextField BookingIDTextField;
     private javax.swing.JTextField CheckInDateTextField;
     private javax.swing.JCheckBox CleaningServiceCheckBox;
+    private javax.swing.JCheckBox DamageCheckBox;
     private javax.swing.JTextField DaysTextField;
     private javax.swing.JTextField EmailTextField;
     private javax.swing.JButton Exit;

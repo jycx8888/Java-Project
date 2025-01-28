@@ -111,6 +111,10 @@ public class Receipt_Staff extends javax.swing.JFrame {
     public void setTotal(double total) {
         Total.setText(String.format("%.2f", total));
     }
+    
+    public void setDamage(double damage) {
+        DamageFee.setText(String.format("%.2f", damage));
+    }
 
     // public static String generateReceiptID() {
     //     return UUID.randomUUID().toString();
@@ -194,7 +198,7 @@ public class Receipt_Staff extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         Days = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
+        DamageFee = new javax.swing.JLabel();
         Print = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
@@ -348,7 +352,7 @@ public class Receipt_Staff extends javax.swing.JFrame {
         jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel19.setText("Damage Fee");
 
-        jLabel20.setText("jLabel20");
+        DamageFee.setText("jLabel20");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -434,7 +438,7 @@ public class Receipt_Staff extends javax.swing.JFrame {
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(jLabel19)
                                                 .addGap(65, 65, 65)
-                                                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(DamageFee, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                             .addComponent(jLabel44)
                                             .addGap(114, 114, 114)
@@ -593,7 +597,7 @@ public class Receipt_Staff extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
-                    .addComponent(jLabel20))
+                    .addComponent(DamageFee))
                 .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(ServiceTax)
@@ -667,6 +671,7 @@ public class Receipt_Staff extends javax.swing.JFrame {
                 LaundryServiceAmount.getText() + ", " +
                 Subtotal.getText() + ", " +
                 ServiceTax.getText() + ", " +
+                DamageFee.getText() + ", " +
                 Total.getText() + ", " +
                 Room.getText() + "\n"
             );
@@ -751,6 +756,7 @@ public class Receipt_Staff extends javax.swing.JFrame {
     private javax.swing.JLabel CleaningServiceAmount;
     private javax.swing.JLabel CleaningServiceQuantity;
     private javax.swing.JLabel CleaningServiceUnitCost;
+    private javax.swing.JLabel DamageFee;
     private javax.swing.JLabel Days;
     private javax.swing.JLabel FoodAndDrinkAmount;
     private javax.swing.JLabel FoodAndDrinkQuantity;
@@ -787,7 +793,6 @@ public class Receipt_Staff extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;

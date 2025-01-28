@@ -31,11 +31,11 @@ public class booking_history_main extends javax.swing.JFrame {
         
         while ((line = br.readLine()) != null){
             String data[] = line.split(", ");
-            if (data.length >= 14 && data[3].trim().equals(userID)) {
+            if (data.length >= 15 && data[3].trim().equals(userID)) {
                     String bookingID = data[0].trim();
                     String checkInDate = data[4].trim();
-                    String bookingStatus = data[11].trim();
-                    String paymentStatus = data[12].trim();
+                    String bookingStatus = data[12].trim();
+                    String paymentStatus = data[13].trim();
                     model.addRow(new Object[]{bookingID, checkInDate, bookingStatus, paymentStatus});
                 }
         }
