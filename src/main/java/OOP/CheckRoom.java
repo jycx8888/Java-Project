@@ -279,7 +279,7 @@ public class CheckRoom extends javax.swing.JFrame {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] details = line.split(", ");
-                if (details.length >= 2 && details[0].trim().equals(roomNumber) && details[1].trim().equals(bookingID)) {
+                if (details.length >= 3 && details[1].trim().equals(roomNumber) && details[2].trim().equals(bookingID)) {
                     return true;
                 }
             }

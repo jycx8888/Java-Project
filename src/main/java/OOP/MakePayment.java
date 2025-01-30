@@ -416,7 +416,8 @@ public class MakePayment extends javax.swing.JFrame {
     
         double subtotal = roomAmount + cleaningAmount + foodAndDrinkAmount + laundryAmount;
         double serviceTax = subtotal * serviceTaxRate;
-        double damageFee = damage ? damageRate : 0;
+        int damagedRoomCount = getDamagedRoomCount(bookingID);
+        double damageFee = ( damage ? damageRate : 0 ) * damagedRoomCount;
         double total = subtotal + serviceTax + damageFee;
     
         // Get room information from text field
@@ -458,7 +459,38 @@ public class MakePayment extends javax.swing.JFrame {
         receipt.setRooms(rooms);
         receipt.setDamage(damageFee);
         receipt.setVisible(true);
+
+        // Clear all text fields and checkboxes
+        BookingIDTextField.setText("");
+        DaysTextField.setText("");
+        PersonTextField.setText("");
+        RoomTextField.setText("");
+        ResidentIDTextField.setText("");
+        FullNameTextField.setText("");
+        EmailTextField.setText("");
+        PhoneNumberTextField.setText("");
+        CheckInDateTextField.setText("");
+        CleaningServiceCheckBox.setSelected(false);
+        FoodAndDrinkServiceCheckBox.setSelected(false);
+        LaundryServiceCheckBox.setSelected(false);
+        DamageCheckBox.setSelected(false);
     }//GEN-LAST:event_ProceedActionPerformed
+
+    private int getDamagedRoomCount(String bookingID) {
+        int count = 0;
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/OOP/checkroom.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] details = line.split(", ");
+                if (details.length >= 4 && details[0].trim().equals(bookingID)) {
+                    count++;
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading checkroom data", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return count;
+    }
 
     private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
         // TODO add your handling code here:

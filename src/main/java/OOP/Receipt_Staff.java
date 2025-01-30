@@ -200,6 +200,7 @@ public class Receipt_Staff extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         DamageFee = new javax.swing.JLabel();
         Print = new javax.swing.JButton();
+        Close = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -620,14 +621,23 @@ public class Receipt_Staff extends javax.swing.JFrame {
             }
         });
 
+        Close.setText("Close");
+        Close.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CloseActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(201, 201, 201)
+                .addGap(133, 133, 133)
                 .addComponent(Print)
+                .addGap(87, 87, 87)
+                .addComponent(Close)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -635,7 +645,9 @@ public class Receipt_Staff extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 776, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Print)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Print)
+                    .addComponent(Close))
                 .addContainerGap())
         );
 
@@ -679,7 +691,59 @@ public class Receipt_Staff extends javax.swing.JFrame {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error writing receipt data", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
+        // Get the booking ID and room numbers
+        String bookingID = BookingID.getText().trim();
+        String roomNumbers = Room.getText().trim();
+    
+        // Remove room availability entries
+        removeRoomAvailabilityEntries(bookingID, roomNumbers);
         
+        // Update the booking status to "paid"
+        updateBookingStatus(bookingID);
+
+        this.dispose();
+
+    }//GEN-LAST:event_PrintActionPerformed
+
+    private void CloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_CloseActionPerformed
+
+    private void removeRoomAvailabilityEntries(String bookingID, String roomNumbers) {
+        List<String> roomAvailabilityLines = new ArrayList<>();
+        String[] roomNumberArray = roomNumbers.split(",\\s*");
+    
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/OOP/room_availability.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                boolean keepLine = true;
+                for (String roomNumber : roomNumberArray) {
+                    String[] details = line.split(", ");
+                    if (details.length >= 3 && details[1].trim().equals(roomNumber) && details[2].trim().equals(bookingID)) {
+                        keepLine = false;
+                        break;
+                    }
+                }
+                if (keepLine) {
+                    roomAvailabilityLines.add(line);
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading room availability data", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    
+        try (FileWriter writer = new FileWriter("src/main/java/OOP/room_availability.txt")) {
+            for (String line : roomAvailabilityLines) {
+                writer.write(line + "\n");
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error writing room availability data", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void updateBookingStatus(String bookingID) {
         // Read the entire booking file into memory
         List<String> bookingLines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/OOP/booking.txt"))) {
@@ -690,12 +754,12 @@ public class Receipt_Staff extends javax.swing.JFrame {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error reading booking data", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
-            // Update the payment status to "paid"
+    
+        // Update the payment status to "paid"
         for (int i = 0; i < bookingLines.size(); i++) {
             String[] parts = bookingLines.get(i).split(", ");
-            if (parts.length >= 14 && parts[0].trim().equals(BookingID.getText())) {
-                parts[12] = "paid";
+            if (parts.length >= 14 && parts[0].trim().equals(bookingID)) {
+                parts[13] = "paid";
                 bookingLines.set(i, String.join(", ", parts));
                 break;
             }
@@ -709,10 +773,7 @@ public class Receipt_Staff extends javax.swing.JFrame {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error writing booking data", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
-        this.dispose();
-
-    }//GEN-LAST:event_PrintActionPerformed
+    }
 
     /**
      * @param args the command line arguments
@@ -756,6 +817,7 @@ public class Receipt_Staff extends javax.swing.JFrame {
     private javax.swing.JLabel CleaningServiceAmount;
     private javax.swing.JLabel CleaningServiceQuantity;
     private javax.swing.JLabel CleaningServiceUnitCost;
+    private javax.swing.JButton Close;
     private javax.swing.JLabel DamageFee;
     private javax.swing.JLabel Days;
     private javax.swing.JLabel FoodAndDrinkAmount;
