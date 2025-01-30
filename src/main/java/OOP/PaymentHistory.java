@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PaymentHistory extends javax.swing.JFrame {
 
-    private DefaultTableModel model;
+    private DefaultTableModel model = new DefaultTableModel();
     private String columnNames[] = {"Receipt ID", "Payment Datetime", "Total"};
     
     public PaymentHistory() {
@@ -30,10 +30,10 @@ public class PaymentHistory extends javax.swing.JFrame {
         
         while ((line = br.readLine()) != null){
             String data[] = line.split(", ");
-            if (data.length >= 26 && data[3].trim().equals(userID)) {
+            if (data.length >= 28 && data[3].trim().equals(userID)) {
                     String receiptID = data[0].trim();
                     String paymentDatetime = data[2].trim();
-                    String total = data[25].trim();
+                    String total = data[26].trim();
                     model.addRow(new Object[]{receiptID, paymentDatetime, total});
                 }
         }
@@ -146,8 +146,8 @@ public class PaymentHistory extends javax.swing.JFrame {
         // TODO add your handling code here:
         int selectedRow = jTable1.getSelectedRow();
         if (selectedRow != -1) {
-            String receiptID = (String) jTable1.getValueAt(selectedRow, 0);
-            new booking_history(receiptID).setVisible(true);
+            String ReceiptID = (String) jTable1.getValueAt(selectedRow, 0);
+            new Receipt_Resident (ReceiptID).setVisible(true);
             this.setVisible(false); 
         } else {
             JOptionPane.showMessageDialog(this, "Please select a payment to view details.");
