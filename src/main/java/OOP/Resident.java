@@ -161,6 +161,9 @@ public class Resident extends javax.swing.JFrame {
 
     private void ReceiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReceiptActionPerformed
         // TODO add your handling code here:
+        PaymentHistory ph = new PaymentHistory();
+        ph.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_ReceiptActionPerformed
 
     private void FeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FeedbackActionPerformed

@@ -150,7 +150,7 @@ public class PaymentHistory extends javax.swing.JFrame {
             new booking_history(receiptID).setVisible(true);
             this.setVisible(false); 
         } else {
-            JOptionPane.showMessageDialog(this, "Please select a booking to view details.");
+            JOptionPane.showMessageDialog(this, "Please select a payment to view details.");
         }
     }//GEN-LAST:event_DetailsActionPerformed
 

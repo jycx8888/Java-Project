@@ -244,7 +244,7 @@ public class Staff_BookingDetails extends javax.swing.JFrame {
             }
         });
 
-        Cancel.setText("Delete booking");
+        Cancel.setText("Cancel Booking");
         Cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CancelActionPerformed(evt);
@@ -322,7 +322,7 @@ public class Staff_BookingDetails extends javax.swing.JFrame {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] details = line.split(", ");
-                if (details.length >= 15 && details[0].trim().equals(bookingID) && details[3].trim().equals(userID)) {
+                if (details.length >= 15 && details[0].trim().equals(bookingID)){
                     if(details[12].trim().equals("cancelled")) {
                         JOptionPane.showMessageDialog(this, "Booking already cancelled", "Error", JOptionPane.ERROR_MESSAGE);
                         return;
