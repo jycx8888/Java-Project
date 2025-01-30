@@ -4,17 +4,47 @@
  */
 package OOP;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Justin Yong
  */
 public class Staff_BookingList extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Staff_BookingList
-     */
+    private DefaultTableModel model = new DefaultTableModel();
+    private String columnNames[] = {"BookingID", "Check In Date", "Booking Status", "Room Number"};
+    
     public Staff_BookingList() {
+        try{
+        model.setColumnIdentifiers(columnNames);
+        FileReader fr = new FileReader("src/main/java/OOP/booking.txt");
+        BufferedReader br = new BufferedReader(fr);
+        
+        String line = null;
+        
+        while ((line = br.readLine()) != null){
+            String data[] = line.split(", ");
+            if (data.length >= 15) {
+                    String bookingID = data[0].trim();
+                    String checkInDate = data[4].trim();
+                    String bookingStatus = data[12].trim();
+                    String rooms = line.substring(line.indexOf(data[14])).trim();
+                    String roomNumber = rooms.replace("[", "").replace("]", "");
+                    model.addRow(new Object[]{bookingID, checkInDate, bookingStatus, roomNumber});
+                }
+        }
+        br.close();
+        fr.close();
+        
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(this, "No booking found.");
+        }
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -28,27 +58,66 @@ public class Staff_BookingList extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        Details = new javax.swing.JButton();
+        Exit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(204, 255, 153));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Booking List");
+
+        jTable1.setModel(model);
+        jScrollPane2.setViewportView(jTable1);
+
+        Details.setText("See Details");
+        Details.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DetailsActionPerformed(evt);
+            }
+        });
+
+        Exit.setText("Exit");
+        Exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(163, 163, 163)
-                .addComponent(jLabel1)
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(168, 168, 168)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(122, 122, 122)
+                        .addComponent(Details)
+                        .addGap(52, 52, 52)
+                        .addComponent(Exit)))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
+                .addGap(21, 21, 21)
                 .addComponent(jLabel1)
-                .addContainerGap(371, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Details)
+                    .addComponent(Exit))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -64,6 +133,25 @@ public class Staff_BookingList extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
+        // TODO add your handling code here:
+        Staff st = new Staff();
+        st.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_ExitActionPerformed
+
+    private void DetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetailsActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow != -1) {
+            String bookingID = (String) jTable1.getValueAt(selectedRow, 0);
+            new Staff_BookingDetails(bookingID).setVisible(true);
+            this.setVisible(false); 
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a booking to view details.");
+        }
+    }//GEN-LAST:event_DetailsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -101,7 +189,11 @@ public class Staff_BookingList extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Details;
+    private javax.swing.JButton Exit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

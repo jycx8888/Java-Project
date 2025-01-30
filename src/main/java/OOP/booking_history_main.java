@@ -43,7 +43,7 @@ public class booking_history_main extends javax.swing.JFrame {
         fr.close();
         
         } catch(Exception e){
-            
+            JOptionPane.showMessageDialog(this, "No booking found.");
         }
         initComponents();
         setLocationRelativeTo(null);

@@ -77,6 +77,11 @@ public class Staff extends javax.swing.JFrame {
         });
 
         BookingList.setText("Booking List");
+        BookingList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BookingListActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -162,6 +167,13 @@ public class Staff extends javax.swing.JFrame {
         cr.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_CheckRoomActionPerformed
+
+    private void BookingListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookingListActionPerformed
+        // TODO add your handling code here:
+        Staff_BookingList sb = new Staff_BookingList ();
+        sb.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BookingListActionPerformed
 
     /**
      * @param args the command line arguments
