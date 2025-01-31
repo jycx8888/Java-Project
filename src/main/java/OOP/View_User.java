@@ -228,13 +228,24 @@ public class View_User extends javax.swing.JFrame {
         String newPhoneNumber = JOptionPane.showInputDialog(this, "Enter new phone number:", phoneNumber);
         String newPassword = JOptionPane.showInputDialog(this, "Enter new password:", password);
         
+        // Skip validation for unchanged email and phone number
+        boolean emailChanged = !email.equals(newEmail);
+        boolean phoneNumberChanged = !phoneNumber.equals(newPhoneNumber);
+        
         if (!Validator.validateProfile(newName, newEmail, newPhoneNumber, newPassword)) {
             return;
         }
-
-        if (Validator.isEmailOrPhoneNumberRegistered(email, phoneNumber, currentFilePath)) {
-            JOptionPane.showMessageDialog(null, "Email or phone number is already registered for this position.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+        
+        if (emailChanged || phoneNumberChanged) {
+            if (Validator.isEmailRegistered(newEmail, currentFilePath, email)) {
+                JOptionPane.showMessageDialog(null, "Email or phone number is already registered for this position.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        
+            if (Validator.isPhoneNumberRegistered(newPhoneNumber, currentFilePath, phoneNumber)) {
+                JOptionPane.showMessageDialog(null, "Email or phone number is already registered for this position.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         }
 
         model.setValueAt(newName, selectedRow, 1);

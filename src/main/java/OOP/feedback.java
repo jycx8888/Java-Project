@@ -4,8 +4,11 @@
  */
 package OOP;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -25,8 +28,26 @@ public class feedback extends javax.swing.JFrame {
     public feedback() {
         initComponents();
         setLocationRelativeTo(null);
+        addFocusListenerToTextArea();
     }
 
+    private void addFocusListenerToTextArea() {
+        FeedbackTextArea.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (FeedbackTextArea.getText().equals("type here")) {
+                    FeedbackTextArea.setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (FeedbackTextArea.getText().isEmpty()) {
+                    FeedbackTextArea.setText("type here");
+                }
+            }
+        });
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,7 +60,7 @@ public class feedback extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        FeedbackTextArea = new javax.swing.JTextArea();
         Submit = new javax.swing.JButton();
         Exit = new javax.swing.JButton();
 
@@ -50,12 +71,12 @@ public class feedback extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Feedback helps us grow!");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setForeground(new java.awt.Color(204, 204, 204));
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Type here\n");
-        jScrollPane1.setViewportView(jTextArea1);
+        FeedbackTextArea.setColumns(20);
+        FeedbackTextArea.setForeground(new java.awt.Color(204, 204, 204));
+        FeedbackTextArea.setLineWrap(true);
+        FeedbackTextArea.setRows(5);
+        FeedbackTextArea.setText("Type here");
+        jScrollPane1.setViewportView(FeedbackTextArea);
 
         Submit.setText("Submit");
         Submit.addActionListener(new java.awt.event.ActionListener() {
@@ -122,10 +143,9 @@ public class feedback extends javax.swing.JFrame {
         // TODO add your handling code here:
         UserSession session = UserSession.getInstance();
         String userID = session.getUserID();
-        String feedbackText = jTextArea1.getText();
+        String feedbackText = FeedbackTextArea.getText().trim();
 
-        if (feedbackText.trim().isEmpty() || 
-            (feedbackText.equals("Type here") && jTextArea1.getForeground().equals(new java.awt.Color(204, 204, 204)))) {
+        if (feedbackText.isEmpty() || feedbackText.equals("Type here")){
             // Show message if the JTextArea is empty
             JOptionPane.showMessageDialog(this, "Please type in the textbox to submit.", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
@@ -136,7 +156,7 @@ public class feedback extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(this, "Feedback successfully submitted! Thank You For Your Feedback!", "Success", JOptionPane.INFORMATION_MESSAGE);
 
-            jTextArea1.setText("");
+            FeedbackTextArea.setText("");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -183,10 +203,10 @@ public class feedback extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Exit;
+    private javax.swing.JTextArea FeedbackTextArea;
     private javax.swing.JButton Submit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }

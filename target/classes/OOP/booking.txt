@@ -1,15 +1,5 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-B01, 2025-01-25, 01:27:29, R01, 2025-02-11, 3, 2, true, false, false, 343.2, confirmed, paid, [201, 202]
-B02, 2025-01-25, 13:16:56, R02, 2025-01-31, 2, 2, true, false, false, 249.6, confirmed, unpaid, [105, 206]
-B03, 2025-01-25, 18:34:23, R01, 2025-02-01, 3, 1, true, true, true, 280.8, cancelled, paid, [202]
-B04, 2025-01-25, 19:59:47, R01, 2025-01-31, 100, 2, true, false, false, 12480.0, cancelled, unpaid, [205, 208]
-B05, 2025-01-27, 17:44:39, R01, 2025-02-02, 2, 2, false, true, false, 291.2, confirmed, unpaid, [102, 103]
-B07, 2025-01-28, 01:04:37, R03, 2025-06-07, 6, 3, [102, 103, 105], true, cancelled, true, 1684.8, confirmed, unpaid
-=======
 B01, 2025-01-25, 01:27:29, R01, 2025-02-11, 3, 2, true, false, false, 343.2, true, confirmed, paid, [201, 202]
 B02, 2025-01-25, 13:16:56, R02, 2025-01-31, 2, 2, true, false, false, 249.6, false, confirmed, unpaid, [105, 206]
 B03, 2025-01-25, 18:34:23, R01, 2025-02-01, 3, 1, true, true, true, 280.8, false, cancelled, unpaid, [202]
 B04, 2025-01-25, 19:59:47, R01, 2025-01-31, 100, 2, true, false, false, 12480.0, false, cancelled, unpaid, [205, 208]
 B05, 2025-01-27, 17:44:39, R01, 2025-02-02, 2, 2, false, true, false, 291.2, false, cancelled, unpaid, [102, 103]
->>>>>>> 0765d7d4c09e9637a6580f22d2d55e1dbcf8ec5c

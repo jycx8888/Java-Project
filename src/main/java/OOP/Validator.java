@@ -45,15 +45,46 @@ public class Validator {
         return true;
     }
 
-    public static boolean isEmailOrPhoneNumberRegistered(String email, String phoneNumber, String filePath) {
+    // Overloaded method for registration
+    public static boolean isEmailRegistered(String email, String currentFilePath) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(currentFilePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] details = line.split(", ");
+                if (details.length >= 3 && details[2].trim().equals(email)) {
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    // Overloaded method for registration
+    public static boolean isPhoneNumberRegistered(String phoneNumber, String currentFilePath) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(currentFilePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] details = line.split(", ");
+                if (details.length >= 4 && details[3].trim().equals(phoneNumber)) {
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean isEmailRegistered(String email, String filePath, String currentEmail) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(", ");
                 if (parts.length >= 5) {
                     String fileEmail = parts[2];
-                    String filePhoneNumber = parts[3];
-                    if (fileEmail.equals(email) || filePhoneNumber.equals(phoneNumber)) {
+                    if (fileEmail.equals(email) && !fileEmail.trim().equals(currentEmail)) {
                         return true;
                     }
                 }
@@ -64,6 +95,24 @@ public class Validator {
         return false;
     }
     
+    public static boolean isPhoneNumberRegistered(String phoneNumber, String filePath, String currentPhoneNumber) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(", ");
+                if (parts.length >= 5) {
+                    String filePhoneNumber = parts[3];
+                    if (filePhoneNumber.equals(phoneNumber) && !filePhoneNumber.trim().equals(currentPhoneNumber)) {
+                        return true;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public static boolean isRateNameRegistered(String rateName, String filePath) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
         String line;

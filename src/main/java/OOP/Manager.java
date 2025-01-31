@@ -40,6 +40,8 @@ public class Manager extends javax.swing.JFrame {
         ViewUser = new javax.swing.JButton();
         UpdateRates = new javax.swing.JButton();
         Exit = new javax.swing.JButton();
+        ViewFeedback = new javax.swing.JButton();
+        Report = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,42 +78,54 @@ public class Manager extends javax.swing.JFrame {
             }
         });
 
+        ViewFeedback.setText("View Feedback");
+        ViewFeedback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ViewFeedbackActionPerformed(evt);
+            }
+        });
+
+        Report.setText("Report");
+        Report.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReportActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(ViewUser)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
-                .addComponent(UpdateRates, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(185, 185, 185)
-                        .addComponent(Exit))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(ApproveUser))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(138, 138, 138)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ApproveUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ViewUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1)
+                    .addComponent(UpdateRates, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ViewFeedback, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Report, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Exit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel1)
-                .addGap(33, 33, 33)
-                .addComponent(ApproveUser, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ViewUser, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(UpdateRates, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(51, 51, 51)
+                .addComponent(ApproveUser)
+                .addGap(18, 18, 18)
+                .addComponent(ViewUser)
+                .addGap(18, 18, 18)
+                .addComponent(UpdateRates)
+                .addGap(18, 18, 18)
+                .addComponent(ViewFeedback)
+                .addGap(18, 18, 18)
+                .addComponent(Report)
                 .addGap(18, 18, 18)
                 .addComponent(Exit)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -162,6 +176,20 @@ public class Manager extends javax.swing.JFrame {
         this. dispose();
     }//GEN-LAST:event_ExitActionPerformed
 
+    private void ViewFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewFeedbackActionPerformed
+        // TODO add your handling code here:
+        ViewFeedback vb = new ViewFeedback();
+        vb.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_ViewFeedbackActionPerformed
+
+    private void ReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReportActionPerformed
+        // TODO add your handling code here:
+        Report rp = new Report();
+        rp.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_ReportActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -200,7 +228,9 @@ public class Manager extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ApproveUser;
     private javax.swing.JButton Exit;
+    private javax.swing.JButton Report;
     private javax.swing.JButton UpdateRates;
+    private javax.swing.JButton ViewFeedback;
     private javax.swing.JButton ViewUser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

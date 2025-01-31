@@ -78,7 +78,7 @@ public class Staff_BookingDetails extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(204, 255, 153));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Booking History");
+        jLabel1.setText("Booking Details");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -244,7 +244,7 @@ public class Staff_BookingDetails extends javax.swing.JFrame {
             }
         });
 
-        Cancel.setText("Cancel Booking");
+        Cancel.setText("Delete booking");
         Cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CancelActionPerformed(evt);

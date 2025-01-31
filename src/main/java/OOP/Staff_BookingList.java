@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
 public class Staff_BookingList extends javax.swing.JFrame {
 
     private DefaultTableModel model = new DefaultTableModel();
-    private String columnNames[] = {"BookingID", "Check In Date", "Booking Status", "Room Number"};
+    private String columnNames[] = {"Booking ID", "Check In Date", "Booking Status", "Room Number"};
     
     public Staff_BookingList() {
         try{

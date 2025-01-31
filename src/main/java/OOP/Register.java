@@ -237,7 +237,12 @@ public class Register extends javax.swing.JFrame {
                  return;
             }
 
-            if (Validator.isEmailOrPhoneNumberRegistered(email, phoneNumber, filePath)) {
+            if (Validator.isEmailRegistered(email, filePath)) {
+                JOptionPane.showMessageDialog(null, "Email or phone number is already registered for this position.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (Validator.isPhoneNumberRegistered(phoneNumber, filePath)) {
                 JOptionPane.showMessageDialog(null, "Email or phone number is already registered for this position.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }

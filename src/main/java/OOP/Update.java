@@ -104,8 +104,15 @@ public class Update {
             return false;
         }
 
-        if (emailChanged || phoneNumberChanged) {
-            if (Validator.isEmailOrPhoneNumberRegistered(email, phoneNumber, filePath)) {
+        if (emailChanged) {
+            if (Validator.isEmailRegistered(email, filePath)) {
+                JOptionPane.showMessageDialog(null, "Email or phone number is already registered for this position.", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
+        
+        if (phoneNumberChanged) {
+            if (Validator.isPhoneNumberRegistered(phoneNumber, filePath)) {
                 JOptionPane.showMessageDialog(null, "Email or phone number is already registered for this position.", "Error", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
