@@ -4,17 +4,31 @@
  */
 package OOP;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.swing.JOptionPane;
+
+
 /**
  *
  * @author Justin Yong
  */
 public class Report extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Report
-     */
+    private Map<String, Integer> monthMap;
+    
     public Report() {
+        populateMonthMap();
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -28,8 +42,11 @@ public class Report extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         Report = new javax.swing.JLabel();
-        Year = new javax.swing.JComboBox<>();
-        Month = new javax.swing.JComboBox<>();
+        YearComboBox = new javax.swing.JComboBox<>();
+        MonthComboBox = new javax.swing.JComboBox<>();
+        Generate = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ReportTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -38,9 +55,20 @@ public class Report extends javax.swing.JFrame {
         Report.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         Report.setText("Report");
 
-        Year.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2025" }));
+        YearComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2025" }));
 
-        Month.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", " " }));
+        MonthComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", " " }));
+
+        Generate.setText("Generate");
+        Generate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GenerateActionPerformed(evt);
+            }
+        });
+
+        ReportTextArea.setColumns(20);
+        ReportTextArea.setRows(5);
+        jScrollPane1.setViewportView(ReportTextArea);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -53,10 +81,15 @@ public class Report extends javax.swing.JFrame {
                         .addComponent(Report))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(63, 63, 63)
-                        .addComponent(Year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(Month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(186, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(YearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37)
+                                .addComponent(MonthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addComponent(Generate)))))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -65,9 +98,12 @@ public class Report extends javax.swing.JFrame {
                 .addComponent(Report)
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(345, Short.MAX_VALUE))
+                    .addComponent(YearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(MonthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Generate))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(225, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -83,6 +119,86 @@ public class Report extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void populateMonthMap() {
+        monthMap = new HashMap<>();
+        monthMap.put("January", 1);
+        monthMap.put("February", 2);
+        monthMap.put("March", 3);
+        monthMap.put("April", 4);
+        monthMap.put("May", 5);
+        monthMap.put("June", 6);
+        monthMap.put("July", 7);
+        monthMap.put("August", 8);
+        monthMap.put("September", 9);
+        monthMap.put("October", 10);
+        monthMap.put("November", 11);
+        monthMap.put("December", 12);
+    }
+    
+    private void GenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerateActionPerformed
+        // TODO add your handling code here:
+        String selectedYear = (String) YearComboBox.getSelectedItem();
+        String selectedMonth = (String) MonthComboBox.getSelectedItem();
+        generateReport(selectedYear, selectedMonth);
+    }//GEN-LAST:event_GenerateActionPerformed
+
+    private void generateReport(String year, String month) {
+        List<String> bookings = loadBookings();
+        int bookingCount = 0;
+        double totalEarnings = 0.0;
+
+        int monthNumber = monthMap.get(month);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        for (String booking : bookings) {
+            String[] details = booking.split(", ");
+            if (details.length >= 15) {
+                LocalDate bookingDate = LocalDate.parse(details[1], formatter);
+                if (bookingDate.getYear() == Integer.parseInt(year) && bookingDate.getMonthValue() == monthNumber) {
+                    bookingCount++;
+                }
+            }
+        }
+
+        totalEarnings = calculateTotalEarnings(year, monthNumber);
+
+        ReportTextArea.setText("Report for " + year + " " + month + "\n");
+        ReportTextArea.append("Number of Bookings: " + bookingCount + "\n");
+        ReportTextArea.append("Total Earnings: $" + totalEarnings + "\n");
+    }
+
+    private double calculateTotalEarnings(String year, int month) {
+        double totalEarnings = 0.0;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/OOP/Receipt.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] details = line.split(", ");
+                if (details.length >= 28) {
+                    LocalDate receiptDate = LocalDateTime.parse(details[2], formatter).toLocalDate();
+                    if (receiptDate.getYear() == Integer.parseInt(year) && receiptDate.getMonthValue() == month) {
+                        totalEarnings += Double.parseDouble(details[26]);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading receipt data", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return totalEarnings;
+    }
+
+    private List<String> loadBookings() {
+        List<String> bookings = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/OOP/booking.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                bookings.add(line);
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading booking data", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return bookings;
+    }
 
     /**
      * @param args the command line arguments
@@ -120,9 +236,12 @@ public class Report extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> Month;
+    private javax.swing.JButton Generate;
+    private javax.swing.JComboBox<String> MonthComboBox;
     private javax.swing.JLabel Report;
-    private javax.swing.JComboBox<String> Year;
+    private javax.swing.JTextArea ReportTextArea;
+    private javax.swing.JComboBox<String> YearComboBox;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

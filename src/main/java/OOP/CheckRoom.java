@@ -283,7 +283,6 @@ public class CheckRoom extends javax.swing.JFrame {
         }
 
         JOptionPane.showMessageDialog(this, "Submission successful", "Success", JOptionPane.INFORMATION_MESSAGE);
-        this.dispose();
     }//GEN-LAST:event_SubmitActionPerformed
 
     private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
