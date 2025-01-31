@@ -47,6 +47,7 @@ public class Report extends javax.swing.JFrame {
         Generate = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         ReportTextArea = new javax.swing.JTextArea();
+        Exit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,6 +71,13 @@ public class Report extends javax.swing.JFrame {
         ReportTextArea.setRows(5);
         jScrollPane1.setViewportView(ReportTextArea);
 
+        Exit.setText("Exit");
+        Exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExitActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -88,7 +96,10 @@ public class Report extends javax.swing.JFrame {
                                 .addGap(37, 37, 37)
                                 .addComponent(MonthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(32, 32, 32)
-                                .addComponent(Generate)))))
+                                .addComponent(Generate))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(171, 171, 171)
+                        .addComponent(Exit)))
                 .addContainerGap(76, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -103,7 +114,9 @@ public class Report extends javax.swing.JFrame {
                     .addComponent(Generate))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(225, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
+                .addComponent(Exit)
+                .addGap(15, 15, 15))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -142,6 +155,13 @@ public class Report extends javax.swing.JFrame {
         String selectedMonth = (String) MonthComboBox.getSelectedItem();
         generateReport(selectedYear, selectedMonth);
     }//GEN-LAST:event_GenerateActionPerformed
+
+    private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
+        // TODO add your handling code here:
+        Manager mg = new Manager();
+        mg.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_ExitActionPerformed
 
     private void generateReport(String year, String month) {
         List<String> bookings = loadBookings();
@@ -236,6 +256,7 @@ public class Report extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Exit;
     private javax.swing.JButton Generate;
     private javax.swing.JComboBox<String> MonthComboBox;
     private javax.swing.JLabel Report;
