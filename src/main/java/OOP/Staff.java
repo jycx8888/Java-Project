@@ -70,8 +70,18 @@ public class Staff extends javax.swing.JFrame {
         });
 
         CheckRoom.setText("Check Room");
+        CheckRoom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CheckRoomActionPerformed(evt);
+            }
+        });
 
         BookingList.setText("Booking List");
+        BookingList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BookingListActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -150,6 +160,20 @@ public class Staff extends javax.swing.JFrame {
         mp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_MakePaymentReceiptActionPerformed
+
+    private void CheckRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckRoomActionPerformed
+        // TODO add your handling code here:
+        CheckRoom cr = new CheckRoom();
+        cr.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_CheckRoomActionPerformed
+
+    private void BookingListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookingListActionPerformed
+        // TODO add your handling code here:
+        Staff_BookingList sb = new Staff_BookingList ();
+        sb.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BookingListActionPerformed
 
     /**
      * @param args the command line arguments

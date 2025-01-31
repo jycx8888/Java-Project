@@ -111,6 +111,10 @@ public class Receipt_Staff extends javax.swing.JFrame {
     public void setTotal(double total) {
         Total.setText(String.format("%.2f", total));
     }
+    
+    public void setDamage(double damage) {
+        DamageFee.setText(String.format("%.2f", damage));
+    }
 
     // public static String generateReceiptID() {
     //     return UUID.randomUUID().toString();
@@ -193,7 +197,10 @@ public class Receipt_Staff extends javax.swing.JFrame {
         Person = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         Days = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        DamageFee = new javax.swing.JLabel();
         Print = new javax.swing.JButton();
+        Close = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -343,6 +350,11 @@ public class Receipt_Staff extends javax.swing.JFrame {
 
         Days.setText("jLabel19");
 
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel19.setText("Damage Fee");
+
+        DamageFee.setText("jLabel20");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -411,30 +423,33 @@ public class Receipt_Staff extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(71, 71, 71)
                                         .addComponent(jLabel4))))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addGap(226, 226, 226)
+                                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel43)
+                                                    .addComponent(jLabel45))
+                                                .addGap(70, 70, 70)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(Subtotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(ServiceTax, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel19)
+                                                .addGap(65, 65, 65)
+                                                .addComponent(DamageFee, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel44)
+                                            .addGap(114, 114, 114)
+                                            .addComponent(Total, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                 .addComponent(jLabel47)
                                                 .addComponent(jLabel46))
-                                            .addGap(20, 20, 20))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jLabel43)
-                                                        .addComponent(jLabel45))
-                                                    .addGap(70, 70, 70)
-                                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(Subtotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(ServiceTax, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                                    .addComponent(jLabel44)
-                                                    .addGap(114, 114, 114)
-                                                    .addComponent(Total, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addGap(11, 11, 11))))
+                                            .addGap(9, 9, 9)))
+                                    .addGap(11, 11, 11))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addContainerGap()
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -540,51 +555,55 @@ public class Receipt_Staff extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
                             .addComponent(Room))))
+                .addGap(13, 13, 13)
+                .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel21)
+                    .addComponent(jLabel23)
+                    .addComponent(jLabel24)
+                    .addComponent(jLabel25))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(RoomUnitCost)
+                    .addComponent(RoomQuantity)
+                    .addComponent(RoomAmount))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel29)
+                    .addComponent(CleaningServiceUnitCost)
+                    .addComponent(CleaningServiceQuantity)
+                    .addComponent(CleaningServiceAmount))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel30)
+                    .addComponent(FoodAndDrinkUnitCost)
+                    .addComponent(FoodAndDrinkQuantity)
+                    .addComponent(FoodAndDrinkAmount))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel31)
+                    .addComponent(LaundryServiceUnitCost)
+                    .addComponent(LaundryServiceQuantity)
+                    .addComponent(LaundryServiceAmount))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(Subtotal)
-                        .addGap(18, 18, 18)
-                        .addComponent(ServiceTax))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel21)
-                            .addComponent(jLabel23)
-                            .addComponent(jLabel24)
-                            .addComponent(jLabel25))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel22)
-                            .addComponent(RoomUnitCost)
-                            .addComponent(RoomQuantity)
-                            .addComponent(RoomAmount))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel29)
-                            .addComponent(CleaningServiceUnitCost)
-                            .addComponent(CleaningServiceQuantity)
-                            .addComponent(CleaningServiceAmount))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel30)
-                            .addComponent(FoodAndDrinkUnitCost)
-                            .addComponent(FoodAndDrinkQuantity)
-                            .addComponent(FoodAndDrinkAmount))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel31)
-                            .addComponent(LaundryServiceUnitCost)
-                            .addComponent(LaundryServiceQuantity)
-                            .addComponent(LaundryServiceAmount))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel43)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel45)))
-                .addGap(8, 8, 8)
+                        .addGap(2, 2, 2))
+                    .addComponent(jLabel43, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(DamageFee))
+                .addGap(12, 12, 12)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ServiceTax)
+                    .addComponent(jLabel45))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -592,7 +611,7 @@ public class Receipt_Staff extends javax.swing.JFrame {
                     .addComponent(Total))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(202, 202, 202))
+                .addGap(178, 178, 178))
         );
 
         Print.setText("Print");
@@ -602,22 +621,33 @@ public class Receipt_Staff extends javax.swing.JFrame {
             }
         });
 
+        Close.setText("Close");
+        Close.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CloseActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(199, 199, 199)
+                .addGap(133, 133, 133)
                 .addComponent(Print)
+                .addGap(87, 87, 87)
+                .addComponent(Close)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Print)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 776, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Print)
+                    .addComponent(Close))
                 .addContainerGap())
         );
 
@@ -653,6 +683,7 @@ public class Receipt_Staff extends javax.swing.JFrame {
                 LaundryServiceAmount.getText() + ", " +
                 Subtotal.getText() + ", " +
                 ServiceTax.getText() + ", " +
+                DamageFee.getText() + ", " +
                 Total.getText() + ", " +
                 Room.getText() + "\n"
             );
@@ -660,7 +691,59 @@ public class Receipt_Staff extends javax.swing.JFrame {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error writing receipt data", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
+        // Get the booking ID and room numbers
+        String bookingID = BookingID.getText().trim();
+        String roomNumbers = Room.getText().trim();
+    
+        // Remove room availability entries
+        removeRoomAvailabilityEntries(bookingID, roomNumbers);
         
+        // Update the booking status to "paid"
+        updateBookingStatus(bookingID);
+
+        this.dispose();
+
+    }//GEN-LAST:event_PrintActionPerformed
+
+    private void CloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_CloseActionPerformed
+
+    private void removeRoomAvailabilityEntries(String bookingID, String roomNumbers) {
+        List<String> roomAvailabilityLines = new ArrayList<>();
+        String[] roomNumberArray = roomNumbers.split(",\\s*");
+    
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/OOP/room_availability.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                boolean keepLine = true;
+                for (String roomNumber : roomNumberArray) {
+                    String[] details = line.split(", ");
+                    if (details.length >= 3 && details[1].trim().equals(roomNumber) && details[2].trim().equals(bookingID)) {
+                        keepLine = false;
+                        break;
+                    }
+                }
+                if (keepLine) {
+                    roomAvailabilityLines.add(line);
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading room availability data", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    
+        try (FileWriter writer = new FileWriter("src/main/java/OOP/room_availability.txt")) {
+            for (String line : roomAvailabilityLines) {
+                writer.write(line + "\n");
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error writing room availability data", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void updateBookingStatus(String bookingID) {
         // Read the entire booking file into memory
         List<String> bookingLines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/OOP/booking.txt"))) {
@@ -671,12 +754,12 @@ public class Receipt_Staff extends javax.swing.JFrame {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error reading booking data", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
-            // Update the payment status to "paid"
+    
+        // Update the payment status to "paid"
         for (int i = 0; i < bookingLines.size(); i++) {
             String[] parts = bookingLines.get(i).split(", ");
-            if (parts.length >= 14 && parts[0].trim().equals(BookingID.getText())) {
-                parts[12] = "paid";
+            if (parts.length >= 14 && parts[0].trim().equals(bookingID)) {
+                parts[13] = "paid";
                 bookingLines.set(i, String.join(", ", parts));
                 break;
             }
@@ -690,10 +773,7 @@ public class Receipt_Staff extends javax.swing.JFrame {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error writing booking data", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
-        this.dispose();
-
-    }//GEN-LAST:event_PrintActionPerformed
+    }
 
     /**
      * @param args the command line arguments
@@ -737,6 +817,8 @@ public class Receipt_Staff extends javax.swing.JFrame {
     private javax.swing.JLabel CleaningServiceAmount;
     private javax.swing.JLabel CleaningServiceQuantity;
     private javax.swing.JLabel CleaningServiceUnitCost;
+    private javax.swing.JButton Close;
+    private javax.swing.JLabel DamageFee;
     private javax.swing.JLabel Days;
     private javax.swing.JLabel FoodAndDrinkAmount;
     private javax.swing.JLabel FoodAndDrinkQuantity;
@@ -771,6 +853,7 @@ public class Receipt_Staff extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;

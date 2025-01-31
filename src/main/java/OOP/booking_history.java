@@ -73,7 +73,7 @@ public class booking_history extends javax.swing.JFrame {
         person = new javax.swing.JLabel();
         PaymentStatus = new javax.swing.JLabel();
         Exit = new javax.swing.JButton();
-        Delete = new javax.swing.JButton();
+        cancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -246,10 +246,10 @@ public class booking_history extends javax.swing.JFrame {
             }
         });
 
-        Delete.setText("Delete booking");
-        Delete.addActionListener(new java.awt.event.ActionListener() {
+        cancel.setText("Cancel Booking");
+        cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DeleteActionPerformed(evt);
+                cancelActionPerformed(evt);
             }
         });
 
@@ -259,7 +259,7 @@ public class booking_history extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Delete)
+                .addComponent(cancel)
                 .addGap(109, 109, 109)
                 .addComponent(Exit)
                 .addGap(212, 212, 212))
@@ -283,7 +283,7 @@ public class booking_history extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Exit)
-                    .addComponent(Delete))
+                    .addComponent(cancel))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -301,7 +301,7 @@ public class booking_history extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
+    private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
         // TODO add your handling code here:
         String bookingID = Booking_ID.getText();
         UserSession session = UserSession.getInstance();
@@ -318,15 +318,15 @@ public class booking_history extends javax.swing.JFrame {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] details = line.split(", ");
-                if (details.length >= 14 && details[0].trim().equals(bookingID) && details[3].trim().equals(userID)) {
-                    if(details[11].trim().equals("cancelled")) {
+                if (details.length >= 15 && details[0].trim().equals(bookingID) && details[3].trim().equals(userID)) {
+                    if(details[12].trim().equals("cancelled")) {
                         JOptionPane.showMessageDialog(this, "Booking already cancelled", "Error", JOptionPane.ERROR_MESSAGE);
                         return;
-                    }else if(details[12].trim().equals("paid")) {
+                    }else if(details[13].trim().equals("paid")) {
                         JOptionPane.showMessageDialog(this, "Booking already paid", "Error", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
-                    details[11] = "cancelled"; // Update status to cancelled
+                    details[12] = "cancelled"; // Update status to cancelled
                     line = String.join(", ", details);
                 }
                 updatedContent.append(line).append(System.lineSeparator());
@@ -365,7 +365,7 @@ public class booking_history extends javax.swing.JFrame {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error updating room availability data", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_DeleteActionPerformed
+    }//GEN-LAST:event_cancelActionPerformed
 
     private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
         // TODO add your handling code here:
@@ -382,7 +382,7 @@ public class booking_history extends javax.swing.JFrame {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] details = line.split(", (?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
-                if (details.length >= 14 && details[0].trim().equals(bookingID) && details[3].trim().equals(userID)) {
+                if (details.length >= 15 && details[0].trim().equals(bookingID) && details[3].trim().equals(userID)) {
                     Booking_ID.setText(details[0].trim());
                     date.setText(details[1].trim());
                     time.setText(details[2].trim());
@@ -394,11 +394,11 @@ public class booking_history extends javax.swing.JFrame {
                     foodndrink.setText(details[8].trim().equals("true") ? "Yes" : "No");
                     laundry.setText(details[9].trim().equals("true") ? "Yes" : "No");
                     price.setText(details[10].trim());
-                    BookingStatus.setText(details[11].trim());
-                    PaymentStatus.setText(details[12].trim());
+                    BookingStatus.setText(details[12].trim());
+                    PaymentStatus.setText(details[13].trim());
 
                     // Format room numbers for display
-                    String rooms = line.substring(line.indexOf(details[13])).trim();
+                    String rooms = line.substring(line.indexOf(details[14])).trim();
                     roomnum.setText(rooms.replace("[", "").replace("]", ""));
                     break;
                     }
@@ -447,9 +447,9 @@ public class booking_history extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BookingStatus;
     private javax.swing.JLabel Booking_ID;
-    private javax.swing.JButton Delete;
     private javax.swing.JButton Exit;
     private javax.swing.JLabel PaymentStatus;
+    private javax.swing.JButton cancel;
     private javax.swing.JLabel checkindate;
     private javax.swing.JLabel cleaning;
     private javax.swing.JLabel date;

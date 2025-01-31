@@ -121,11 +121,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Check Room"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CheckRoomActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="BookingList">
           <Properties>
             <Property name="text" type="java.lang.String" value="Booking List"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BookingListActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

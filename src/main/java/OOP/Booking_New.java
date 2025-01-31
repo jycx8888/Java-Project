@@ -348,6 +348,12 @@ public class Booking_New extends javax.swing.JFrame {
                 javax.swing.JOptionPane.showMessageDialog(this, "Invalid date format. Please use yyyy-MM-dd.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
+
+            // Check if the date is valid
+            if (!checkInDate.equals(checkInLocalDate.format(formatter))) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Invalid date. Please enter a valid date.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
     
             if (checkInLocalDate.isBefore(LocalDate.now())) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Check-in date cannot be in the past.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
@@ -449,7 +455,7 @@ public class Booking_New extends javax.swing.JFrame {
             String datebook = bookingDate.toLocalDate().toString();
             DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
             String time = bookingDate.toLocalTime().format(timeFormatter);
-            String data = bookingId + ", " + datebook + ", " + time + ", " + userID + ", " + checkInDate + ", " + daysValue + ", " + personValue + ", " + chosenRooms + ", " + cleaningService + ", " + foodAndDrinkService + ", " + laundryService + ", " + total + ", " + "confirmed" + ", " + "unpaid";
+            String data = bookingId + ", " + datebook + ", " + time + ", " + userID + ", " + checkInDate + ", " + daysValue + ", " + personValue + ", " + cleaningService + ", " + foodAndDrinkService + ", " + laundryService + ", " + total + ", " + "false" + ", " + "confirmed" + ", " + "unpaid" + ", " + chosenRooms;
 
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/OOP/booking.txt", true))) {
                 writer.write(data + "\n");
