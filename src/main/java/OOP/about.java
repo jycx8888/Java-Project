@@ -90,9 +90,8 @@ public class about extends javax.swing.JFrame {
                         + "2) Cleaning Service: 10\n"
                         + "3) Food and Drink Service: 20\n"
                         + "4) Laundry Service: 10\n"
-                        + "5) Service Tax: 0.04\n"
-                        + "6) Damage Fee (Mild): 50\n"
-                        + "7) Damage Fee (Severe): 500";
+                        + "5) Service Tax: 4%\n"
+                        + "6) Damage Fee: 100";
                 JOptionPane.showMessageDialog(null, feesMessage);
             }
         });

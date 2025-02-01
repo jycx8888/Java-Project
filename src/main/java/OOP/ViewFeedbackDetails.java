@@ -6,46 +6,26 @@ package OOP;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Justin Yong
  */
-public class PaymentHistory extends javax.swing.JFrame {
+public class ViewFeedbackDetails extends javax.swing.JFrame {
 
-    private DefaultTableModel model = new DefaultTableModel();
-    private String columnNames[] = {"Receipt ID", "Payment Datetime", "Total"};
+    public ViewFeedbackDetails() {
+        initComponents();
+    }
     
-    public PaymentHistory() {
-        UserSession session = UserSession.getInstance();
-        String userID = session.getUserID().trim();
-        try{
-        model.setColumnIdentifiers(columnNames);
-        FileReader fr = new FileReader("src/main/java/OOP/Receipt.txt");
-        BufferedReader br = new BufferedReader(fr);
-        
-        String line = null;
-        
-        while ((line = br.readLine()) != null){
-            String data[] = line.split(", ");
-            if (data.length >= 28 && data[3].trim().equals(userID)) {
-                    String receiptID = data[0].trim();
-                    String paymentDatetime = data[2].trim();
-                    String total = data[26].trim();
-                    model.addRow(new Object[]{receiptID, paymentDatetime, total});
-                }
-        }
-        br.close();
-        fr.close();
-        
-        } catch(Exception e){
-            JOptionPane.showMessageDialog(this, "Error reading file: " + e.getMessage(),
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        initComponents();        
+    public ViewFeedbackDetails (String ResidentID, int feedbackLine){
+        initComponents();
         setLocationRelativeTo(null);
+        loadFeedbackData(ResidentID, feedbackLine);
     }
 
     /**
@@ -60,31 +40,24 @@ public class PaymentHistory extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        Details = new javax.swing.JButton();
-        Exit = new javax.swing.JButton();
+        FeedbackTextArea = new javax.swing.JTextArea();
+        Back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 255));
+        jPanel1.setBackground(new java.awt.Color(153, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Payment History");
+        jLabel1.setText("Resident's Feedback");
 
-        jTable1.setModel(model);
-        jScrollPane1.setViewportView(jTable1);
+        FeedbackTextArea.setColumns(20);
+        FeedbackTextArea.setRows(5);
+        jScrollPane1.setViewportView(FeedbackTextArea);
 
-        Details.setText("See Details");
-        Details.addActionListener(new java.awt.event.ActionListener() {
+        Back.setText("Back");
+        Back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DetailsActionPerformed(evt);
-            }
-        });
-
-        Exit.setText("Exit");
-        Exit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ExitActionPerformed(evt);
+                BackActionPerformed(evt);
             }
         });
 
@@ -95,30 +68,26 @@ public class PaymentHistory extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(172, 172, 172)
+                        .addGap(131, 131, 131)
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(131, 131, 131)
-                        .addComponent(Details)
-                        .addGap(62, 62, 62)
-                        .addComponent(Exit)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                        .addGap(170, 170, 170)
+                        .addComponent(Back)))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(29, 29, 29)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Details)
-                    .addComponent(Exit))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addComponent(Back)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -135,24 +104,30 @@ public class PaymentHistory extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
+    private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
         // TODO add your handling code here:
-        Resident residentPage = new Resident();
-        residentPage.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_ExitActionPerformed
+    }//GEN-LAST:event_BackActionPerformed
 
-    private void DetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetailsActionPerformed
-        // TODO add your handling code here:
-        int selectedRow = jTable1.getSelectedRow();
-        if (selectedRow != -1) {
-            String ReceiptID = (String) jTable1.getValueAt(selectedRow, 0);
-            new Receipt_Resident (ReceiptID).setVisible(true); 
-        } else {
-            JOptionPane.showMessageDialog(this, "Please select a payment to view details.");
+    private void loadFeedbackData (String Residentid, int feedbackLine) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/OOP/feedback.txt"))) {
+            String line;
+            int currentLine = 0;
+            while ((line = reader.readLine()) != null) {
+                String[] details = line.split(", ");
+                if (details.length == 2 && details[0].trim().equals(Residentid)) {
+                    if(currentLine == feedbackLine) {
+                        FeedbackTextArea.setText("Resident ID : " + details[0] + "\n");
+                        FeedbackTextArea.append("Feedback : " + details[1] + "\n");
+                        return;
+                    }
+                    currentLine++;
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading feedback data", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_DetailsActionPerformed
-
+    }
     /**
      * @param args the command line arguments
      */
@@ -170,13 +145,13 @@ public class PaymentHistory extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PaymentHistory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewFeedbackDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PaymentHistory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewFeedbackDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PaymentHistory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewFeedbackDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PaymentHistory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewFeedbackDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -184,17 +159,16 @@ public class PaymentHistory extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PaymentHistory().setVisible(true);
+                new ViewFeedbackDetails().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Details;
-    private javax.swing.JButton Exit;
+    private javax.swing.JButton Back;
+    private javax.swing.JTextArea FeedbackTextArea;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

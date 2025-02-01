@@ -42,6 +42,7 @@ public class Manager extends javax.swing.JFrame {
         Exit = new javax.swing.JButton();
         ViewFeedback = new javax.swing.JButton();
         Report = new javax.swing.JButton();
+        RoomStatus = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,6 +93,13 @@ public class Manager extends javax.swing.JFrame {
             }
         });
 
+        RoomStatus.setText("Room Status");
+        RoomStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RoomStatusActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -105,7 +113,8 @@ public class Manager extends javax.swing.JFrame {
                     .addComponent(UpdateRates, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ViewFeedback, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Report, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Exit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Exit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(RoomStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(143, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -123,9 +132,11 @@ public class Manager extends javax.swing.JFrame {
                 .addComponent(ViewFeedback)
                 .addGap(18, 18, 18)
                 .addComponent(Report)
+                .addGap(19, 19, 19)
+                .addComponent(RoomStatus)
                 .addGap(18, 18, 18)
                 .addComponent(Exit)
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -190,6 +201,13 @@ public class Manager extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_ReportActionPerformed
 
+    private void RoomStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RoomStatusActionPerformed
+        // TODO add your handling code here:
+        RoomStatus rs = new RoomStatus();
+        rs.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_RoomStatusActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -229,6 +247,7 @@ public class Manager extends javax.swing.JFrame {
     private javax.swing.JButton ApproveUser;
     private javax.swing.JButton Exit;
     private javax.swing.JButton Report;
+    private javax.swing.JButton RoomStatus;
     private javax.swing.JButton UpdateRates;
     private javax.swing.JButton ViewFeedback;
     private javax.swing.JButton ViewUser;

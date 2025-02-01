@@ -15,6 +15,8 @@ import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -29,21 +31,51 @@ public class feedback extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         addFocusListenerToTextArea();
+        addDocumentListenerToTextArea();
+        FeedbackTextArea.setForeground(Color.BLACK);
     }
 
     private void addFocusListenerToTextArea() {
         FeedbackTextArea.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (FeedbackTextArea.getText().equals("type here")) {
+                if (FeedbackTextArea.getText().equals("Type here")) {
                     FeedbackTextArea.setText("");
+                    FeedbackTextArea.setForeground(Color.BLACK);
                 }
             }
 
             @Override
             public void focusLost(FocusEvent e) {
                 if (FeedbackTextArea.getText().isEmpty()) {
-                    FeedbackTextArea.setText("type here");
+                    FeedbackTextArea.setText("Type here");
+                    FeedbackTextArea.setForeground(Color.GRAY);
+                }
+            }
+        });
+    }
+
+    private void addDocumentListenerToTextArea() {
+        FeedbackTextArea.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                enforceCharacterLimit();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                enforceCharacterLimit();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                enforceCharacterLimit();
+            }
+
+            private void enforceCharacterLimit() {
+                if (FeedbackTextArea.getText().length() > 500) {
+                    FeedbackTextArea.setText(FeedbackTextArea.getText().substring(0, 500));
+                    JOptionPane.showMessageDialog(feedback.this, "Feedback cannot exceed 500 characters.", "Warning", JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
@@ -63,19 +95,19 @@ public class feedback extends javax.swing.JFrame {
         FeedbackTextArea = new javax.swing.JTextArea();
         Submit = new javax.swing.JButton();
         Exit = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 255));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Feedback helps us grow!");
 
         FeedbackTextArea.setColumns(20);
         FeedbackTextArea.setForeground(new java.awt.Color(204, 204, 204));
         FeedbackTextArea.setLineWrap(true);
         FeedbackTextArea.setRows(5);
-        FeedbackTextArea.setText("Type here");
         jScrollPane1.setViewportView(FeedbackTextArea);
 
         Submit.setText("Submit");
@@ -92,6 +124,8 @@ public class feedback extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("* Only Accept 500 characters");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -99,14 +133,16 @@ public class feedback extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
+                        .addGap(90, 90, 90)
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
-                        .addComponent(Submit)
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(Submit))
                         .addGap(28, 28, 28)
                         .addComponent(Exit)))
                 .addContainerGap(31, Short.MAX_VALUE))
@@ -117,12 +153,14 @@ public class feedback extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Submit)
                     .addComponent(Exit))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -133,7 +171,9 @@ public class feedback extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -206,6 +246,7 @@ public class feedback extends javax.swing.JFrame {
     private javax.swing.JTextArea FeedbackTextArea;
     private javax.swing.JButton Submit;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

@@ -53,6 +53,7 @@
                       <Component id="ViewFeedback" alignment="0" max="32767" attributes="0"/>
                       <Component id="Report" alignment="0" max="32767" attributes="0"/>
                       <Component id="Exit" max="32767" attributes="0"/>
+                      <Component id="RoomStatus" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="143" max="32767" attributes="0"/>
               </Group>
@@ -73,9 +74,11 @@
                   <Component id="ViewFeedback" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="Report" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                  <Component id="RoomStatus" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="Exit" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="120" max="32767" attributes="0"/>
+                  <EmptySpace pref="78" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -135,6 +138,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ReportActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="RoomStatus">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Room Status"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RoomStatusActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

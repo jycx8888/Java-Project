@@ -6,6 +6,9 @@ package OOP;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,22 +19,29 @@ import javax.swing.table.DefaultTableModel;
 public class ViewFeedback extends javax.swing.JFrame {
 
     private DefaultTableModel model = new DefaultTableModel();
+    private Map<Integer, Integer> rowToLineNumberMap;
     private String columnNames[] = {"Resident ID", "Feedback"};
 
     public ViewFeedback() {
+        rowToLineNumberMap = new HashMap<>();
         try{
         model.setColumnIdentifiers(columnNames);
         FileReader fr = new FileReader("src/main/java/OOP/feedback.txt");
         BufferedReader br = new BufferedReader(fr);
         
         String line = null;
+        int lineNumber = 0;
+        int rowIndex = 0;
         
         while ((line = br.readLine()) != null){
             String data[] = line.split(", ");
             if (data.length == 2) {
-                    String bookingID = data[0].trim();
+                    String residentID = data[0].trim();
                     String feedback = data[1].trim();
-                    model.addRow(new Object[]{bookingID, feedback});
+                    model.addRow(new Object[]{residentID, feedback});
+                    rowToLineNumberMap.put(rowIndex, lineNumber);
+                    lineNumber++;
+                    rowIndex++;
                 }
         }
         br.close();
@@ -58,6 +68,7 @@ public class ViewFeedback extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         Exit = new javax.swing.JButton();
+        Details = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,6 +87,13 @@ public class ViewFeedback extends javax.swing.JFrame {
             }
         });
 
+        Details.setText("See Details");
+        Details.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DetailsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -91,8 +109,10 @@ public class ViewFeedback extends javax.swing.JFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(Details)
+                .addGap(79, 79, 79)
                 .addComponent(Exit)
-                .addGap(187, 187, 187))
+                .addGap(114, 114, 114))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,8 +121,11 @@ public class ViewFeedback extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Exit))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Exit)
+                    .addComponent(Details))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -125,6 +148,18 @@ public class ViewFeedback extends javax.swing.JFrame {
         mg.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ExitActionPerformed
+
+    private void DetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetailsActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow != -1) {
+            int feedbackLine = rowToLineNumberMap.get(selectedRow);
+            String residentID = (String) jTable1.getValueAt(selectedRow, 0);
+            new ViewFeedbackDetails (residentID, feedbackLine).setVisible(true); 
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a payment to view details.");
+        }
+    }//GEN-LAST:event_DetailsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -162,6 +197,7 @@ public class ViewFeedback extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Details;
     private javax.swing.JButton Exit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

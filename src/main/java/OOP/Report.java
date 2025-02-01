@@ -184,7 +184,7 @@ public class Report extends javax.swing.JFrame {
 
         ReportTextArea.setText("Report for " + year + " " + month + "\n");
         ReportTextArea.append("Number of Bookings: " + bookingCount + "\n");
-        ReportTextArea.append("Total Earnings: $" + totalEarnings + "\n");
+        ReportTextArea.append("Total Earnings: RM" + totalEarnings + "\n");
     }
 
     private double calculateTotalEarnings(String year, int month) {
