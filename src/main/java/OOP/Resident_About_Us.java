@@ -31,10 +31,10 @@ public class Resident_About_Us extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        Exit = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        Description = new javax.swing.JButton();
+        Fees = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,14 +44,29 @@ public class Resident_About_Us extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
         jLabel1.setText("About Us");
 
-        jButton1.setText("Exit");
+        Exit.setText("Exit");
+        Exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExitActionPerformed(evt);
+            }
+        });
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/OOP/Blog1-1.jpg"))); // NOI18N
         jLabel2.setText("jLabel2");
 
-        jButton2.setText("Description");
+        Description.setText("Description");
+        Description.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DescriptionActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Fees");
+        Fees.setText("Fees");
+        Fees.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FeesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -67,11 +82,11 @@ public class Resident_About_Us extends javax.swing.JFrame {
                 .addGap(24, 24, 24))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Fees, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
-                .addComponent(jButton2)
+                .addComponent(Description)
                 .addGap(36, 36, 36)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Exit, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(119, 119, 119))
         );
         jPanel1Layout.setVerticalGroup(
@@ -83,9 +98,9 @@ public class Resident_About_Us extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Fees, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Description, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Exit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
 
@@ -103,19 +118,51 @@ public class Resident_About_Us extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-        // Close the current window
+    private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
+        // TODO add your handling code here:
         this.dispose();
-        
-        // Open resident.java
         Resident resident = new Resident();
         resident.setVisible(true);
-    }
+    }//GEN-LAST:event_ExitActionPerformed
 
+    private void FeesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FeesActionPerformed
+        // TODO add your handling code here:
+        String feesMessage = "Fees\n\n"
+                        + "Our pricing is designed to be transparent and affordable,"
+                        + "\nensuring you get the best value for your stay at APU Hostel." 
+                        + "\nBelow is a breakdown of our services and charges:\n\n"
+                        + "1) Room per Day: 50\n"
+                        + "2) Cleaning Service: 10\n"
+                        + "3) Food and Drink Service: 20\n"
+                        + "4) Laundry Service: 10\n"
+                        + "5) Service Tax: 4%\n"
+                        + "6) Damage Fee: 100";
+        JOptionPane.showMessageDialog(null, feesMessage);
+    }//GEN-LAST:event_FeesActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void DescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DescriptionActionPerformed
+        // TODO add your handling code here:
+        String message = "Welcome to APU Hostel, where innovation meets hospitality." 
+                + "\nOur hostel offers a truly futuristic stay with sleek, "
+                + "\nspace-age capsule accommodations. Each pod is meticulously "
+                + "\ndesigned to provide a private, secure, and comfortable "
+                + "\nsanctuary, blending cutting-edge technology with modern "
+                + "\nconvenience."
+
+                + "\n\nEach pod is thoughtfully designed for one person, offering"
+                + "\na cozy and private space that’s perfect for solo travelers "
+                + "\nseeking comfort and tranquility."
+
+                + "\n\nWhether you're here to explore, work remotely, or simply "
+                + "\nunwind, APU Hostel ensures an unforgettable experience with "
+                + "\ntop-tier amenities, a welcoming atmosphere, and a unique touch "
+                + "\nof innovation. Step into the future of travel—your adventure "
+                + "\nstarts here!"
+
+                + "\n\nContact us at: +03-8877-1122\nLocation: 118, Taman Kenari, 32000, Kuala Lumpur";
+        JOptionPane.showMessageDialog(null, message);
+    }//GEN-LAST:event_DescriptionActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -152,9 +199,9 @@ public class Resident_About_Us extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton Description;
+    private javax.swing.JButton Exit;
+    private javax.swing.JButton Fees;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

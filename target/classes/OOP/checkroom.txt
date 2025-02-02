@@ -1,2 +1,4 @@
 B01, S01, 201, both room's door broken
 B01, S01, 202, both room's door broken
+B06, S01, 102, window broken
+B08, S01, 103, windows broken

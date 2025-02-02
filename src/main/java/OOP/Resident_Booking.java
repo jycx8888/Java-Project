@@ -12,16 +12,17 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
+import java.util.Set;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -408,10 +409,10 @@ public class Resident_Booking extends javax.swing.JFrame {
             }
     
             // Check room availability for the entire stay duration
-            Map<LocalDate, Integer> roomAvailability = new HashMap<>();
+            Map<LocalDate, Set<Integer>> roomAvailability = new HashMap<>();
             for (int i = 0; i < daysValue; i++) {
                 LocalDate date = checkInLocalDate.plusDays(i);
-                roomAvailability.put(date, 0);
+                roomAvailability.put(date, new HashSet<>());
             }
     
             try (BufferedReader roomAvailabilityReader = new BufferedReader(new FileReader("src/main/java/OOP/room_availability.txt"))) {
@@ -419,8 +420,9 @@ public class Resident_Booking extends javax.swing.JFrame {
                 while ((line = roomAvailabilityReader.readLine()) != null) {
                     String[] parts = line.split(", ");
                     LocalDate date = LocalDate.parse(parts[0], formatter);
+                    int roomNumber = Integer.parseInt(parts[1]);
                     if (roomAvailability.containsKey(date)) {
-                        roomAvailability.put(date, roomAvailability.get(date) + 1);
+                        roomAvailability.get(date).add(roomNumber);
                     }
                 }
             } catch (IOException e) {
@@ -431,11 +433,12 @@ public class Resident_Booking extends javax.swing.JFrame {
             // Check if there are enough rooms available for each day
             StringBuilder errorMessage = new StringBuilder();
             boolean roomsAvailable = true;
-            for (Map.Entry<LocalDate, Integer> entry : roomAvailability.entrySet()) {
-                int available = availableRooms.size() - entry.getValue();
-                if (available < personValue) {
+            for (Map.Entry<LocalDate, Set<Integer>> entry : roomAvailability.entrySet()) {
+                Set<Integer> bookedRooms = entry.getValue();
+                int availableRoomsCount = availableRooms.size() - bookedRooms.size();
+                if (availableRoomsCount < personValue) {
                     roomsAvailable = false;
-                    errorMessage.append(entry.getKey().toString()).append(" only has ").append(available).append(" rooms available.\n");
+                    errorMessage.append(entry.getKey().toString()).append(" only has ").append(availableRoomsCount).append(" rooms available.\n");
                 }
             }
     
@@ -447,8 +450,28 @@ public class Resident_Booking extends javax.swing.JFrame {
             // Randomly choose the available rooms based on the number of persons
             List<String> chosenRooms = new ArrayList<>();
             for (int i = 0; i < personValue; i++) {
-                String chosenRoom = availableRooms.remove(0);
-                chosenRooms.add(chosenRoom);
+                boolean roomAssigned = false;
+                for (String room : availableRooms) {
+                    boolean isRoomAvailable = true;
+                    for (int j = 0; j < daysValue; j++) {
+                        LocalDate date = checkInLocalDate.plusDays(j);
+                        Set<Integer> bookedRooms = roomAvailability.get(date);
+                        if (bookedRooms.contains(Integer.parseInt(room))) {
+                            isRoomAvailable = false;
+                            break;
+                        }
+                    }
+                    if (isRoomAvailable) {
+                        chosenRooms.add(room);
+                        availableRooms.remove(room);
+                        roomAssigned = true;
+                        break;
+                    }
+                }
+                if (!roomAssigned) {
+                    JOptionPane.showMessageDialog(this, "Not enough rooms available.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
             }
 
             LocalDateTime bookingDate = LocalDateTime.now(); // Replace with actual booking date

@@ -272,6 +272,7 @@ public class Manager_View_User extends javax.swing.JFrame {
         int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this user?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             model.removeRow(selectedRow);
+            passwords.remove(selectedRow);
             try {
                 saveData(currentFilePath);
                 JOptionPane.showMessageDialog(this, "User deleted successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);

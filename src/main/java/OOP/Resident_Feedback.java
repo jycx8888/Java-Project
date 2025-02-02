@@ -5,18 +5,12 @@
 package OOP;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -31,7 +25,6 @@ public class Resident_Feedback extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         addFocusListenerToTextArea();
-        addDocumentListenerToTextArea();
         FeedbackTextArea.setForeground(Color.BLACK);
     }
 
@@ -50,32 +43,6 @@ public class Resident_Feedback extends javax.swing.JFrame {
                 if (FeedbackTextArea.getText().isEmpty()) {
                     FeedbackTextArea.setText("Type here");
                     FeedbackTextArea.setForeground(Color.GRAY);
-                }
-            }
-        });
-    }
-
-    private void addDocumentListenerToTextArea() {
-        FeedbackTextArea.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                enforceCharacterLimit();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                enforceCharacterLimit();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                enforceCharacterLimit();
-            }
-
-            private void enforceCharacterLimit() {
-                if (FeedbackTextArea.getText().length() > 500) {
-                    FeedbackTextArea.setText(FeedbackTextArea.getText().substring(0, 500));
-                    JOptionPane.showMessageDialog(Resident_Feedback.this, "Feedback cannot exceed 500 characters.", "Warning", JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
@@ -188,6 +155,12 @@ public class Resident_Feedback extends javax.swing.JFrame {
         if (feedbackText.isEmpty() || feedbackText.equals("Type here")){
             // Show message if the JTextArea is empty
             JOptionPane.showMessageDialog(this, "Please type in the textbox to submit.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        if (FeedbackTextArea.getText().length() > 500) {
+            FeedbackTextArea.setText(FeedbackTextArea.getText().substring(0, 500));
+            JOptionPane.showMessageDialog(Resident_Feedback.this, "Feedback cannot exceed 500 characters.", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 

@@ -7,9 +7,6 @@ package OOP;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.JOptionPane;
 
 /**
@@ -114,15 +111,14 @@ public class Manager_View_Feedback_Details extends javax.swing.JFrame {
             String line;
             int currentLine = 0;
             while ((line = reader.readLine()) != null) {
-                String[] details = line.split(", ");
-                if (details.length == 2 && details[0].trim().equals(Residentid)) {
-                    if(currentLine == feedbackLine) {
-                        FeedbackTextArea.setText("Resident ID : " + details[0] + "\n");
-                        FeedbackTextArea.append("Feedback : " + details[1] + "\n");
+                if (currentLine == feedbackLine) {
+                    String[] parts = line.split(", ");
+                    if (parts.length >= 2 && parts[0].equals(Residentid)) {
+                        FeedbackTextArea.setText("Resident ID : " + parts[0] + "\nFeedback : " + parts[1]);
                         return;
                     }
-                    currentLine++;
                 }
+                currentLine++;
             }
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error reading feedback data", "Error", JOptionPane.ERROR_MESSAGE);

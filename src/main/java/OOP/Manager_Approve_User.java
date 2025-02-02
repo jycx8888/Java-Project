@@ -114,14 +114,6 @@ public class Manager_Approve_User extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Select)
-                .addGap(26, 26, 26)
-                .addComponent(Delete)
-                .addGap(26, 26, 26)
-                .addComponent(Exit)
-                .addGap(115, 115, 115))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -129,7 +121,14 @@ public class Manager_Approve_User extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(172, 172, 172)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addComponent(Select)
+                        .addGap(26, 26, 26)
+                        .addComponent(Delete)
+                        .addGap(26, 26, 26)
+                        .addComponent(Exit)))
                 .addContainerGap(64, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -253,14 +252,20 @@ public class Manager_Approve_User extends javax.swing.JFrame {
         String filePath = "src/main/java/OOP/" + position + "_info.txt";
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
 
-        int count = 0;
-        while (reader.readLine() != null) {
-            count++;
+        int highestId = 0;
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] parts = line.split(", ");
+            String id = parts[0];
+            int numericId = Integer.parseInt(id.substring(1)); // Remove the 'R' prefix and parse the number
+            if (numericId > highestId) {
+                highestId = numericId;
+            }
         }
         reader.close();
 
         String prefix = position.substring(0, 1).toUpperCase();
-        return prefix + String.format("%02d", count + 1);
+        return prefix + String.format("%02d", highestId + 1);
     }
 
     private void addUserToFile(String userId, String name, String email, String phoneNumber, String position, String password) throws IOException {

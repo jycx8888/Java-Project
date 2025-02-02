@@ -8,7 +8,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,28 +24,27 @@ public class Manager_View_Feedback extends javax.swing.JFrame {
     public Manager_View_Feedback() {
         rowToLineNumberMap = new HashMap<>();
         try{
-        model.setColumnIdentifiers(columnNames);
-        FileReader fr = new FileReader("src/main/java/OOP/feedback.txt");
-        BufferedReader br = new BufferedReader(fr);
-        
-        String line = null;
-        int lineNumber = 0;
-        int rowIndex = 0;
-        
-        while ((line = br.readLine()) != null){
-            String data[] = line.split(", ");
-            if (data.length == 2) {
-                    String residentID = data[0].trim();
-                    String feedback = data[1].trim();
-                    model.addRow(new Object[]{residentID, feedback});
-                    rowToLineNumberMap.put(rowIndex, lineNumber);
+            model.setColumnIdentifiers(columnNames);
+            FileReader fr = new FileReader("src/main/java/OOP/feedback.txt");
+            BufferedReader br = new BufferedReader(fr);
+            
+            String line;
+            int lineNumber = 0;
+            int rowIndex = 0;
+            
+            while ((line = br.readLine()) != null){
+                String data[] = line.split(", ");
+                if (data.length >= 2) {
+                        String residentID = data[0].trim();
+                        String feedback = data[1].trim();
+                        model.addRow(new Object[]{residentID, feedback});
+                        rowToLineNumberMap.put(rowIndex, lineNumber);
+                        rowIndex++;
+                    }
                     lineNumber++;
-                    rowIndex++;
-                }
-        }
+            }
         br.close();
         fr.close();
-        
         } catch(Exception e){
             JOptionPane.showMessageDialog(this, "No booking found.");
         }

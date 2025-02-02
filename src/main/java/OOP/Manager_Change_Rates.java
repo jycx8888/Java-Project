@@ -8,8 +8,6 @@ package OOP;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Manager_Change_Rates extends javax.swing.JFrame {
     

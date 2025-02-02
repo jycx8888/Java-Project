@@ -120,9 +120,9 @@ public class Manager extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(41, 41, 41)
                 .addComponent(jLabel1)
-                .addGap(51, 51, 51)
+                .addGap(36, 36, 36)
                 .addComponent(ApproveUser)
                 .addGap(18, 18, 18)
                 .addComponent(ViewUser)

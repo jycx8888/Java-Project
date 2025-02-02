@@ -1,6 +1,6 @@
 101, available
-102, available
-103, available
+102, unavailable
+103, unavailable
 104, available
 105, available
 106, available
