@@ -24,7 +24,7 @@ public class Register extends javax.swing.JFrame {
     public Register() {
         initComponents();
         setLocationRelativeTo(null);
-        jButton1.addActionListener(new SubmitButtonListener());
+        Submit.addActionListener(new SubmitButtonListener());
         
     }
 
@@ -48,8 +48,8 @@ public class Register extends javax.swing.JFrame {
         emailField = new javax.swing.JTextField();
         phoneNumberField = new javax.swing.JTextField();
         passwordField = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Submit = new javax.swing.JButton();
+        Exit = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
 
@@ -92,17 +92,17 @@ public class Register extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Submit");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Submit.setText("Submit");
+        Submit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                SubmitActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Exit");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Exit.setText("Exit");
+        Exit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                ExitActionPerformed(evt);
             }
         });
 
@@ -123,9 +123,9 @@ public class Register extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(137, 137, 137)
-                .addComponent(jButton1)
+                .addComponent(Submit)
                 .addGap(33, 33, 33)
-                .addComponent(jButton2)
+                .addComponent(Exit)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 83, Short.MAX_VALUE)
@@ -173,8 +173,8 @@ public class Register extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(Submit)
+                    .addComponent(Exit))
                 .addContainerGap(85, Short.MAX_VALUE))
         );
 
@@ -196,18 +196,18 @@ public class Register extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_usernameFieldActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void SubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitActionPerformed
         // TODO add your handling code here:
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_SubmitActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
         // TODO add your handling code here:
 
         Login lg = new Login();
         lg.setVisible(true);
         this. dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_ExitActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
@@ -231,7 +231,7 @@ public class Register extends javax.swing.JFrame {
             String password = passwordField.getText().trim();
             String phoneNumber = phoneNumberField.getText().trim();
             String position = (String) jComboBox1.getSelectedItem();
-            String filePath = "src/main/java/OOP/" + position + "_Info.txt";
+            String filePath = "src/main/java/OOP/" + position + "_info.txt";
 
             if (!Validator.validateProfile(username, email, phoneNumber, password)) {
                  return;
@@ -310,9 +310,9 @@ public class Register extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Exit;
+    private javax.swing.JButton Submit;
     private javax.swing.JTextField emailField;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;

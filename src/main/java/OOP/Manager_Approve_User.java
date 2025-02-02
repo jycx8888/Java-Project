@@ -39,7 +39,7 @@ public class Manager_Approve_User extends javax.swing.JFrame {
         };
         try{
         model.setColumnIdentifiers(columnNames);
-        FileReader fr = new FileReader("src/main/java/OOP/Unapprove_User.txt");
+        FileReader fr = new FileReader("src/main/java/OOP/unapprove_user.txt");
         BufferedReader br = new BufferedReader(fr);
         
         String line = null;
@@ -208,7 +208,7 @@ public class Manager_Approve_User extends javax.swing.JFrame {
     }//GEN-LAST:event_SelectActionPerformed
     
     public boolean isUserAlreadyRegistered(String position, String email, String phoneNumber) throws IOException {
-        String filePath = "src/main/java/OOP/" + position + "_Info.txt";
+        String filePath = "src/main/java/OOP/" + position + "_info.txt";
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
 
         String line;
@@ -224,8 +224,8 @@ public class Manager_Approve_User extends javax.swing.JFrame {
     }
     
     private void removeUserFromFile(String position, String email, String phoneNumber) throws IOException {
-        File inputFile = new File("src/main/java/OOP/Unapprove_User.txt");
-        File tempFile = new File("src/main/java/OOP/Unapprove_User_temp.txt");
+        File inputFile = new File("src/main/java/OOP/unapprove_user.txt");
+        File tempFile = new File("src/main/java/OOP/unapprove_user_temp.txt");
 
         BufferedReader reader = new BufferedReader(new FileReader(inputFile));
         BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
@@ -250,7 +250,7 @@ public class Manager_Approve_User extends javax.swing.JFrame {
     }
 
     private String generateUserId(String position) throws IOException {
-        String filePath = "src/main/java/OOP/" + position + "_Info.txt";
+        String filePath = "src/main/java/OOP/" + position + "_info.txt";
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
 
         int count = 0;
@@ -264,7 +264,7 @@ public class Manager_Approve_User extends javax.swing.JFrame {
     }
 
     private void addUserToFile(String userId, String name, String email, String phoneNumber, String position, String password) throws IOException {
-        String filePath = "src/main/java/OOP/" + position + "_Info.txt";
+        String filePath = "src/main/java/OOP/" + position + "_info.txt";
         BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
         writer.write(userId + ", " + name + ", " + email + ", " + phoneNumber + ", " + password + "\n");
         writer.close();

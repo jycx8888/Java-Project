@@ -181,11 +181,11 @@ public class Staff_Update_Profile extends javax.swing.JFrame {
             String newPhoneNumber = PhoneNumberTextField.getText();
             String newPassword = PasswordTextField.getText();
             
-            if (!update.validateProfile(newName, newEmail, newPhoneNumber, newPassword, "src/main/java/OOP/Staff_Info.txt")) {
+            if (!update.validateProfile(newName, newEmail, newPhoneNumber, newPassword, "src/main/java/OOP/staff_info.txt")) {
                 return;
             }
 
-            update.editProfile(newName, newEmail, newPhoneNumber, newPassword, "src/main/java/OOP/Staff_Info.txt");
+            update.editProfile(newName, newEmail, newPhoneNumber, newPassword, "src/main/java/OOP/staff_info.txt");
 
             // Update the UserSession with the new details
             UserSession session = UserSession.getInstance();

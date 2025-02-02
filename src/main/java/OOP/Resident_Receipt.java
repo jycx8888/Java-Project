@@ -535,7 +535,7 @@ public class Resident_Receipt extends javax.swing.JFrame {
         UserSession session = UserSession.getInstance();
         String userID = session.getUserID();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/OOP/Receipt.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/OOP/receipt.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] details = line.split(", (?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");

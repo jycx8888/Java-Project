@@ -38,7 +38,7 @@ public class Manager_Room_Status extends javax.swing.JFrame {
     }
 
     private void loadRoomData() {
-        try (BufferedReader br = new BufferedReader(new FileReader("src/main/java/OOP/Room.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("src/main/java/OOP/room.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String data[] = line.split(", ");
@@ -226,7 +226,7 @@ public class Manager_Room_Status extends javax.swing.JFrame {
 
     private void updateRoomStatus(String roomNumber, String newStatus) {
         List<String> fileContent = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader("src/main/java/OOP/Room.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("src/main/java/OOP/room.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(", ");
@@ -240,7 +240,7 @@ public class Manager_Room_Status extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error updating room status: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("src/main/java/OOP/Room.txt"))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("src/main/java/OOP/room.txt"))) {
             for (String line : fileContent) {
                 bw.write(line);
                 bw.newLine();

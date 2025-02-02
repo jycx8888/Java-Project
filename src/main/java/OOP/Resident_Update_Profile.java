@@ -179,11 +179,11 @@ public class Resident_Update_Profile extends javax.swing.JFrame {
             String newPhoneNumber = PhoneNumberTextField.getText();
             String newPassword = PasswordTextField.getText();
             
-            if (!update.validateProfile(newName, newEmail, newPhoneNumber, newPassword, "src/main/java/OOP/Resident_Info.txt")) {
+            if (!update.validateProfile(newName, newEmail, newPhoneNumber, newPassword, "src/main/java/OOP/resident_info.txt")) {
                 return;
             }
 
-            update.editProfile(newName, newEmail, newPhoneNumber, newPassword, "src/main/java/OOP/Resident_Info.txt");
+            update.editProfile(newName, newEmail, newPhoneNumber, newPassword, "src/main/java/OOP/resident_info.txt");
 
             // Update the UserSession with the new details
             UserSession session = UserSession.getInstance();

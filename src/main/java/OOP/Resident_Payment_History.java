@@ -23,7 +23,7 @@ public class Resident_Payment_History extends javax.swing.JFrame {
         String userID = session.getUserID().trim();
         try{
         model.setColumnIdentifiers(columnNames);
-        FileReader fr = new FileReader("src/main/java/OOP/Receipt.txt");
+        FileReader fr = new FileReader("src/main/java/OOP/receipt.txt");
         BufferedReader br = new BufferedReader(fr);
         
         String line = null;

@@ -190,7 +190,7 @@ public class Manager_Report extends javax.swing.JFrame {
     private double calculateTotalEarnings(String year, int month) {
         double totalEarnings = 0.0;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/OOP/Receipt.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/OOP/receipt.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] details = line.split(", ");

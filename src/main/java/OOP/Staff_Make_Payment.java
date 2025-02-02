@@ -299,7 +299,7 @@ public class Staff_Make_Payment extends javax.swing.JFrame {
 
         // Read room information from Room_Availability.txt based on booking ID
         Set<String> rooms = new HashSet<>();
-        try (BufferedReader roomReader = new BufferedReader(new FileReader("src/main/java/OOP/Room_Availability.txt"))) {
+        try (BufferedReader roomReader = new BufferedReader(new FileReader("src/main/java/OOP/room_availability.txt"))) {
             String line;
             while ((line = roomReader.readLine()) != null) {
                 String[] parts = line.split(", ");
@@ -317,7 +317,7 @@ public class Staff_Make_Payment extends javax.swing.JFrame {
     }//GEN-LAST:event_SearchBookingIDActionPerformed
     
     private void findResidentInfoById(String residentId) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/OOP/Resident_Info.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/OOP/resident_info.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(", ");
@@ -428,7 +428,7 @@ public class Staff_Make_Payment extends javax.swing.JFrame {
     
         // Generate a sequential Receipt ID based on the number of receipts
         int receiptCount = 0;
-        try (BufferedReader receiptReader = new BufferedReader(new FileReader("src/main/java/OOP/Receipt.txt"))) {
+        try (BufferedReader receiptReader = new BufferedReader(new FileReader("src/main/java/OOP/receipt.txt"))) {
             while (receiptReader.readLine() != null) {
                 receiptCount++;
             }

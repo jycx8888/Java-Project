@@ -324,7 +324,7 @@ public class Staff_Check_Room extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error reading room data", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-        try (FileWriter writer = new FileWriter("src/main/java/OOP/Room.txt")) {
+        try (FileWriter writer = new FileWriter("src/main/java/OOP/room.txt")) {
             for (String line : roomLines) {
                 writer.write(line + "\n");
             }
