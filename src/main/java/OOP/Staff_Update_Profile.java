@@ -10,11 +10,11 @@ import javax.swing.JOptionPane;
  *
  * @author Justin Yong
  */
-public class UpdateProfile_Staff extends javax.swing.JFrame {
+public class Staff_Update_Profile extends javax.swing.JFrame {
 
     private Update update; 
     
-    public UpdateProfile_Staff() {
+    public Staff_Update_Profile() {
         initComponents();
         setLocationRelativeTo(null);
         loadProfile();
@@ -216,20 +216,21 @@ public class UpdateProfile_Staff extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UpdateProfile_Staff.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Staff_Update_Profile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UpdateProfile_Staff.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Staff_Update_Profile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UpdateProfile_Staff.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Staff_Update_Profile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UpdateProfile_Staff.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Staff_Update_Profile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UpdateProfile_Staff().setVisible(true);
+                new Staff_Update_Profile().setVisible(true);
             }
         });
     }

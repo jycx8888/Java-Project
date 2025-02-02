@@ -149,28 +149,28 @@ public class Staff extends javax.swing.JFrame {
 
     private void ProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProfileActionPerformed
         // TODO add your handling code here:
-        UpdateProfile_Staff ups = new UpdateProfile_Staff();
+        Staff_Update_Profile ups = new Staff_Update_Profile();
         ups.setVisible(true);
         this. dispose();
     }//GEN-LAST:event_ProfileActionPerformed
 
     private void MakePaymentReceiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MakePaymentReceiptActionPerformed
         // TODO add your handling code here:
-        MakePayment mp = new MakePayment();
+        Staff_Make_Payment mp = new Staff_Make_Payment();
         mp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_MakePaymentReceiptActionPerformed
 
     private void CheckRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckRoomActionPerformed
         // TODO add your handling code here:
-        CheckRoom cr = new CheckRoom();
+        Staff_Check_Room cr = new Staff_Check_Room();
         cr.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_CheckRoomActionPerformed
 
     private void BookingListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookingListActionPerformed
         // TODO add your handling code here:
-        Staff_BookingList sb = new Staff_BookingList ();
+        Staff_Booking_List sb = new Staff_Booking_List ();
         sb.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BookingListActionPerformed

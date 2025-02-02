@@ -10,12 +10,12 @@ import javax.swing.JOptionPane;
  *
  * @author hp
  */
-public class about extends javax.swing.JFrame {
+public class Resident_About_Us extends javax.swing.JFrame {
 
     /**
      * Creates new form about
      */
-    public about() {
+    public Resident_About_Us() {
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -45,56 +45,13 @@ public class about extends javax.swing.JFrame {
         jLabel1.setText("About Us");
 
         jButton1.setText("Exit");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/OOP/Blog1-1.jpg"))); // NOI18N
         jLabel2.setText("jLabel2");
 
         jButton2.setText("Description");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                String message = "Welcome to APU Hostel, where innovation meets hospitality." 
-                + "\nOur hostel offers a truly futuristic stay with sleek, "
-                + "\nspace-age capsule accommodations. Each pod is meticulously "
-                + "\ndesigned to provide a private, secure, and comfortable "
-                + "\nsanctuary, blending cutting-edge technology with modern "
-                + "\nconvenience."
-
-                + "\n\nEach pod is thoughtfully designed for one person, offering"
-                + "\na cozy and private space that’s perfect for solo travelers "
-                + "\nseeking comfort and tranquility."
-
-                + "\n\nWhether you're here to explore, work remotely, or simply "
-                + "\nunwind, APU Hostel ensures an unforgettable experience with "
-                + "\ntop-tier amenities, a welcoming atmosphere, and a unique touch "
-                + "\nof innovation. Step into the future of travel—your adventure "
-                + "\nstarts here!"
-
-                + "\n\nContact us at: +03-8877-1122\nLocation: 118, Taman Kenari, 32000, Kuala Lumpur";
-                JOptionPane.showMessageDialog(null, message);
-            }
-        });
 
         jButton3.setText("Fees");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                String feesMessage = "Fees\n\n"
-                        + "Our pricing is designed to be transparent and affordable,"
-                        + "\nensuring you get the best value for your stay at APU Hostel." 
-                        + "\nBelow is a breakdown of our services and charges:\n\n"
-                        + "1) Room per Day: 50\n"
-                        + "2) Cleaning Service: 10\n"
-                        + "3) Food and Drink Service: 20\n"
-                        + "4) Laundry Service: 10\n"
-                        + "5) Service Tax: 4%\n"
-                        + "6) Damage Fee: 100";
-                JOptionPane.showMessageDialog(null, feesMessage);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -173,21 +130,23 @@ public class about extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(about.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Resident_About_Us.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(about.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Resident_About_Us.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(about.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Resident_About_Us.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(about.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Resident_About_Us.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new about().setVisible(true);
+                new Resident_About_Us().setVisible(true);
             }
         });
     }

@@ -10,14 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class View_User extends javax.swing.JFrame {
+public class Manager_View_User extends javax.swing.JFrame {
 
     private CustomTableModel model;
     private String columnNames[] = {"UserID", "Name", "Email", "Phone Number", "Password"};
     private String currentFilePath = "src/main/java/OOP/Resident_Info.txt";
     private List<String> passwords;
     
-    public View_User() {
+    public Manager_View_User() {
         passwords = new ArrayList<>();
         model = new CustomTableModel(columnNames, 0, passwords);
         initComponents();
@@ -321,21 +321,22 @@ public class View_User extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(View_User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manager_View_User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(View_User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manager_View_User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(View_User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manager_View_User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(View_User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manager_View_User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new View_User().setVisible(true);
+                new Manager_View_User().setVisible(true);
             }
         });
     }

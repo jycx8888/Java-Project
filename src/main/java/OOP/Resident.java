@@ -135,7 +135,7 @@ public class Resident extends javax.swing.JFrame {
 
     private void ProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProfileActionPerformed
         // TODO add your handling code here:
-        UpdateProfile_Resident upr = new UpdateProfile_Resident();
+        Resident_Update_Profile upr = new Resident_Update_Profile();
         upr.setVisible(true);
         this. dispose();
     }//GEN-LAST:event_ProfileActionPerformed
@@ -154,32 +154,32 @@ public class Resident extends javax.swing.JFrame {
     }//GEN-LAST:event_ExitActionPerformed
 
     private void BookingRoomActionPerformed(java.awt.event.ActionEvent evt) {
-        Booking_New bk = new Booking_New();
+        Resident_Booking bk = new Resident_Booking();
         bk.setVisible(true);
         this.dispose();
     }
 
     private void ReceiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReceiptActionPerformed
         // TODO add your handling code here:
-        PaymentHistory ph = new PaymentHistory();
+        Resident_Payment_History ph = new Resident_Payment_History();
         ph.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ReceiptActionPerformed
 
     private void FeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FeedbackActionPerformed
-        feedback feedbackPage = new feedback();
+        Resident_Feedback feedbackPage = new Resident_Feedback();
         feedbackPage.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_FeedbackActionPerformed
 
     private void BookHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookHistoryActionPerformed
-        booking_history_main bookingHistorymainPage = new booking_history_main();
+        Resident_Booking_History bookingHistorymainPage = new Resident_Booking_History();
         bookingHistorymainPage.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_BookHistoryActionPerformed
 
     private void AboutActionPerformed(java.awt.event.ActionEvent evt) {                                      
-        about aboutPage = new about();  
+        Resident_About_Us aboutPage = new Resident_About_Us();  
         aboutPage.setVisible(true);
         this.setVisible(false);
     }

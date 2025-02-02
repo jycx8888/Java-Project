@@ -15,13 +15,13 @@ import java.util.List;
  *
  * @author Justin Yong
  */
-public class Approve_User extends javax.swing.JFrame {
+public class Manager_Approve_User extends javax.swing.JFrame {
     
     private List<String> passwords;
     private DefaultTableModel model;
     private String columnNames[] = {"Position", "Name", "Email", "Phone Number", "Password"};
 
-    public Approve_User() {
+    public Manager_Approve_User() {
         passwords = new ArrayList<>();
         model = new DefaultTableModel(columnNames, 0) {
             @Override
@@ -86,7 +86,7 @@ public class Approve_User extends javax.swing.JFrame {
         jScrollPane1.setViewportView(unapproveUserTable);
         unapproveUserTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
-        Select.setText("Approve");
+        Select.setText("Select");
         Select.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SelectActionPerformed(evt);
@@ -165,7 +165,7 @@ public class Approve_User extends javax.swing.JFrame {
         // TODO add your handling code here:
         int selectedRow = unapproveUserTable.getSelectedRow();
         if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(Approve_User.this, "Please select a user to approve.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(Manager_Approve_User.this, "Please select a user to approve.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
             
@@ -178,15 +178,15 @@ public class Approve_User extends javax.swing.JFrame {
         
         try {
             if (isUserAlreadyRegistered(position, email, phoneNumber)) {
-                JOptionPane.showMessageDialog(Approve_User.this, "This user cannot be approved because the email or phone number is already registered.", "Warning", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(Manager_Approve_User.this, "This user cannot be approved because the email or phone number is already registered.", "Warning", JOptionPane.WARNING_MESSAGE);
                 return;
             }
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(Approve_User.this, "An error occurred while checking user registration: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(Manager_Approve_User.this, "An error occurred while checking user registration: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        int confirm = JOptionPane.showConfirmDialog(Approve_User.this, "Are you sure you want to approve this user?", "Confirm Approval", JOptionPane.YES_NO_OPTION);
+        int confirm = JOptionPane.showConfirmDialog(Manager_Approve_User.this, "Are you sure you want to approve this user?", "Confirm Approval", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             try {
                 // Remove the selected user from Unapprove_User.txt
@@ -199,9 +199,9 @@ public class Approve_User extends javax.swing.JFrame {
                 // Remove the row from the table
                 model.removeRow(selectedRow);
 
-                JOptionPane.showMessageDialog(Approve_User.this, "User approved successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(Manager_Approve_User.this, "User approved successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException ex) {
-                JOptionPane.showMessageDialog(Approve_User.this, "An error occurred while approving the user: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(Manager_Approve_User.this, "An error occurred while approving the user: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
         
@@ -286,7 +286,7 @@ public class Approve_User extends javax.swing.JFrame {
         // TODO add your handling code here:
         int selectedRow = unapproveUserTable.getSelectedRow();
         if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(Approve_User.this, "Please select a user to delete.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(Manager_Approve_User.this, "Please select a user to delete.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
@@ -294,7 +294,7 @@ public class Approve_User extends javax.swing.JFrame {
         String email = (String) model.getValueAt(selectedRow, 2);
         String phoneNumber = (String) model.getValueAt(selectedRow, 3);
 
-        int confirm = JOptionPane.showConfirmDialog(Approve_User.this, "Are you sure you want to delete this user?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
+        int confirm = JOptionPane.showConfirmDialog(Manager_Approve_User.this, "Are you sure you want to delete this user?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             try {
                 // Remove the selected user from Unapprove_User.txt
@@ -303,9 +303,9 @@ public class Approve_User extends javax.swing.JFrame {
                 // Remove the row from the table
                 model.removeRow(selectedRow);
 
-                JOptionPane.showMessageDialog(Approve_User.this, "User deleted successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(Manager_Approve_User.this, "User deleted successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException ex) {
-                JOptionPane.showMessageDialog(Approve_User.this, "An error occurred while deleting the user: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(Manager_Approve_User.this, "An error occurred while deleting the user: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_DeleteActionPerformed
@@ -341,20 +341,21 @@ public class Approve_User extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Approve_User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manager_Approve_User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Approve_User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manager_Approve_User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Approve_User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manager_Approve_User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Approve_User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manager_Approve_User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Approve_User().setVisible(true);
+                new Manager_Approve_User().setVisible(true);
             }
         });
     }

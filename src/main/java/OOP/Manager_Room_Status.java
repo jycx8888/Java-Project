@@ -21,13 +21,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Justin Yong
  */
-public class RoomStatus extends javax.swing.JFrame {
+public class Manager_Room_Status extends javax.swing.JFrame {
 
     private DefaultTableModel model = new DefaultTableModel();;
     private String columnNames[] = {"Room Number", "Status"};
     private Map<String, String> damageMap;
 
-    public RoomStatus() {
+    public Manager_Room_Status() {
         initComponents();
         setLocationRelativeTo(null);
         model = (DefaultTableModel) jTable1.getModel();
@@ -290,20 +290,21 @@ public class RoomStatus extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RoomStatus.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manager_Room_Status.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RoomStatus.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manager_Room_Status.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RoomStatus.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manager_Room_Status.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RoomStatus.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manager_Room_Status.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RoomStatus().setVisible(true);
+                new Manager_Room_Status().setVisible(true);
             }
         });
     }

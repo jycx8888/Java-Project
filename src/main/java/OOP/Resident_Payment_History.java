@@ -13,12 +13,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Justin Yong
  */
-public class PaymentHistory extends javax.swing.JFrame {
+public class Resident_Payment_History extends javax.swing.JFrame {
 
     private DefaultTableModel model = new DefaultTableModel();
     private String columnNames[] = {"Receipt ID", "Payment Datetime", "Total"};
     
-    public PaymentHistory() {
+    public Resident_Payment_History() {
         UserSession session = UserSession.getInstance();
         String userID = session.getUserID().trim();
         try{
@@ -147,7 +147,7 @@ public class PaymentHistory extends javax.swing.JFrame {
         int selectedRow = jTable1.getSelectedRow();
         if (selectedRow != -1) {
             String ReceiptID = (String) jTable1.getValueAt(selectedRow, 0);
-            new Receipt_Resident (ReceiptID).setVisible(true); 
+            new Resident_Receipt (ReceiptID).setVisible(true); 
         } else {
             JOptionPane.showMessageDialog(this, "Please select a payment to view details.");
         }
@@ -170,21 +170,23 @@ public class PaymentHistory extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PaymentHistory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Resident_Payment_History.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PaymentHistory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Resident_Payment_History.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PaymentHistory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Resident_Payment_History.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PaymentHistory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Resident_Payment_History.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PaymentHistory().setVisible(true);
+                new Resident_Payment_History().setVisible(true);
             }
         });
     }

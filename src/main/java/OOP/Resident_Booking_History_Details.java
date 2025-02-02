@@ -16,18 +16,18 @@ import javax.swing.JOptionPane;
  *
  * @author hp
  */
-public class booking_history extends javax.swing.JFrame {
+public class Resident_Booking_History_Details extends javax.swing.JFrame {
 
     /**
      * Creates new form booking_history
      */
 
-    public booking_history() {
+    public Resident_Booking_History_Details() {
         initComponents();
         setLocationRelativeTo(null);
     }
 
-    public booking_history(String bookingID) {
+    public Resident_Booking_History_Details(String bookingID) {
         initComponents();
         setLocationRelativeTo(null);
         loadBookingData(bookingID);
@@ -369,7 +369,7 @@ public class booking_history extends javax.swing.JFrame {
 
     private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
         // TODO add your handling code here:
-        booking_history_main bkm = new booking_history_main();
+        Resident_Booking_History bkm = new Resident_Booking_History();
         bkm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ExitActionPerformed
@@ -426,20 +426,23 @@ public class booking_history extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(booking_history.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Resident_Booking_History_Details.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(booking_history.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Resident_Booking_History_Details.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(booking_history.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Resident_Booking_History_Details.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(booking_history.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Resident_Booking_History_Details.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new booking_history().setVisible(true);
+                new Resident_Booking_History_Details().setVisible(true);
             }
         });
     }

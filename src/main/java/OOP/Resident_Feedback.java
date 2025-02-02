@@ -22,12 +22,12 @@ import javax.swing.event.DocumentListener;
  *
  * @author hp
  */
-public class feedback extends javax.swing.JFrame {
+public class Resident_Feedback extends javax.swing.JFrame {
 
     /**
      * Creates new form feedback
      */
-    public feedback() {
+    public Resident_Feedback() {
         initComponents();
         setLocationRelativeTo(null);
         addFocusListenerToTextArea();
@@ -75,7 +75,7 @@ public class feedback extends javax.swing.JFrame {
             private void enforceCharacterLimit() {
                 if (FeedbackTextArea.getText().length() > 500) {
                     FeedbackTextArea.setText(FeedbackTextArea.getText().substring(0, 500));
-                    JOptionPane.showMessageDialog(feedback.this, "Feedback cannot exceed 500 characters.", "Warning", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(Resident_Feedback.this, "Feedback cannot exceed 500 characters.", "Warning", JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
@@ -223,20 +223,21 @@ public class feedback extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(feedback.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Resident_Feedback.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(feedback.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Resident_Feedback.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(feedback.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Resident_Feedback.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(feedback.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Resident_Feedback.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new feedback().setVisible(true);
+                new Resident_Feedback().setVisible(true);
             }
         });
     }

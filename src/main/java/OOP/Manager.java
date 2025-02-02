@@ -155,21 +155,21 @@ public class Manager extends javax.swing.JFrame {
     
     private void UpdateRatesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateRatesActionPerformed
         // TODO add your handling code here:
-        ChangeRates cr = new ChangeRates();
+        Manager_Change_Rates cr = new Manager_Change_Rates();
         cr.setVisible(true);
         this. dispose();
     }//GEN-LAST:event_UpdateRatesActionPerformed
 
     private void ViewUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewUserActionPerformed
         // TODO add your handling code here:
-        View_User vu = new View_User();
+        Manager_View_User vu = new Manager_View_User();
         vu.setVisible(true);
         this. dispose();
     }//GEN-LAST:event_ViewUserActionPerformed
 
     private void ApproveUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApproveUserActionPerformed
         // TODO add your handling code here:
-        Approve_User au = new Approve_User();
+        Manager_Approve_User au = new Manager_Approve_User();
         au.setVisible(true);
         this. dispose();
     }//GEN-LAST:event_ApproveUserActionPerformed
@@ -189,21 +189,21 @@ public class Manager extends javax.swing.JFrame {
 
     private void ViewFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewFeedbackActionPerformed
         // TODO add your handling code here:
-        ViewFeedback vb = new ViewFeedback();
+        Manager_View_Feedback vb = new Manager_View_Feedback();
         vb.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ViewFeedbackActionPerformed
 
     private void ReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReportActionPerformed
         // TODO add your handling code here:
-        Report rp = new Report();
+        Manager_Report rp = new Manager_Report();
         rp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ReportActionPerformed
 
     private void RoomStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RoomStatusActionPerformed
         // TODO add your handling code here:
-        RoomStatus rs = new RoomStatus();
+        Manager_Room_Status rs = new Manager_Room_Status();
         rs.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_RoomStatusActionPerformed

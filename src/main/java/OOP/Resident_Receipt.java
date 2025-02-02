@@ -13,17 +13,17 @@ import javax.swing.JOptionPane;
  *
  * @author Justin Yong
  */
-public class Receipt_Resident extends javax.swing.JFrame {
+public class Resident_Receipt extends javax.swing.JFrame {
 
     /**
      * Creates new form Receipt_Resident
      */
-    public Receipt_Resident() {
+    public Resident_Receipt() {
         initComponents();
         setLocationRelativeTo(null);
     }
     
-    public Receipt_Resident (String ReceiptID){
+    public Resident_Receipt (String ReceiptID){
         initComponents();
         setLocationRelativeTo(null);
         loadReceiptData(ReceiptID);
@@ -594,20 +594,21 @@ public class Receipt_Resident extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Receipt_Resident.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Resident_Receipt.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Receipt_Resident.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Resident_Receipt.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Receipt_Resident.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Resident_Receipt.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Receipt_Resident.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Resident_Receipt.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Receipt_Resident().setVisible(true);
+                new Resident_Receipt().setVisible(true);
             }
         });
     }

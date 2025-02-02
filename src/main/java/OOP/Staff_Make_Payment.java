@@ -16,12 +16,12 @@ import javax.swing.JOptionPane;
  *
  * @author Justin Yong
  */
-public class MakePayment extends javax.swing.JFrame {
+public class Staff_Make_Payment extends javax.swing.JFrame {
 
     /**
      * Creates new form MakePayment
      */
-    public MakePayment() {
+    public Staff_Make_Payment() {
         initComponents();
         setLocationRelativeTo(null);
         UserSession session = UserSession.getInstance();
@@ -438,10 +438,10 @@ public class MakePayment extends javax.swing.JFrame {
         String receiptID = String.format("RE%04d", receiptCount + 1);
     
         // Show the receipt
-        Receipt_Staff receipt = new Receipt_Staff();
+        Staff_Receipt receipt = new Staff_Receipt();
         receipt.setReceiptID(receiptID);
         receipt.setStaffID(UserSession.getInstance().getUserID());
-        receipt.setProceedDate(Receipt_Staff.getLocalDateTime());
+        receipt.setProceedDate(Staff_Receipt.getLocalDateTime());
         receipt.setResidentID(residentID);
         receipt.setName(residentName);
         receipt.setEmail(residentEmail);
@@ -516,20 +516,21 @@ public class MakePayment extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MakePayment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Staff_Make_Payment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MakePayment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Staff_Make_Payment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MakePayment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Staff_Make_Payment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MakePayment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Staff_Make_Payment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MakePayment().setVisible(true);
+                new Staff_Make_Payment().setVisible(true);
             }
         });
     }

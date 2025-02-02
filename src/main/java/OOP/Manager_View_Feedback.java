@@ -16,13 +16,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Justin Yong
  */
-public class ViewFeedback extends javax.swing.JFrame {
+public class Manager_View_Feedback extends javax.swing.JFrame {
 
     private DefaultTableModel model = new DefaultTableModel();
     private Map<Integer, Integer> rowToLineNumberMap;
     private String columnNames[] = {"Resident ID", "Feedback"};
 
-    public ViewFeedback() {
+    public Manager_View_Feedback() {
         rowToLineNumberMap = new HashMap<>();
         try{
         model.setColumnIdentifiers(columnNames);
@@ -155,9 +155,9 @@ public class ViewFeedback extends javax.swing.JFrame {
         if (selectedRow != -1) {
             int feedbackLine = rowToLineNumberMap.get(selectedRow);
             String residentID = (String) jTable1.getValueAt(selectedRow, 0);
-            new ViewFeedbackDetails (residentID, feedbackLine).setVisible(true); 
+            new Manager_View_Feedback_Details (residentID, feedbackLine).setVisible(true); 
         } else {
-            JOptionPane.showMessageDialog(this, "Please select a payment to view details.");
+            JOptionPane.showMessageDialog(this, "Please select a feedback to view details.");
         }
     }//GEN-LAST:event_DetailsActionPerformed
 
@@ -178,20 +178,21 @@ public class ViewFeedback extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewFeedback.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manager_View_Feedback.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewFeedback.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manager_View_Feedback.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewFeedback.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manager_View_Feedback.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewFeedback.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manager_View_Feedback.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewFeedback().setVisible(true);
+                new Manager_View_Feedback().setVisible(true);
             }
         });
     }

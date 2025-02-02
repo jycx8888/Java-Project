@@ -11,12 +11,12 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChangeRates extends javax.swing.JFrame {
+public class Manager_Change_Rates extends javax.swing.JFrame {
     
     private DefaultTableModel model = new DefaultTableModel();
     private String columnNames[] = {"Rates","Value"};
 
-    public ChangeRates() {
+    public Manager_Change_Rates() {
         try{
         model.setColumnIdentifiers(columnNames);
         FileReader fr = new FileReader("src/main/java/OOP/rates.txt");
@@ -265,7 +265,7 @@ public class ChangeRates extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ChangeRates().setVisible(true);
+                new Manager_Change_Rates().setVisible(true);
             }
         });
     }

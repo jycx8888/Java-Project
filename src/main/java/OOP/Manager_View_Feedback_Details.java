@@ -16,13 +16,13 @@ import javax.swing.JOptionPane;
  *
  * @author Justin Yong
  */
-public class ViewFeedbackDetails extends javax.swing.JFrame {
+public class Manager_View_Feedback_Details extends javax.swing.JFrame {
 
-    public ViewFeedbackDetails() {
+    public Manager_View_Feedback_Details() {
         initComponents();
     }
     
-    public ViewFeedbackDetails (String ResidentID, int feedbackLine){
+    public Manager_View_Feedback_Details (String ResidentID, int feedbackLine){
         initComponents();
         setLocationRelativeTo(null);
         loadFeedbackData(ResidentID, feedbackLine);
@@ -145,21 +145,23 @@ public class ViewFeedbackDetails extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewFeedbackDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manager_View_Feedback_Details.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewFeedbackDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manager_View_Feedback_Details.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewFeedbackDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manager_View_Feedback_Details.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewFeedbackDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manager_View_Feedback_Details.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewFeedbackDetails().setVisible(true);
+                new Manager_View_Feedback_Details().setVisible(true);
             }
         });
     }
