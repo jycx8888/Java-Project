@@ -347,7 +347,7 @@ public class Resident_Booking_History_Details extends javax.swing.JFrame {
 
         // Remove room information from Room_Availability.txt based on booking ID
         StringBuilder updatedRoomContent = new StringBuilder();
-        try (BufferedReader roomReader = new BufferedReader(new FileReader("src/main/java/OOP/Room_Availability.txt"))) {
+        try (BufferedReader roomReader = new BufferedReader(new FileReader("src/main/java/OOP/room_availability.txt"))) {
             String line;
             while ((line = roomReader.readLine()) != null) {
                 String[] parts = line.split(", ");
@@ -360,7 +360,7 @@ public class Resident_Booking_History_Details extends javax.swing.JFrame {
         }
     
         // Write the updated room availability content back to the file
-        try (BufferedWriter roomWriter = new BufferedWriter(new FileWriter("src/main/java/OOP/Room_Availability.txt"))) {
+        try (BufferedWriter roomWriter = new BufferedWriter(new FileWriter("src/main/java/OOP/room_availability.txt"))) {
             roomWriter.write(updatedRoomContent.toString());
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error updating room availability data", "Error", JOptionPane.ERROR_MESSAGE);

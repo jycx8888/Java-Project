@@ -300,7 +300,7 @@ public class Resident_Booking extends javax.swing.JFrame {
         try {
             // Read rates from rates.txt
             Map<String, Double> rates = new HashMap<>();
-            try (BufferedReader ratesReader = new BufferedReader(new FileReader("src/main/java/OOP/Rates.txt"))) {
+            try (BufferedReader ratesReader = new BufferedReader(new FileReader("src/main/java/OOP/rates.txt"))) {
                 String line;
                 while ((line = ratesReader.readLine()) != null) {
                     String[] parts = line.split(", ");
@@ -414,7 +414,7 @@ public class Resident_Booking extends javax.swing.JFrame {
                 roomAvailability.put(date, 0);
             }
     
-            try (BufferedReader roomAvailabilityReader = new BufferedReader(new FileReader("src/main/java/OOP/Room_Availability.txt"))) {
+            try (BufferedReader roomAvailabilityReader = new BufferedReader(new FileReader("src/main/java/OOP/room_availability.txt"))) {
                 String line;
                 while ((line = roomAvailabilityReader.readLine()) != null) {
                     String[] parts = line.split(", ");
