@@ -30,7 +30,7 @@ public class Manager_Room_Status extends javax.swing.JFrame {
     public Manager_Room_Status() {
         initComponents();
         setLocationRelativeTo(null);
-        model = (DefaultTableModel) jTable1.getModel();
+        model = (DefaultTableModel) RoomStatusTable.getModel();
         model.setColumnIdentifiers(columnNames);
         damageMap = new HashMap<>();
         loadRoomData();
@@ -80,7 +80,7 @@ public class Manager_Room_Status extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        RoomStatusTable = new javax.swing.JTable();
         Exit = new javax.swing.JButton();
         SeeDetails = new javax.swing.JButton();
         MakeAvailable = new javax.swing.JButton();
@@ -92,8 +92,8 @@ public class Manager_Room_Status extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Room Status");
 
-        jTable1.setModel(model);
-        jScrollPane1.setViewportView(jTable1);
+        RoomStatusTable.setModel(model);
+        jScrollPane1.setViewportView(RoomStatusTable);
 
         Exit.setText("Exit");
         Exit.addActionListener(new java.awt.event.ActionListener() {
@@ -177,10 +177,10 @@ public class Manager_Room_Status extends javax.swing.JFrame {
 
     private void SeeDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeeDetailsActionPerformed
         // TODO add your handling code here:
-        int selectedRow = jTable1.getSelectedRow();
+        int selectedRow = RoomStatusTable.getSelectedRow();
         if (selectedRow != -1) {
-            String roomNumber = (String) jTable1.getValueAt(selectedRow, 0);
-            String status = (String) jTable1.getValueAt(selectedRow, 1);
+            String roomNumber = (String) RoomStatusTable.getValueAt(selectedRow, 0);
+            String status = (String) RoomStatusTable.getValueAt(selectedRow, 1);
             String damage = damageMap.getOrDefault(roomNumber, "None");
 
             if (status.equalsIgnoreCase("Unavailable")) {
@@ -197,16 +197,16 @@ public class Manager_Room_Status extends javax.swing.JFrame {
 
     private void MakeAvailableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MakeAvailableActionPerformed
         // TODO add your handling code here:
-        int selectedRow = jTable1.getSelectedRow();
+        int selectedRow = RoomStatusTable.getSelectedRow();
         if (selectedRow != -1) {
-            String roomNumber = (String) jTable1.getValueAt(selectedRow, 0);
-            String status = (String) jTable1.getValueAt(selectedRow, 1);
+            String roomNumber = (String) RoomStatusTable.getValueAt(selectedRow, 0);
+            String status = (String) RoomStatusTable.getValueAt(selectedRow, 1);
 
             if (status.equalsIgnoreCase("unavailable")) {
                 int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to make this room available?", "Confirm", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
                     // Change status to available in the table
-                    jTable1.setValueAt("available", selectedRow, 1);
+                    RoomStatusTable.setValueAt("available", selectedRow, 1);
 
                     // Update Room.txt
                     updateRoomStatus(roomNumber, "available");
@@ -312,10 +312,10 @@ public class Manager_Room_Status extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Exit;
     private javax.swing.JButton MakeAvailable;
+    private javax.swing.JTable RoomStatusTable;
     private javax.swing.JButton SeeDetails;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

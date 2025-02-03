@@ -64,7 +64,7 @@ public class Manager_View_Feedback extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        ResidentFeedbackTable = new javax.swing.JTable();
         Exit = new javax.swing.JButton();
         Details = new javax.swing.JButton();
 
@@ -75,8 +75,8 @@ public class Manager_View_Feedback extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Resident's Feedback");
 
-        jTable1.setModel(model);
-        jScrollPane1.setViewportView(jTable1);
+        ResidentFeedbackTable.setModel(model);
+        jScrollPane1.setViewportView(ResidentFeedbackTable);
 
         Exit.setText("Exit");
         Exit.addActionListener(new java.awt.event.ActionListener() {
@@ -149,10 +149,10 @@ public class Manager_View_Feedback extends javax.swing.JFrame {
 
     private void DetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetailsActionPerformed
         // TODO add your handling code here:
-        int selectedRow = jTable1.getSelectedRow();
+        int selectedRow = ResidentFeedbackTable.getSelectedRow();
         if (selectedRow != -1) {
             int feedbackLine = rowToLineNumberMap.get(selectedRow);
-            String residentID = (String) jTable1.getValueAt(selectedRow, 0);
+            String residentID = (String) ResidentFeedbackTable.getValueAt(selectedRow, 0);
             new Manager_View_Feedback_Details (residentID, feedbackLine).setVisible(true); 
         } else {
             JOptionPane.showMessageDialog(this, "Please select a feedback to view details.");
@@ -198,9 +198,9 @@ public class Manager_View_Feedback extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Details;
     private javax.swing.JButton Exit;
+    private javax.swing.JTable ResidentFeedbackTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

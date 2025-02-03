@@ -59,7 +59,7 @@ public class Staff_Booking_List extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        BookingListTable = new javax.swing.JTable();
         Details = new javax.swing.JButton();
         Exit = new javax.swing.JButton();
 
@@ -70,8 +70,8 @@ public class Staff_Booking_List extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Booking List");
 
-        jTable1.setModel(model);
-        jScrollPane2.setViewportView(jTable1);
+        BookingListTable.setModel(model);
+        jScrollPane2.setViewportView(BookingListTable);
 
         Details.setText("See Details");
         Details.addActionListener(new java.awt.event.ActionListener() {
@@ -143,9 +143,9 @@ public class Staff_Booking_List extends javax.swing.JFrame {
 
     private void DetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetailsActionPerformed
         // TODO add your handling code here:
-        int selectedRow = jTable1.getSelectedRow();
+        int selectedRow = BookingListTable.getSelectedRow();
         if (selectedRow != -1) {
-            String bookingID = (String) jTable1.getValueAt(selectedRow, 0);
+            String bookingID = (String) BookingListTable.getValueAt(selectedRow, 0);
             new Staff_Booking_Details(bookingID).setVisible(true);
             this.setVisible(false); 
         } else {
@@ -190,11 +190,11 @@ public class Staff_Booking_List extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable BookingListTable;
     private javax.swing.JButton Details;
     private javax.swing.JButton Exit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

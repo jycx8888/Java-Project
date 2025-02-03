@@ -60,7 +60,7 @@ public class Resident_Payment_History extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        PaymentHistoryTable = new javax.swing.JTable();
         Details = new javax.swing.JButton();
         Exit = new javax.swing.JButton();
 
@@ -71,8 +71,8 @@ public class Resident_Payment_History extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Payment History");
 
-        jTable1.setModel(model);
-        jScrollPane1.setViewportView(jTable1);
+        PaymentHistoryTable.setModel(model);
+        jScrollPane1.setViewportView(PaymentHistoryTable);
 
         Details.setText("See Details");
         Details.addActionListener(new java.awt.event.ActionListener() {
@@ -144,9 +144,9 @@ public class Resident_Payment_History extends javax.swing.JFrame {
 
     private void DetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetailsActionPerformed
         // TODO add your handling code here:
-        int selectedRow = jTable1.getSelectedRow();
+        int selectedRow = PaymentHistoryTable.getSelectedRow();
         if (selectedRow != -1) {
-            String ReceiptID = (String) jTable1.getValueAt(selectedRow, 0);
+            String ReceiptID = (String) PaymentHistoryTable.getValueAt(selectedRow, 0);
             new Resident_Receipt (ReceiptID).setVisible(true); 
         } else {
             JOptionPane.showMessageDialog(this, "Please select a payment to view details.");
@@ -194,9 +194,9 @@ public class Resident_Payment_History extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Details;
     private javax.swing.JButton Exit;
+    private javax.swing.JTable PaymentHistoryTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
