@@ -1,1 +1,2 @@
 S01, Mervin Ooi, mervin@gmail.com, 0123456789, QWer$1122
+S02, kcl, kcl@gmail.com, 0123456721, QWrr1122%

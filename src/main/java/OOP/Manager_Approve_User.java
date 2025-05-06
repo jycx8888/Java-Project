@@ -17,26 +17,13 @@ import java.util.List;
  */
 public class Manager_Approve_User extends javax.swing.JFrame {
     
+    private CustomTableModel model;
     private List<String> passwords;
-    private DefaultTableModel model;
     private String columnNames[] = {"Position", "Name", "Email", "Phone Number", "Password"};
 
     public Manager_Approve_User() {
         passwords = new ArrayList<>();
-        model = new DefaultTableModel(columnNames, 0) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false; // Make cells non-editable
-            }
-
-            @Override
-            public Object getValueAt(int row, int column) {
-                if (column == 4) { // Mask the password column
-                    return "********";
-                }
-                return super.getValueAt(row, column);
-            }
-        };
+        model = new CustomTableModel(columnNames, 0, passwords);
         try{
         model.setColumnIdentifiers(columnNames);
         FileReader fr = new FileReader("src/main/java/OOP/unapprove_user.txt");
@@ -52,7 +39,7 @@ public class Manager_Approve_User extends javax.swing.JFrame {
         br.close();
         fr.close();
         
-        } catch(Exception e){
+        } catch(IOException e){
             JOptionPane.showMessageDialog(this, "Error reading file: " + e.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -318,19 +305,6 @@ public class Manager_Approve_User extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
-    /*private void loadDataFromFile(String filePath) {
-        try (BufferedReader br = new BufferedReader(new FileReader(Unapprove_User.txt))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] rowData = line.split(","); // Adjust the delimiter if needed
-                tableModel.addRow(rowData);
-            }
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Error reading file: " + e.getMessage(),
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }*/
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

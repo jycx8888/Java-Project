@@ -2,3 +2,6 @@ R06, I like this hostel soooo much. The room is nice, warm and perfect. food is 
 R01, I like this hostel so much !
 R05, I like the service and the environment of this hostel. I love it
 R06, The staff is caring and polite. I will come again
+R01, I love it!
+R07, I feel a bit disappointed about the room condition, but the service is nice. Hope can improve
+R07, haaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
